@@ -1,5 +1,6 @@
 ---
 import '@arche/tokens';
+import { ViewTransitions } from 'astro:transitions';
 
 interface Props {
   title: string;
@@ -31,9 +32,69 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
     <meta name="twitter:title" content={fullTitle} />
     {description && <meta name="twitter:description" content={description} />}
 
+    <ViewTransitions />
+
+    {/*
+      Pre-hide motion targets BEFORE first paint, but only when motion is
+      enabled and this is the first home view of the session. Removed by
+      motion JS once timelines are armed, or by a 5s safety net below.
+    */}
+    <script is:inline>
+      (function () {
+        try {
+          var noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          if (!noMotion) {
+            document.documentElement.classList.add('js-motion');
+            if (!sessionStorage.getItem('homeOpeningSeen')) {
+              document.documentElement.classList.add('js-opening-pending');
+            }
+          }
+        } catch (e) {}
+      })();
+    </script>
+
     <slot name="head" />
   </head>
   <body class="bg-ink text-bone font-body antialiased">
     <slot />
+
+    {/* Safety net: if motion JS failed to mount, reveal the hero anyway. */}
+    <script is:inline>
+      setTimeout(function () {
+        document.documentElement.classList.remove('js-opening-pending');
+      }, 5000);
+    </script>
   </body>
 </html>
+
+<style is:global>
+  /* View-transition name hooks (must be global to morph across pages) */
+  .vt-arche-heading { view-transition-name: arche-heading; }
+  .vt-storia-heading { view-transition-name: storia-heading; }
+
+  /* Pre-hide for the opening reveal (only when .js-opening-pending is set) */
+  .js-opening-pending .hero-word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(14px);
+    will-change: transform, opacity;
+  }
+  .js-opening-pending #hero-portrait {
+    opacity: 0;
+    transform: scale(1.04);
+    will-change: transform, opacity;
+  }
+  .js-opening-pending #hero-eyebrow,
+  .js-opening-pending #hero-lead,
+  .js-opening-pending #hero-scroll-hint {
+    opacity: 0;
+    will-change: opacity;
+  }
+
+  /* Disable any view-transition animation when the user opts out */
+  @media (prefers-reduced-motion: reduce) {
+    ::view-transition-group(*),
+    ::view-transition-old(*),
+    ::view-transition-new(*) { animation: none !important; }
+  }
+</style>
