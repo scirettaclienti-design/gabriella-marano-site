@@ -1,17 +1,199 @@
 ---
 import Base from '../layouts/Base.astro';
-import Hero from '../components/Hero.astro';
 ---
 
 <Base
   title="Home"
-  description="Psicologa clinica e forense, criminologa, archeologa. Dal mito alla mente."
+  description="Gabriella Marano: psicologa clinica e forense, criminologa. Nei tribunali, nei media, nelle aule — ascoltare, ricostruire, restituire."
 >
-  <Hero
-    heading="La verità, in ogni dettaglio."
-    lead="Psicologa clinica e forense, criminologa, archeologa. Una voce sola, una lente sola: dal mito alla mente."
-  />
 
+  {/* HERO — full viewport, theatrical. Solo H1 della pagina. */}
+  <section class="relative flex min-h-screen flex-col justify-center overflow-hidden px-6 pb-24 pt-32 md:pt-40">
+    {/* glow ~0.10 oro, alto a destra */}
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0"
+      style="background: radial-gradient(ellipse 65vw 55vh at 100% -5%, rgba(200, 162, 78, 0.10), transparent 62%);"
+    ></div>
+
+    <div class="relative mx-auto grid w-full max-w-wide grid-cols-1 items-center gap-14 md:grid-cols-[1.27fr_1fr] md:gap-16">
+
+      <div>
+        <p class="eyebrow mb-8">Psicologa clinica e forense · Criminologa</p>
+        <h1
+          class="font-display tracking-tight text-bone"
+          style="font-size: clamp(3.5rem, 6vw, 5rem); line-height: 0.97;"
+        >
+          La verità,<br />in ogni dettaglio.
+        </h1>
+        <p class="mt-10 max-w-md font-serif text-lg leading-relaxed text-bone-dim md:text-xl">
+          Nei tribunali, nei media, nelle aule. Ascolto, ricostruisco,
+          restituisco. Con gli altri, per gli altri.
+        </p>
+      </div>
+
+      {/* TODO portrait — sostituire con il vero ritratto 4:5 di Gabriella. */}
+      {/* Suggerito: <Image src="..." alt="Ritratto di Gabriella Marano" widths={[480,720,960]} aspectRatio={4/5} /> */}
+      <div
+        class="relative aspect-[4/5] w-full bg-ink-3"
+        role="img"
+        aria-label="Spazio riservato al ritratto"
+      >
+        <span class="absolute bottom-4 left-4 font-sans text-xs uppercase tracking-eyebrow text-bone-faint">
+          ritratto
+        </span>
+      </div>
+
+    </div>
+
+    {/* scroll hint */}
+    <a
+      href="#storia"
+      class="absolute bottom-8 left-6 font-sans text-xs uppercase tracking-eyebrow text-bone-faint transition hover:text-gold"
+    >
+      ↓ La mia storia
+    </a>
+  </section>
+
+
+  {/* LA MIA STORIA — anticipo, link a /storia */}
+  <section id="storia" class="px-6" style="padding-block: var(--space-band)">
+    <div class="mx-auto max-w-text">
+      <p class="eyebrow mb-8">La mia storia</p>
+      <h2 class="font-display text-3xl leading-tight tracking-tight text-bone md:text-4xl">
+        Una storia, molte storie.
+      </h2>
+      <p class="home-storia-lead mt-10 font-serif leading-loose text-bone">
+        Prima di occuparmi di crimini, mi sono occupata di rovine. Una laurea
+        in Beni Archeologici, poi Psicologia Clinica e Scienze Forensi. Non
+        un cambio di rotta: lo stesso gesto, su una materia diversa. Partire
+        dai frammenti e lasciare che la forma emerga.
+      </p>
+      <a href="/storia" class="cta-link mt-10">La mia storia →</a>
+    </div>
+  </section>
+
+
+  {/* IL MIO LAVORO — tre porte */}
+  <section class="px-6" style="padding-block: var(--space-band); background-color: var(--color-ink-2);">
+    <div class="mx-auto max-w-wide">
+      <p class="eyebrow mb-12">Il mio lavoro</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3">
+
+        <article class="px-2 py-12 md:px-10 md:py-4">
+          <span
+            aria-hidden="true"
+            class="mb-8 block font-secret leading-none"
+            style="font-size: clamp(4.5rem, 8vw, 6.5rem); color: rgba(200, 162, 78, 0.5);"
+          >I</span>
+          <h3 class="font-display text-2xl tracking-tight text-bone md:text-3xl">Civile</h3>
+          <p class="mt-5 font-serif leading-loose text-bone-dim">
+            Danno psichico, capacità genitoriali, consulenze tecniche.
+          </p>
+        </article>
+
+        <article
+          class="border-t px-2 py-12 md:border-l md:border-t-0 md:px-10 md:py-4"
+          style="border-color: var(--line)"
+        >
+          <span
+            aria-hidden="true"
+            class="mb-8 block font-secret leading-none"
+            style="font-size: clamp(4.5rem, 8vw, 6.5rem); color: rgba(200, 162, 78, 0.5);"
+          >II</span>
+          <h3 class="font-display text-2xl tracking-tight text-bone md:text-3xl">Penale</h3>
+          <p class="mt-5 font-serif leading-loose text-bone-dim">
+            Capacità di intendere e volere, perizie criminologiche.
+          </p>
+        </article>
+
+        <article
+          class="border-t px-2 py-12 md:border-l md:border-t-0 md:px-10 md:py-4"
+          style="border-color: var(--line)"
+        >
+          <span
+            aria-hidden="true"
+            class="mb-8 block font-secret leading-none"
+            style="font-size: clamp(4.5rem, 8vw, 6.5rem); color: rgba(200, 162, 78, 0.5);"
+          >III</span>
+          <h3 class="font-display text-2xl tracking-tight text-bone md:text-3xl">Forense</h3>
+          <p class="mt-5 font-serif leading-loose text-bone-dim">
+            Autopsia psicologica, decessi equivoci, scomparse.
+          </p>
+        </article>
+
+      </div>
+
+      <a href="/perizie" class="cta-link mt-14">Tutte le perizie →</a>
+    </div>
+  </section>
+
+
+  {/* LE MIE ATTIVITÀ · NEI MEDIA */}
+  <section class="px-6" style="padding-block: var(--space-band)">
+    <div class="mx-auto max-w-text">
+      <p class="eyebrow mb-8">Le mie attività · Nei media</p>
+      <h2 class="font-display text-3xl leading-tight tracking-tight text-bone md:text-4xl">
+        L'analisi, non la cronaca.
+      </h2>
+      <p class="mt-10 font-serif leading-loose text-bone">
+        Intervengo nei principali format di approfondimento come criminologa.
+        Porto la lettura del comportamento e del movente — mai lo spettacolo
+        del dolore.
+      </p>
+
+      {/* TODO: questi outlet diventeranno una content collection (televisione). Per ora hardcoded. */}
+      <div class="mt-10 flex flex-wrap items-baseline gap-x-8 gap-y-3 font-display text-2xl md:text-3xl">
+        <a href="/media/televisione" class="media-outlet">Quarto Grado</a>
+        <span class="text-bone-faint" aria-hidden="true">·</span>
+        <a href="/media/televisione" class="media-outlet">Pomeriggio Cinque</a>
+      </div>
+
+      <a href="/media/televisione" class="cta-link mt-12">Tutte le apparizioni →</a>
+    </div>
+  </section>
+
+
+  {/* ARCHÈ — ponte, sezione più scura, glow basso a sinistra */}
+  <section
+    class="relative overflow-hidden px-6"
+    style="background-color: #0F0C07; padding-block: var(--space-band);"
+  >
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0"
+      style="background: radial-gradient(ellipse 75vw 65vh at 0% 100%, rgba(200, 162, 78, 0.12), transparent 62%);"
+    ></div>
+
+    <div class="relative mx-auto max-w-text text-center">
+      <p class="eyebrow mb-10">Il progetto editoriale</p>
+
+      <h2
+        class="font-display tracking-tight text-bone"
+        style="font-size: clamp(4rem, 9vw, 7rem); line-height: 0.95; letter-spacing: -0.015em;"
+      >archè</h2>
+
+      <p class="mt-4 font-secret text-xl italic text-bone-dim md:text-2xl">
+        dal mito alla mente
+      </p>
+
+      <p class="mx-auto mt-12 max-w-md font-serif leading-loose text-bone">
+        Ogni crimine contemporaneo ripete una scena già scritta. Il progetto
+        con cui restituisco al crimine la sua origine — dove tutto comincia.
+      </p>
+
+      <a
+        href="/arche"
+        class="mt-14 inline-block bg-gold px-9 py-4 font-sans text-sm font-semibold uppercase tracking-eyebrow text-ink transition hover:bg-gold-bright"
+      >
+        Scopri archè
+      </a>
+    </div>
+  </section>
+
+
+  {/* Hash legacy → redirect lato client (lascia in fondo per non bloccare il primo paint) */}
   <script is:inline>
     (function () {
       const map = {
@@ -25,4 +207,53 @@ import Hero from '../components/Hero.astro';
       if (target) window.location.replace(target);
     })();
   </script>
+
+
+  <style>
+    /* Drop cap Bodoni sulla P di "Prima" — sezione storia */
+    .home-storia-lead::first-letter {
+      font-family: var(--font-display);
+      font-weight: 600;
+      color: var(--color-gold);
+      font-size: 3.6em;
+      line-height: 0.95;
+      float: left;
+      padding-right: 0.14em;
+      padding-top: 0.06em;
+      margin-bottom: -0.05em;
+    }
+
+    /* Editorial CTA: sans, gold, uppercase, tracked, gold underline */
+    .cta-link {
+      display: inline-block;
+      color: var(--color-gold);
+      font-family: var(--font-sans);
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      letter-spacing: var(--tracking-eyebrow);
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--color-gold);
+      padding-bottom: 0.35em;
+      transition: color 250ms var(--ease-out-quart, ease), border-color 250ms;
+    }
+    .cta-link:hover {
+      color: var(--color-gold-bright);
+      border-color: var(--color-gold-bright);
+    }
+
+    /* Outlet TV: Bodoni con sottolineatura oro */
+    .media-outlet {
+      color: var(--color-bone);
+      text-decoration: underline;
+      text-decoration-color: var(--color-gold);
+      text-underline-offset: 0.22em;
+      text-decoration-thickness: 1px;
+      transition: color 220ms, text-decoration-color 220ms;
+    }
+    .media-outlet:hover {
+      color: var(--color-gold-bright);
+      text-decoration-color: var(--color-gold-bright);
+    }
+  </style>
+
 </Base>
