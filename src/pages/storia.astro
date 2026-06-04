@@ -4,13 +4,116 @@ import Base from '../layouts/Base.astro';
 
 <Base
   title="Storia"
-  description="Bio editoriale di Gabriella Marano: psicologa clinica e forense, criminologa, archeologa."
+  description="Avellino 1978. Archeologia, psicologia clinica, criminologia: una formazione lunga, tre territori, una sola attenzione al frammento."
 >
-  <section class="mx-auto max-w-3xl px-6 py-24">
-    <p class="eyebrow mb-6 text-bone-faint">Storia</p>
-    <h2 class="font-display text-4xl md:text-6xl">Una voce, tre lenti.</h2>
-    <p class="mt-8 text-lg text-bone-dim">
-      Pagina in costruzione — bio editoriale a due colonne.
-    </p>
-  </section>
+  <main class="relative">
+
+    {/* Background depth: very subtle gold radial glow, bottom-right corner */}
+    <div
+      aria-hidden="true"
+      class="pointer-events-none fixed inset-0"
+      style="background: radial-gradient(ellipse 70vw 55vh at 100% 100%, rgba(200, 162, 78, 0.055), transparent 62%);"
+    ></div>
+
+    {/* INTRO BAND */}
+    <section class="relative px-6" style="padding-block: var(--space-band)">
+      <div class="mx-auto flex max-w-wide flex-col items-start gap-6 md:flex-row md:items-start md:gap-x-16">
+
+        {/* Archè signature — chapter mark, used exactly once on this page */}
+        <span
+          aria-hidden="true"
+          class="pointer-events-none select-none font-secret leading-none"
+          style="font-size: clamp(5rem, 10vw, 9rem); color: rgba(200, 162, 78, 0.22);"
+        >I</span>
+
+        <div class="max-w-text">
+          <p class="eyebrow mb-8">Chi sono</p>
+          <h2 class="font-display text-3xl leading-tight tracking-tight text-bone md:text-4xl">
+            Una storia, molte storie.
+          </h2>
+        </div>
+
+      </div>
+    </section>
+
+    {/* Composed divider: short gold rule + diamond + short gold rule */}
+    <div
+      class="relative mx-auto flex max-w-wide items-center justify-center px-6"
+      style="padding-block: clamp(2.5rem, 6vw, 5rem);"
+      aria-hidden="true"
+    >
+      <span class="block h-px w-16 md:w-28" style="background-color: var(--line)"></span>
+      <span class="mx-5 inline-block h-2 w-2 rotate-45" style="background-color: var(--color-gold)"></span>
+      <span class="block h-px w-16 md:w-28" style="background-color: var(--line)"></span>
+    </div>
+
+    {/* TWO-COLUMN BODY */}
+    <section class="relative px-6" style="padding-block: var(--space-band)">
+      <div class="mx-auto grid max-w-wide grid-cols-1 gap-12 md:grid-cols-2 md:gap-20">
+
+        <div class="font-serif leading-loose text-bone">
+          <p class="persona-lead mb-6">
+            Sono nata ad Avellino nel 1978. Lavoro tra Latina, Roma e Milano.
+          </p>
+          <p class="mb-6">
+            Prima di occuparmi di crimini mi sono occupata di rovine. Una laurea
+            in Lettere, indirizzo Beni Archeologici: anni passati a ricomporre
+            ciò che il tempo aveva disperso, a leggere una civiltà da un
+            frammento di ceramica. Poi una seconda laurea in Psicologia Clinica
+            e la specializzazione post lauream in Scienze Forensi — Criminologia
+            Investigativa e Criminal Profiling.
+          </p>
+          <p>
+            Non è stato un cambio di rotta. È stato lo stesso lavoro applicato
+            a una materia diversa. Dove prima c'erano cocci, poi ci sono stati
+            comportamenti; dove prima c'era uno scavo, poi un fascicolo. In
+            entrambi i casi: partire dai frammenti, rispettare l'oggetto,
+            lasciare che la forma emerga senza forzarla.
+          </p>
+        </div>
+
+        <div class="md:border-l md:pl-16" style="border-color: var(--line)">
+          {/* TODO portrait — replace this placeholder with the real 4:5 portrait of Gabriella. */}
+          {/* Suggested: <Image src="..." alt="Ritratto di Gabriella Marano" widths={[480,720,960]} aspectRatio={4/5} /> */}
+          <div
+            class="relative mb-10 aspect-[4/5] w-full bg-ink-3"
+            role="img"
+            aria-label="Spazio riservato al ritratto"
+          >
+            <span class="absolute bottom-4 left-4 font-sans text-xs uppercase tracking-eyebrow text-bone-faint">
+              ritratto
+            </span>
+          </div>
+
+          <div class="font-serif leading-loose text-bone">
+            <p class="mb-6">
+              Mi occupo di violenza di genere, bullismo, mobbing, abusi,
+              scomparse e morti equivoche. Lavoro come consulente tecnico per
+              la magistratura e le parti, intervengo nei media come criminologa,
+              insegno nei percorsi di formazione che ho contribuito a costruire.
+            </p>
+            <p>
+              Combatto la violenza in ogni sua forma. E credo che capirne
+              l'origine — non solo punirne l'effetto — sia il primo gesto utile.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <style>
+    .persona-lead::first-letter {
+      font-family: var(--font-display);
+      font-weight: 600;
+      color: var(--color-gold);
+      font-size: 3.6em;
+      line-height: 0.95;
+      float: left;
+      padding-right: 0.14em;
+      padding-top: 0.06em;
+      margin-bottom: -0.05em;
+    }
+  </style>
 </Base>
