@@ -1,0 +1,1896 @@
+<!DOCTYPE html>
+<html lang="it" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="archè — Documento di regia strategica. Posizionamento digitale, sistema editoriale e modello di crescita per Gabriella Marano.">
+<meta property="og:title" content="archè — Documento di Regia Strategica">
+<meta property="og:description" content="Posizionamento digitale, brand personale, sistema editoriale e modello di crescita per Gabriella Marano.">
+<meta property="og:type" content="article"><title>archè — Documento di Regia Strategica · Gabriella Marano</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============ archè · inchiostro ============ */
+:root{
+  color-scheme: dark;
+  --ink:#14110C;
+  --ink-2:#1B1711;
+  --ink-3:#221D15;
+  --oxblood:#2A1412;
+  --bone:#ECE4D2;
+  --bone-dim:#BDB39C;
+  --bone-faint:#8C8370;
+  --gold:#C8A24E;
+  --gold-bright:#E0C685;
+  --gold-deep:#8C6E36;
+  --line:rgba(200,162,78,.24);
+  --line-soft:rgba(236,228,210,.10);
+  --serif:"Spectral",Georgia,"Times New Roman",serif;
+  --display:"Bodoni Moda","Didot",Georgia,serif;
+  --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --col:39rem;
+  --wide:74rem;
+}
+*{box-sizing:border-box;}
+html,body{background:var(--ink);}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{
+  margin:0;
+  color:var(--bone);
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:clamp(1.03rem,.99rem + .22vw,1.19rem);
+  line-height:1.74;
+  letter-spacing:.005em;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+/* grain */
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:.035;mix-blend-mode:overlay;
+}
+img{max-width:100%;height:auto;display:block;}
+a{color:var(--gold-bright);text-decoration:none;}
+a:hover{color:var(--bone);}
+::selection{background:var(--gold-deep);color:var(--ink);}
+
+/* ---- layout ---- */
+.wrap{position:relative;z-index:1;}
+.band{padding:clamp(4.5rem,11vw,9.5rem) 1.5rem;}
+.col{max-width:var(--col);margin:0 auto;}
+.frame{max-width:var(--wide);margin:0 auto;}
+.scroll-anchor{scroll-margin-top:5rem;}
+
+/* ---- typography utility ---- */
+.eyebrow{
+  font-family:var(--sans);
+  font-size:.71rem;font-weight:600;
+  letter-spacing:.26em;text-transform:uppercase;
+  color:var(--gold);
+}
+h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.08;margin:0;}
+.lead{
+  font-family:var(--serif);font-size:clamp(1.15rem,1.02rem + .6vw,1.4rem);
+  line-height:1.6;color:var(--bone-dim);font-weight:300;
+}
+.small{font-size:.95rem;color:var(--bone-faint);line-height:1.6;}
+em{font-style:italic;}
+strong{font-weight:600;color:var(--bone);}
+p{margin:0 0 1.35rem;}
+p:last-child{margin-bottom:0;}
+.dim{color:var(--bone-dim);}
+.gold{color:var(--gold);}
+
+/* ---- declared slot ---- */
+.slot{
+  display:inline;
+  border-bottom:1.5px dashed var(--gold);
+  padding:.05em .15em;
+}
+.slot::after{
+  content:"da confermare";
+  font-family:var(--sans);font-size:.56em;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gold);vertical-align:.45em;margin-left:.4em;
+  white-space:nowrap;
+}
+
+/* ---- top bar ---- */
+.bar{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.85rem clamp(1.1rem,3vw,2.2rem);
+  background:rgba(20,17,12,.82);
+  -webkit-backdrop-filter:blur(9px);backdrop-filter:blur(9px);
+  border-bottom:1px solid var(--line-soft);
+}
+.bar .mark{
+  font-family:var(--display);font-size:1.18rem;font-weight:600;
+  letter-spacing:.02em;color:var(--bone);
+}
+.bar .mark i{color:var(--gold);font-style:normal;margin-left:.12em;font-size:.6em;vertical-align:.35em;}
+.bar nav{display:flex;gap:.15rem;}
+.bar nav a{
+  font-family:var(--display);font-size:.95rem;color:var(--bone-faint);
+  padding:.2rem .5rem;letter-spacing:.05em;transition:color .25s;
+}
+.bar nav a:hover{color:var(--gold);}
+@media(max-width:680px){.bar nav{display:none;}}
+
+/* ---- hero ---- */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:7rem 1.5rem 4rem;position:relative;
+}
+.hero-glow{
+  position:absolute;top:34%;left:50%;width:min(70vw,640px);height:min(70vw,640px);
+  transform:translate(-50%,-50%);
+  background:radial-gradient(circle,rgba(200,162,78,.16),transparent 66%);
+  pointer-events:none;
+}
+.hero-logo{width:min(58vw,272px);margin:0 auto 2.6rem;position:relative;}
+.hero .eyebrow{margin-bottom:2.4rem;}
+.hero h1{
+  font-size:clamp(2.5rem,3rem + 3.6vw,5.2rem);
+  letter-spacing:-.012em;max-width:14ch;margin:0 auto;
+}
+.hero h1 em{font-style:italic;color:var(--gold);}
+.hero .standfirst{
+  max-width:36rem;margin:2rem auto 0;
+  font-size:clamp(1.05rem,1rem + .4vw,1.24rem);
+  color:var(--bone-dim);font-weight:300;line-height:1.66;
+}
+.hero .essence{
+  margin-top:2.7rem;font-family:var(--display);font-style:italic;
+  font-size:clamp(1.15rem,1.05rem + .6vw,1.55rem);
+  color:var(--gold-bright);max-width:24ch;line-height:1.4;
+}
+.hero .scrollcue{
+  margin-top:3.4rem;font-family:var(--sans);font-size:.66rem;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--bone-faint);
+}
+.hero .scrollcue::after{content:"";display:block;width:1px;height:46px;margin:.9rem auto 0;background:linear-gradient(var(--gold),transparent);}
+
+/* ---- ornament rule ---- */
+.rule{display:flex;align-items:center;gap:1.1rem;max-width:var(--col);margin:0 auto;}
+.rule::before,.rule::after{content:"";flex:1;height:1px;background:var(--line);}
+.rule span{
+  width:7px;height:7px;transform:rotate(45deg);
+  border:1px solid var(--gold);background:transparent;flex:none;
+}
+.divider{padding:clamp(2rem,5vw,3.6rem) 1.5rem;}
+
+/* ---- premessa ---- */
+.premessa{background:var(--ink-2);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);}
+.premessa h2{
+  font-size:clamp(1.5rem,1.2rem + 1.4vw,2.1rem);margin-bottom:1.8rem;
+  font-weight:500;font-style:italic;color:var(--bone);
+}
+
+/* ---- sommario ---- */
+.toc{max-width:var(--wide);margin:0 auto;}
+.toc h2{font-size:clamp(1.6rem,3.4vw,2.3rem);margin-bottom:2.6rem;font-weight:500;}
+.toc-item{
+  display:grid;grid-template-columns:4.2rem 1fr;gap:1.4rem;
+  align-items:baseline;
+  padding:1.5rem 0;border-top:1px solid var(--line-soft);
+  transition:background .3s;
+}
+.toc-item:last-child{border-bottom:1px solid var(--line-soft);}
+.toc-item:hover{background:rgba(200,162,78,.04);}
+.toc-num{
+  font-family:var(--display);font-size:1.5rem;color:var(--gold);
+  font-weight:500;letter-spacing:.04em;
+}
+.toc-item h3{
+  font-size:clamp(1.3rem,1.1rem + 1vw,1.8rem);font-weight:600;
+  color:var(--bone);margin-bottom:.4rem;
+}
+.toc-item:hover h3{color:var(--gold-bright);}
+.toc-item p{color:var(--bone-faint);font-size:.97rem;margin:0;line-height:1.55;}
+
+/* ---- block opener ---- */
+.opener{max-width:var(--wide);margin:0 auto clamp(2.6rem,6vw,4.6rem);}
+.opener .numeral{
+  font-family:var(--display);font-weight:500;
+  font-size:clamp(4.5rem,16vw,11rem);
+  line-height:.8;color:var(--gold-deep);opacity:.55;letter-spacing:.02em;
+}
+.opener .eyebrow{display:block;margin:1.6rem 0 1rem;}
+.opener h2{
+  font-size:clamp(2rem,1.5rem + 2.6vw,3.5rem);
+  letter-spacing:-.01em;max-width:18ch;
+}
+.opener h2 em{font-style:italic;color:var(--gold);}
+.opener .intro{
+  margin-top:1.7rem;max-width:34rem;
+  font-family:var(--serif);font-style:italic;font-weight:300;
+  font-size:clamp(1.1rem,1rem + .5vw,1.3rem);
+  color:var(--bone-dim);line-height:1.6;
+}
+
+/* ---- sub-section ---- */
+.sub{max-width:var(--col);margin:0 auto clamp(2.6rem,5vw,3.8rem);}
+.sub:last-child{margin-bottom:0;}
+.sub-label{
+  font-family:var(--sans);font-size:.69rem;font-weight:600;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--gold);
+  display:flex;align-items:center;gap:.7rem;margin-bottom:1.1rem;
+}
+.sub-label::before{content:"";width:1.6rem;height:1px;background:var(--gold);}
+.sub h3{
+  font-size:clamp(1.4rem,1.2rem + 1vw,1.95rem);font-weight:600;
+  margin-bottom:1.2rem;color:var(--bone);line-height:1.18;
+}
+.sub h3 em{font-style:italic;color:var(--gold);}
+
+/* ---- principle / pull ---- */
+.principle{
+  max-width:46rem;margin:clamp(3rem,7vw,5rem) auto;
+  text-align:center;padding:0 1rem;
+}
+.principle p{
+  font-family:var(--display);font-style:italic;font-weight:500;
+  font-size:clamp(1.45rem,1.1rem + 1.9vw,2.4rem);
+  line-height:1.34;color:var(--bone);margin:1.8rem 0;
+}
+.principle p .gold{color:var(--gold);}
+.principle .mk{width:8px;height:8px;transform:rotate(45deg);border:1px solid var(--gold);margin:0 auto;}
+
+/* ---- numbered list (gradini) ---- */
+.steps{counter-reset:s;list-style:none;padding:0;margin:1.6rem 0 0;}
+.steps li{
+  counter-increment:s;position:relative;
+  padding:1.4rem 0 1.4rem 3.4rem;
+  border-top:1px solid var(--line-soft);
+}
+.steps li:last-child{border-bottom:1px solid var(--line-soft);}
+.steps li::before{
+  content:counter(s,decimal-leading-zero);
+  position:absolute;left:0;top:1.35rem;
+  font-family:var(--display);font-size:1.05rem;color:var(--gold);
+  font-weight:500;letter-spacing:.04em;
+}
+.steps b{font-family:var(--display);font-weight:600;font-size:1.12rem;color:var(--bone);display:block;margin-bottom:.25rem;}
+.steps span{color:var(--bone-dim);font-size:.99rem;line-height:1.6;}
+
+/* ---- criticità cards ---- */
+.cards{
+  max-width:var(--wide);margin:2.4rem auto 0;
+  display:grid;grid-template-columns:repeat(2,1fr);gap:1px;
+  background:var(--line-soft);border:1px solid var(--line-soft);
+}
+.cards .card{background:var(--ink);padding:clamp(1.8rem,3.4vw,2.6rem);}
+.card .cnum{font-family:var(--display);color:var(--gold-deep);font-size:2.6rem;font-weight:500;line-height:1;}
+.card h4{font-size:1.28rem;font-weight:600;margin:.9rem 0 .8rem;color:var(--bone);}
+.card p{font-size:.98rem;color:var(--bone-dim);line-height:1.62;margin:0;}
+.card .conseg{
+  margin-top:1.1rem;padding-top:1.1rem;border-top:1px solid var(--line-soft);
+  font-size:.93rem;color:var(--bone-faint);
+}
+.card .conseg b{font-family:var(--sans);font-size:.64rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.4rem;}
+@media(max-width:720px){.cards{grid-template-columns:1fr;}}
+
+/* ---- skip link (accessibilità) ---- */
+.skip{
+  position:absolute;left:50%;transform:translateX(-50%) translateY(-200%);
+  top:.6rem;z-index:100;
+  background:var(--gold);color:var(--ink);
+  font-family:var(--sans);font-size:.8rem;font-weight:600;
+  padding:.55rem 1.1rem;border-radius:2px;
+  transition:transform .2s;
+}
+.skip:focus{transform:translateX(-50%) translateY(0);color:var(--ink);}
+
+/* ---- domande ---- */
+.domande{background:var(--ink-2);}
+.qlist{max-width:46rem;margin:2rem auto 0;list-style:none;padding:0;counter-reset:q;}
+.qlist li{
+  counter-increment:q;position:relative;
+  padding:1.7rem 0 1.7rem 3.3rem;
+  border-top:1px solid var(--line-soft);
+}
+.qlist li:last-child{border-bottom:1px solid var(--line-soft);}
+.qlist li::before{
+  content:"0" counter(q);position:absolute;left:0;top:1.7rem;
+  font-family:var(--display);color:var(--gold);
+  font-size:1.05rem;font-weight:500;
+}
+.qlist .q{font-family:var(--display);font-size:clamp(1.12rem,1rem + .62vw,1.4rem);font-weight:500;color:var(--bone);line-height:1.34;margin-bottom:.5rem;}
+.qlist .why{font-size:.95rem;color:var(--bone-faint);line-height:1.6;}
+.qlist .why::before{content:"— ";color:var(--gold);}
+@media(max-width:520px){.qlist li{padding-left:2.6rem;}}
+
+/* ---- sitemap (sito archè) ---- */
+.sitemap{max-width:var(--wide);margin:2.2rem auto 0;}
+.sitemap-root{text-align:center;font-family:var(--display);font-size:1.5rem;font-weight:600;color:var(--gold);}
+.sitemap-root i{font-style:normal;font-size:.62em;vertical-align:.32em;margin-left:.1em;}
+.sitemap-stem{width:1px;height:2.4rem;background:var(--line);margin:.2rem auto 0;}
+.sitemap-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:var(--line-soft);border:1px solid var(--line-soft);
+}
+.smpage{background:var(--ink);padding:clamp(1.4rem,2.6vw,1.9rem);}
+.smpage .pnum{font-family:var(--sans);font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);}
+.smpage h4{font-family:var(--display);font-size:1.22rem;font-weight:600;margin:.45rem 0 .55rem;color:var(--bone);}
+.smpage p{font-size:.92rem;color:var(--bone-dim);line-height:1.56;margin:0;}
+@media(max-width:760px){.sitemap-grid{grid-template-columns:1fr;}}
+
+/* ---- compare (prima / con archè) ---- */
+.compare{max-width:var(--wide);margin:2.2rem auto 0;border-top:1px solid var(--line);}
+.crow{
+  display:grid;grid-template-columns:10.5rem 1fr 1fr;gap:1.7rem;
+  padding:1.5rem 0;border-bottom:1px solid var(--line-soft);align-items:start;
+}
+.crow.head{padding:.85rem 0;border-bottom:1px solid var(--line);}
+.crow.head span{font-family:var(--sans);font-size:.63rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;}
+.chead-before{color:var(--bone-faint);}
+.chead-after{color:var(--gold);}
+.crow .dim-label{font-family:var(--display);font-size:1.16rem;font-weight:600;color:var(--bone);}
+.crow .before{color:var(--bone-faint);font-size:.95rem;line-height:1.58;}
+.crow .after{color:var(--bone);font-size:.95rem;line-height:1.58;}
+@media(max-width:760px){
+  .crow{grid-template-columns:1fr;gap:.45rem;padding:1.5rem 0;}
+  .crow.head{display:none;}
+  .crow .dim-label{margin-bottom:.35rem;}
+  .crow .before::before,.crow .after::before{
+    font-family:var(--sans);font-size:.6rem;font-weight:700;letter-spacing:.1em;
+    text-transform:uppercase;display:block;margin-bottom:.15rem;
+  }
+  .crow .before::before{content:"Oggi";color:var(--bone-faint);}
+  .crow .after::before{content:"Con archè";color:var(--gold);}
+}
+
+/* ---- episodi ---- */
+.episodes{max-width:46rem;margin:1.6rem auto 0;list-style:none;padding:0;}
+.episodes li{
+  display:grid;grid-template-columns:3.4rem 1fr;gap:1.3rem;
+  padding:1.4rem 0;border-top:1px solid var(--line-soft);align-items:baseline;
+}
+.episodes li:last-child{border-bottom:1px solid var(--line-soft);}
+.episodes .epn{font-family:var(--display);font-size:1.15rem;font-weight:500;color:var(--gold);letter-spacing:.03em;}
+.episodes .ept{font-family:var(--display);font-size:clamp(1.14rem,1rem + .6vw,1.4rem);font-weight:600;color:var(--bone);margin-bottom:.3rem;line-height:1.25;}
+.episodes .epd{font-size:.94rem;color:var(--bone-dim);line-height:1.56;}
+@media(max-width:520px){.episodes li{grid-template-columns:2.7rem 1fr;gap:.9rem;}}
+
+/* ---- rubriche ---- */
+.rubriche{
+  max-width:var(--wide);margin:1.6rem auto 0;
+  display:grid;grid-template-columns:repeat(2,1fr);gap:1px;
+  background:var(--line-soft);border:1px solid var(--line-soft);
+}
+.rub{background:var(--ink);padding:clamp(1.4rem,2.6vw,1.8rem);}
+.rub h4{font-family:var(--display);font-size:1.16rem;font-weight:600;color:var(--gold);margin:0 0 .45rem;}
+.rub p{font-size:.92rem;color:var(--bone-dim);line-height:1.56;margin:0;}
+@media(max-width:620px){.rubriche{grid-template-columns:1fr;}}
+
+/* ---- esempio lavorato ---- */
+.example{
+  max-width:46rem;margin:2rem auto 0;
+  border:1px solid var(--line);background:var(--ink-3);
+  padding:clamp(1.7rem,4vw,2.7rem);
+}
+.example .extag{font-family:var(--sans);font-size:.64rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);}
+.example h4{font-family:var(--display);font-size:clamp(1.3rem,1.1rem + .9vw,1.7rem);font-weight:600;color:var(--bone);margin:.55rem 0 1.4rem;}
+.example h4 em{font-style:italic;color:var(--gold);}
+.exday{
+  display:grid;grid-template-columns:6.6rem 1fr;gap:1.2rem;
+  padding:.95rem 0;border-top:1px solid var(--line-soft);align-items:baseline;
+}
+.exday:first-of-type{border-top:none;padding-top:0;}
+.exday .exd{font-family:var(--display);font-size:1.02rem;font-weight:600;color:var(--gold);}
+.exday .exc{font-size:.93rem;color:var(--bone-dim);line-height:1.55;}
+.exday .exc b{font-family:var(--sans);font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--bone);margin-right:.5rem;}
+@media(max-width:520px){.exday{grid-template-columns:1fr;gap:.2rem;}}
+
+/* ---- never list ---- */
+.never{max-width:46rem;margin:1.5rem auto 0;list-style:none;padding:0;}
+.never li{
+  position:relative;padding:.9rem 0 .9rem 2rem;
+  border-top:1px solid var(--line-soft);
+  color:var(--bone-dim);font-size:.99rem;line-height:1.55;
+}
+.never li:last-child{border-bottom:1px solid var(--line-soft);}
+.never li::before{content:"";position:absolute;left:0;top:1.42rem;width:11px;height:1px;background:var(--gold);}
+.never li b{color:var(--bone);font-weight:600;}
+
+/* ---- matrice archetipi ---- */
+.matrix{max-width:var(--wide);margin:2.4rem auto 0;border-top:1px solid var(--line);}
+.mrow{
+  display:grid;grid-template-columns:15rem 1fr;gap:2rem;
+  padding:1.7rem 0;border-bottom:1px solid var(--line-soft);align-items:start;
+}
+.mrow .myth{font-family:var(--display);font-size:1.5rem;font-weight:600;color:var(--gold);}
+.mrow .myth small{display:block;font-family:var(--sans);font-size:.64rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--bone-faint);margin-top:.45rem;}
+.mrow .read{color:var(--bone-dim);font-size:1rem;line-height:1.62;}
+.mrow .read b{color:var(--bone);font-weight:600;}
+@media(max-width:680px){.mrow{grid-template-columns:1fr;gap:.7rem;}}
+
+/* ---- channel grid ---- */
+.channels{max-width:var(--wide);margin:2.4rem auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);}
+.chan{background:var(--ink);padding:clamp(1.6rem,3vw,2.3rem);}
+.chan .role{font-family:var(--sans);font-size:.64rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);}
+.chan h4{font-size:1.35rem;font-weight:600;margin:.6rem 0 .7rem;color:var(--bone);}
+.chan p{font-size:.95rem;color:var(--bone-dim);line-height:1.6;margin:0;}
+@media(max-width:820px){.channels{grid-template-columns:1fr;}}
+
+/* ---- property cards ---- */
+.props{max-width:var(--wide);margin:2.2rem auto 0;display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;}
+.prop{background:var(--ink-2);border:1px solid var(--line-soft);padding:clamp(1.8rem,3.4vw,2.7rem);}
+.prop .tag{font-family:var(--sans);font-size:.66rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);}
+.prop h4{font-family:var(--display);font-size:clamp(1.3rem,1.1rem + .9vw,1.7rem);font-weight:600;margin:.7rem 0;color:var(--bone);}
+.prop h4 .dom{color:var(--gold);}
+.prop p{font-size:.97rem;color:var(--bone-dim);line-height:1.62;}
+.prop .eth{margin-top:1.1rem;padding-top:1.1rem;border-top:1px solid var(--line-soft);font-size:.9rem;color:var(--bone-faint);font-style:italic;}
+@media(max-width:760px){.props{grid-template-columns:1fr;}}
+
+/* ---- ritmo settimanale ---- */
+.week{max-width:46rem;margin:1.8rem auto 0;list-style:none;padding:0;}
+.week li{
+  display:grid;grid-template-columns:8.5rem 1fr;gap:1.4rem;
+  padding:1.15rem 0;border-top:1px solid var(--line-soft);align-items:baseline;
+}
+.week li:last-child{border-bottom:1px solid var(--line-soft);}
+.week .day{font-family:var(--display);font-size:1.12rem;font-weight:600;color:var(--gold);}
+.week .act{color:var(--bone-dim);font-size:.98rem;line-height:1.55;}
+.week .act b{color:var(--bone);font-weight:600;}
+@media(max-width:560px){.week li{grid-template-columns:1fr;gap:.2rem;}}
+
+/* ---- scala del valore ---- */
+.scale{max-width:46rem;margin:2rem auto 0;list-style:none;padding:0;}
+.scale li{
+  position:relative;padding:1.5rem 0 1.5rem 4.6rem;
+  border-top:1px solid var(--line-soft);
+}
+.scale li:last-child{border-bottom:1px solid var(--line-soft);}
+.scale li::before{
+  content:"";position:absolute;left:1.4rem;top:1.95rem;
+  width:9px;height:9px;transform:rotate(45deg);
+  border:1px solid var(--gold);background:var(--ink);
+}
+.scale li::after{
+  content:"";position:absolute;left:1.78rem;top:2.6rem;bottom:-1px;
+  width:1px;background:var(--line-soft);
+}
+.scale li:last-child::after{display:none;}
+.scale .tier{font-family:var(--display);font-size:1.2rem;font-weight:600;color:var(--bone);display:block;margin-bottom:.3rem;}
+.scale .tier i{font-style:italic;color:var(--gold);}
+.scale .desc{color:var(--bone-dim);font-size:.96rem;line-height:1.6;}
+
+/* sections that breathe darker / warmer */
+.alt{background:var(--ink-2);}
+.deep{background:linear-gradient(180deg,var(--ink),var(--oxblood) 60%,var(--ink));}
+
+/* ---- closing ---- */
+.closing{text-align:center;}
+.closing h2{
+  font-size:clamp(2.1rem,1.6rem + 2.6vw,3.7rem);
+  font-style:italic;font-weight:500;max-width:18ch;margin:0 auto 1.8rem;
+}
+.closing h2 .gold{color:var(--gold);font-style:normal;}
+.closing .col p{font-size:clamp(1.05rem,1rem + .4vw,1.22rem);color:var(--bone-dim);}
+
+/* ---- colophon ---- */
+.colophon{
+  background:var(--ink-2);border-top:1px solid var(--line);
+  text-align:center;padding:clamp(3.5rem,7vw,5.5rem) 1.5rem;
+}
+.colophon .cmark{font-family:var(--display);font-size:2rem;font-weight:600;color:var(--bone);}
+.colophon .cmark i{color:var(--gold);font-style:normal;}
+.colophon .meta{font-family:var(--sans);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-faint);margin-top:1rem;line-height:2;}
+.colophon .sign{margin-top:1.8rem;font-size:.95rem;color:var(--bone-faint);font-style:italic;}
+
+/* ---- reveal (JS-gated; visibile senza JS) ---- */
+.no-js .reveal{opacity:1;}
+.js .reveal{opacity:0;transform:translateY(20px);}
+.js .reveal.vis{opacity:1;transform:none;transition:opacity 1s ease,transform 1s cubic-bezier(.2,.7,.2,1);}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  .js .reveal{opacity:1!important;transform:none!important;transition:none!important;}
+  .hero-logo,.hero .eyebrow,.hero h1,.hero .standfirst,.hero .essence,.hero .scrollcue{animation:none!important;}
+}
+/* hero entrance (CSS-only, completa sempre) */
+@keyframes rise{from{opacity:0;transform:translateY(26px);}to{opacity:1;transform:none;}}
+.hero-logo{animation:rise 1.1s .1s both cubic-bezier(.2,.7,.2,1);}
+.hero .eyebrow{animation:rise 1s .3s both;}
+.hero h1{animation:rise 1.1s .45s both cubic-bezier(.2,.7,.2,1);}
+.hero .standfirst{animation:rise 1s .65s both;}
+.hero .essence{animation:rise 1s .85s both;}
+.hero .scrollcue{animation:rise 1s 1.05s both;}
+
+/* ===== ESEMPI DI REALIZZAZIONE — MOCKUP ===== */
+.mock-label{
+  font-family:var(--sans);font-size:.7rem;font-weight:600;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--gold);
+  display:flex;align-items:center;gap:.7rem;max-width:46rem;margin:0 auto;
+}
+.mock-label::before{content:"";width:1.7rem;height:1px;background:var(--gold);flex:none;}
+.mock-intro{max-width:46rem;margin:1rem auto 2rem;font-size:.99rem;color:var(--bone-dim);line-height:1.62;}
+.mock-cap{margin:1rem auto 0;font-size:.86rem;color:var(--bone-faint);font-style:italic;text-align:center;}
+
+/* browser window */
+.bw{
+  max-width:53rem;margin:0 auto;background:var(--ink-2);
+  border:1px solid var(--line);border-radius:9px;overflow:hidden;
+  box-shadow:0 36px 80px -34px rgba(0,0,0,.78);
+}
+.bw + .bw{margin-top:2.6rem;}
+.bw-bar{display:flex;align-items:center;gap:.75rem;padding:.62rem .95rem;
+  background:var(--ink-3);border-bottom:1px solid var(--line-soft);}
+.bw-dots{display:flex;gap:.36rem;flex:none;}
+.bw-dots i{width:9px;height:9px;border-radius:50%;background:rgba(236,228,210,.15);}
+.bw-url{flex:1;text-align:center;font-family:var(--sans);font-size:.63rem;
+  letter-spacing:.04em;color:var(--bone-faint);background:var(--ink);
+  border:1px solid var(--line-soft);border-radius:5px;padding:.3rem .7rem;}
+.bw-url b{color:var(--gold);font-weight:600;letter-spacing:.02em;}
+.bw-body{padding:clamp(1.5rem,3.4vw,2.7rem);background:var(--ink);}
+
+/* faux visual still */
+.mk-still{
+  position:relative;overflow:hidden;
+  background:radial-gradient(120% 130% at 28% 0%,rgba(200,162,78,.16),transparent 56%),
+    linear-gradient(158deg,var(--ink-3),var(--ink) 64%,var(--oxblood));
+  border:1px solid var(--line);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;gap:.3rem;
+}
+.mk-still .st-k{font-family:var(--sans);font-size:.57rem;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--gold);}
+.mk-still .st-t{font-family:var(--display);font-weight:600;color:var(--bone);
+  letter-spacing:.05em;line-height:1.02;font-size:1.7rem;}
+.mk-still .st-s{font-family:var(--display);font-style:italic;color:var(--bone-dim);font-size:.85rem;}
+
+/* mini site chrome */
+.mk-top{display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--line-soft);padding-bottom:.95rem;margin-bottom:1.5rem;}
+.mk-logo{font-family:var(--display);font-size:1.12rem;font-weight:600;color:var(--bone);}
+.mk-logo i{color:var(--gold);font-style:normal;font-size:.55em;vertical-align:.32em;margin-left:.12em;}
+.mk-nav{display:flex;gap:1.1rem;font-family:var(--sans);font-size:.61rem;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--bone-faint);}
+@media(max-width:560px){.mk-nav{display:none;}}
+
+/* homepage */
+.mk-hero{text-align:center;padding:1.1rem 0 1.7rem;}
+.mk-hero .eye{font-family:var(--sans);font-size:.6rem;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--gold);}
+.mk-hero h5{font-family:var(--display);font-size:clamp(1.7rem,1.2rem + 2.2vw,2.7rem);
+  font-weight:600;color:var(--bone);margin:.55rem 0 .45rem;line-height:1.08;}
+.mk-hero p{font-size:.9rem;color:var(--bone-dim);margin:0;}
+.mk-feat{display:grid;grid-template-columns:1.3fr 1fr;gap:1.2rem;align-items:center;
+  border:1px solid var(--line-soft);background:var(--ink-2);padding:1rem;}
+.mk-feat .mk-still{aspect-ratio:16/10;}
+.mk-feat .mk-still .st-t{font-size:1.8rem;}
+.mk-feat .fe-k{font-family:var(--sans);font-size:.57rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--gold);}
+.mk-feat h6{font-family:var(--display);font-size:1.16rem;font-weight:600;
+  color:var(--bone);margin:.4rem 0;line-height:1.2;}
+.mk-feat p{font-size:.83rem;color:var(--bone-dim);line-height:1.5;margin:0;}
+.mk-doors{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin-top:1.2rem;}
+.mk-door{border:1px solid var(--line-soft);padding:.9rem .6rem;text-align:center;}
+.mk-door .dk{font-family:var(--display);font-size:1rem;font-weight:600;color:var(--gold);}
+.mk-door .dd{font-family:var(--sans);font-size:.55rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--bone-faint);margin-top:.25rem;}
+@media(max-width:560px){.mk-feat{grid-template-columns:1fr;}}
+
+/* episode page */
+.mk-eyrow{display:flex;align-items:baseline;gap:.8rem;margin-bottom:.45rem;}
+.mk-eyrow .ep-n{font-family:var(--display);color:var(--gold);font-size:1.05rem;font-weight:600;}
+.mk-eyrow .ep-k{font-family:var(--sans);font-size:.58rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--bone-faint);}
+.mk-eptitle{font-family:var(--display);font-size:clamp(1.4rem,1.1rem + 1.5vw,2rem);
+  font-weight:600;color:var(--bone);line-height:1.13;margin:0 0 1.1rem;}
+.mk-player{aspect-ratio:16/9;margin-bottom:1.2rem;}
+.mk-play{width:48px;height:48px;border-radius:50%;border:1px solid var(--gold);
+  background:rgba(20,17,12,.5);display:flex;align-items:center;justify-content:center;flex:none;}
+.mk-play::after{content:"";width:0;height:0;border-style:solid;
+  border-width:7px 0 7px 12px;border-color:transparent transparent transparent var(--gold);margin-left:3px;}
+.mk-dur{position:absolute;right:.55rem;bottom:.55rem;font-family:var(--sans);
+  font-size:.57rem;letter-spacing:.05em;color:var(--bone);
+  background:rgba(0,0,0,.62);padding:.16rem .42rem;border-radius:3px;}
+.mk-seclabel{font-family:var(--sans);font-size:.58rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.7rem;}
+.mk-chapters{list-style:none;padding:0;margin:0;}
+.mk-chapters li{display:flex;gap:.85rem;padding:.58rem 0;
+  border-top:1px solid var(--line-soft);font-size:.84rem;color:var(--bone-dim);line-height:1.46;}
+.mk-chapters li:last-child{border-bottom:1px solid var(--line-soft);}
+.mk-chapters .ch-n{font-family:var(--display);color:var(--gold);font-weight:600;flex:none;}
+.mk-chapters .ch-t{color:var(--bone);font-weight:600;}
+
+/* editorial mockups */
+.mockpair{max-width:var(--wide);margin:0 auto;display:grid;
+  grid-template-columns:1fr 1fr;gap:2.6rem;align-items:start;}
+@media(max-width:720px){.mockpair{grid-template-columns:1fr;gap:3rem;}}
+.mockcol .mk-kicker{font-family:var(--sans);font-size:.62rem;font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--bone-faint);
+  text-align:center;display:block;margin-bottom:1rem;}
+.igp{max-width:25rem;width:100%;margin:0 auto;background:var(--ink-2);
+  border:1px solid var(--line);border-radius:9px;overflow:hidden;
+  box-shadow:0 30px 70px -32px rgba(0,0,0,.76);}
+.igp-head{display:flex;align-items:center;gap:.6rem;padding:.72rem .9rem;}
+.igp-av,.ytv-av{flex:none;border-radius:50%;border:1px solid var(--gold);
+  background:radial-gradient(circle at 35% 30%,var(--gold-deep),var(--ink-3));
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--display);color:var(--gold-bright);font-weight:600;}
+.igp-av{width:31px;height:31px;font-size:.9rem;}
+.igp-name{font-family:var(--sans);font-size:.79rem;font-weight:600;color:var(--bone);line-height:1.25;}
+.igp-name span{display:block;color:var(--bone-faint);font-weight:400;font-size:.66rem;}
+.igp-dots{margin-left:auto;color:var(--bone-faint);font-size:1rem;letter-spacing:.04em;}
+.igp-media{aspect-ratio:1/1;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);}
+.igp-media .mk-still{height:100%;border:none;}
+.igp-media .mk-still .st-t{font-size:2rem;}
+.igp-actions{display:flex;align-items:center;gap:.85rem;padding:.7rem .9rem .35rem;}
+.igp-actions svg{width:21px;height:21px;stroke:var(--bone);fill:none;
+  stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+.igp-actions .sp{margin-left:auto;}
+.igp-cap{padding:.15rem .9rem 1rem;font-size:.79rem;color:var(--bone-dim);line-height:1.52;}
+.igp-cap b{color:var(--bone);font-weight:600;}
+.igp-cap .more{color:var(--bone-faint);}
+.ytv{max-width:30rem;width:100%;margin:0 auto;}
+.ytv-thumb{aspect-ratio:16/9;border-radius:7px;}
+.ytv-thumb .st-t{font-size:2.5rem;}
+.ytv-meta{display:flex;gap:.7rem;margin-top:.85rem;}
+.ytv-av{width:35px;height:35px;font-size:.95rem;}
+.ytv-title{font-family:var(--display);font-size:1.02rem;font-weight:600;color:var(--bone);line-height:1.26;}
+.ytv-sub{font-family:var(--sans);font-size:.69rem;color:var(--bone-faint);margin-top:.28rem;}
+
+/* ===== MOVIMENTO VIII — rischi e piano ===== */
+.risks{max-width:46rem;margin:1.9rem auto 0;}
+.risk{padding:1.7rem 0;border-top:1px solid var(--line-soft);}
+.risk:last-child{border-bottom:1px solid var(--line-soft);}
+.risk .rk-k{font-family:var(--sans);font-size:.62rem;font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--gold);}
+.risk h4{font-family:var(--display);font-size:1.3rem;font-weight:600;color:var(--bone);
+  margin:.38rem 0 .6rem;line-height:1.2;}
+.risk .rk-d{font-size:.97rem;color:var(--bone-dim);line-height:1.6;}
+.risk .rk-mit{margin-top:1rem;padding-left:1.15rem;border-left:2px solid var(--gold);
+  font-size:.93rem;color:var(--bone-dim);line-height:1.58;}
+.risk .rk-mit b{font-family:var(--sans);font-size:.59rem;font-weight:700;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.32rem;}
+
+.timeline{max-width:46rem;margin:1.9rem auto 0;}
+.tl-phase{position:relative;padding:0 0 1.9rem 2.5rem;border-left:1px solid var(--line);}
+.tl-phase:last-child{border-left-color:transparent;padding-bottom:0;}
+.tl-phase::before{content:"";position:absolute;left:-5px;top:.3rem;width:9px;height:9px;
+  transform:rotate(45deg);background:var(--gold);}
+.tl-when{font-family:var(--sans);font-size:.62rem;font-weight:600;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--gold);}
+.tl-phase h4{font-family:var(--display);font-size:1.22rem;font-weight:600;color:var(--bone);margin:.3rem 0 .5rem;}
+.tl-phase p{font-size:.95rem;color:var(--bone-dim);line-height:1.6;margin:0;}
+
+.v1grid{max-width:var(--wide);margin:2rem auto 0;display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;}
+.v1col{border:1px solid var(--line-soft);background:var(--ink-2);padding:clamp(1.6rem,3vw,2.3rem);}
+.v1col.essential{border-color:var(--line);}
+.v1col .v1k{font-family:var(--sans);font-size:.64rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;}
+.v1col.essential .v1k{color:var(--gold);}
+.v1col.later .v1k{color:var(--bone-faint);}
+.v1col h4{font-family:var(--display);font-size:1.3rem;font-weight:600;color:var(--bone);margin:.45rem 0 .9rem;}
+.v1col ul{list-style:none;padding:0;margin:0;}
+.v1col li{padding:.55rem 0;border-top:1px solid var(--line-soft);font-size:.93rem;color:var(--bone-dim);line-height:1.5;}
+.v1col li:first-child{border-top:none;}
+.v1col.essential li::before{content:"";display:inline-block;width:6px;height:6px;
+  transform:rotate(45deg);background:var(--gold);margin-right:.6rem;vertical-align:.04em;}
+@media(max-width:680px){.v1grid{grid-template-columns:1fr;}}
+
+/* ===== sistema di format ===== */
+.fmt-group{max-width:var(--wide);margin:2rem auto 0;}
+.fmt-group + .fmt-group{margin-top:2.2rem;}
+.fmt-cat{font-family:var(--sans);font-size:.66rem;font-weight:600;letter-spacing:.17em;
+  text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:.7rem;margin-bottom:1rem;}
+.fmt-cat::before{content:"";width:1.5rem;height:1px;background:var(--gold);flex:none;}
+.fmt-cat em{color:var(--bone-faint);font-weight:400;font-style:normal;letter-spacing:.07em;text-transform:none;}
+.fmt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:var(--line-soft);border:1px solid var(--line-soft);}
+.fmt-card{background:var(--ink);padding:1.35rem 1.25rem;}
+.fmt-card h5{font-family:var(--display);font-size:1.12rem;font-weight:600;color:var(--bone);margin:0 0 .42rem;}
+.fmt-card p{font-size:.86rem;color:var(--bone-dim);line-height:1.52;margin:0 0 .65rem;}
+.fmt-card .fmt-meta{font-family:var(--sans);font-size:.57rem;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--gold);}
+@media(max-width:760px){.fmt-grid{grid-template-columns:1fr;}}
+
+/* phone mockups */
+.phonepair{max-width:60rem;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;justify-items:center;}
+@media(max-width:680px){.phonepair{grid-template-columns:1fr;gap:3.2rem;}}
+.ph-wrap{display:flex;flex-direction:column;align-items:center;width:100%;}
+.ph-kicker{font-family:var(--sans);font-size:.62rem;font-weight:600;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--bone-faint);margin-bottom:1rem;}
+.phone{width:100%;max-width:16.5rem;background:#0b0907;border:1px solid var(--line);
+  border-radius:26px;padding:7px;box-shadow:0 38px 82px -30px rgba(0,0,0,.85);}
+.ph-still{aspect-ratio:9/16;position:relative;border-radius:19px;overflow:hidden;
+  display:flex;flex-direction:column;
+  background:radial-gradient(130% 78% at 50% 14%,rgba(200,162,78,.2),transparent 52%),
+    linear-gradient(168deg,var(--ink-3),var(--ink) 56%,var(--oxblood));}
+.reel-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:1.5rem 1.3rem;gap:.5rem;}
+.reel-body .rk{font-family:var(--sans);font-size:.53rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);}
+.reel-body .rt{font-family:var(--display);font-weight:600;color:var(--bone);font-size:1.4rem;line-height:1.14;}
+.reel-rail{position:absolute;right:.5rem;bottom:3.6rem;display:flex;flex-direction:column;gap:1rem;align-items:center;}
+.reel-rail svg{width:19px;height:19px;stroke:var(--bone);fill:none;stroke-width:1.6;
+  stroke-linecap:round;stroke-linejoin:round;}
+.reel-foot{position:absolute;left:0;right:0;bottom:0;padding:.7rem .75rem .8rem;
+  background:linear-gradient(transparent,rgba(11,9,7,.92));}
+.reel-acc{display:flex;align-items:center;gap:.4rem;font-family:var(--sans);font-size:.63rem;font-weight:600;color:var(--bone);}
+.reel-cap{font-size:.57rem;color:var(--bone-dim);margin-top:.32rem;line-height:1.42;}
+.mini-av{width:18px;height:18px;border-radius:50%;border:1px solid var(--gold);flex:none;
+  background:radial-gradient(circle at 35% 30%,var(--gold-deep),var(--ink-3));
+  display:flex;align-items:center;justify-content:center;font-family:var(--display);
+  font-size:.55rem;color:var(--gold-bright);font-weight:600;}
+.story-bars{position:absolute;top:.55rem;left:.55rem;right:.55rem;display:flex;gap:3px;z-index:3;}
+.story-bars i{flex:1;height:2.5px;background:rgba(236,228,210,.22);border-radius:2px;}
+.story-bars i.on{background:var(--bone);}
+.story-head{position:absolute;top:1.18rem;left:.65rem;right:.65rem;display:flex;align-items:center;gap:.4rem;z-index:3;}
+.story-head .sh-n{font-family:var(--sans);font-size:.6rem;font-weight:600;color:var(--bone);}
+.story-head .sh-t{font-family:var(--sans);font-size:.54rem;color:var(--bone-faint);}
+.story-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:1.5rem 1.2rem;gap:.55rem;text-align:center;}
+.story-body .sk{font-family:var(--sans);font-size:.51rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);}
+.story-sticker{margin-top:.3rem;width:90%;background:rgba(11,9,7,.74);border:1px solid var(--line);
+  border-radius:11px;padding:.78rem .8rem;}
+.story-sticker .ss-q{font-family:var(--display);font-size:.84rem;color:var(--bone);font-weight:600;line-height:1.22;}
+.story-sticker .ss-box{margin-top:.5rem;border:1px dashed var(--gold);border-radius:6px;
+  padding:.4rem;font-family:var(--sans);font-size:.55rem;color:var(--bone-faint);}
+.story-foot{position:absolute;left:.65rem;right:.65rem;bottom:.7rem;border:1px solid var(--line);
+  border-radius:14px;padding:.44rem .75rem;font-family:var(--sans);font-size:.56rem;color:var(--bone-faint);}
+
+/* homepage method strip */
+.mk-method{margin-top:1.3rem;border-top:1px solid var(--line-soft);padding-top:1.3rem;text-align:center;}
+.mk-mlabel{font-family:var(--sans);font-size:.57rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);}
+.mk-method p{font-size:.85rem;color:var(--bone-dim);line-height:1.55;margin:.5rem auto .85rem;max-width:31rem;}
+.mk-arch{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;}
+.mk-arch span{font-family:var(--display);font-size:.82rem;color:var(--gold);
+  border:1px solid var(--line);padding:.24rem .7rem;border-radius:20px;}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#premessa">Vai al contenuto</a>
+
+<!-- ===================== TOP BAR ===================== -->
+<header class="bar">
+  <span class="mark">archè<i>&#9670;</i></span>
+  <nav aria-label="Sezioni">
+    <a href="#diagnosi">I</a>
+    <a href="#concetto">II</a>
+    <a href="#persona">III</a>
+    <a href="#architettura">IV</a>
+    <a href="#pubblicazione">V</a>
+    <a href="#crescita">VI</a>
+    <a href="#metodo">VII</a>
+    <a href="#piano">VIII</a>
+  </nav>
+</header>
+
+<div class="wrap">
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <img class="hero-logo" src="data:image/png;base64,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" alt="archè — parola di Gabri" width="460" height="378">
+  <span class="eyebrow">Gabriella Marano &nbsp;&middot;&nbsp; Documento di Regia &nbsp;&middot;&nbsp; MMXXVI</span>
+  <h1>Architettura di un <em>posizionamento</em></h1>
+  <p class="standfirst">Strategia digitale, sistema editoriale e modello di crescita per <strong>archè</strong> — il progetto che traduce la doppia competenza di Gabriella Marano, archeologia e criminologia, in un'autorità riconoscibile, duratura e inimitabile.</p>
+  <p class="essence">Non un piano social. La costruzione di un'autorità culturale — e del sistema che la sostiene.</p>
+  <div class="scrollcue">Il documento</div>
+</section>
+
+<!-- ===================== PREMESSA ===================== -->
+<section class="band premessa scroll-anchor" id="premessa">
+  <div class="col reveal">
+    <span class="eyebrow">Premessa</span>
+    <h2 style="margin-top:1.4rem;">Come leggere questo documento.</h2>
+    <p>Questo non è un piano di gestione dei social. Non descrive quante volte pubblicare, né quali formati assecondino l'algoritmo. Descrive una cosa più grande e più semplice: come si costruisce un'autorità — e come quell'autorità, una volta costruita, diventa un sistema che lavora anche quando Gabriella non è in scena.</p>
+    <p>Il documento procede in otto movimenti. Prima la <strong>diagnosi</strong>: chi è il pubblico, come decide di fidarsi, e perché la presenza attuale — pur solida — non lo intercetta ancora. Poi i due pilastri: il <strong>concetto</strong> archè e il metodo che lo rende inimitabile, e il <strong>brand personale</strong> di Gabriella, che deve crescere alla pari del format. Quindi l'<strong>architettura</strong>: come si organizzano siti, canali e distribuzione. Poi la <strong>crescita</strong>: come il sistema si sostiene, si monetizza con misura, si mantiene nel tempo. Infine il <strong>piano</strong>: i rischi dichiarati con franchezza, e il percorso operativo che traduce tutto in date.</p>
+    <p>La diagnosi che segue è onesta per scelta. Un'analisi che non nomina i problemi reali non serve a costruire niente.</p>
+  </div>
+</section>
+
+<!-- ===================== SOMMARIO ===================== -->
+<section class="band">
+  <div class="toc reveal">
+    <span class="eyebrow">Sommario</span>
+    <h2 style="margin-top:1.2rem;">Otto movimenti.</h2>
+    <a class="toc-item" href="#diagnosi">
+      <span class="toc-num">I</span>
+      <span><h3>La diagnosi</h3><p>Il pubblico, la psicologia d'acquisto, e dove la presenza attuale non arriva.</p></span>
+    </a>
+    <a class="toc-item" href="#concetto">
+      <span class="toc-num">II</span>
+      <span><h3>Il concetto archè — dal mito alla mente</h3><p>La sintesi inimitabile di archeologia e criminologia. Il metodo, e la regola che lo protegge.</p></span>
+    </a>
+    <a class="toc-item" href="#persona">
+      <span class="toc-num">III</span>
+      <span><h3>Il brand personale</h3><p>Gabriella Marano come asset: la persona che cresce insieme al format, e come si costruisce.</p></span>
+    </a>
+    <a class="toc-item" href="#architettura">
+      <span class="toc-num">IV</span>
+      <span><h3>Architettura web e posizionamento digitale</h3><p>Le due proprietà, pagina per pagina. Le implementazioni concrete e le innovazioni.</p></span>
+    </a>
+    <a class="toc-item" href="#pubblicazione">
+      <span class="toc-num">V</span>
+      <span><h3>La struttura di pubblicazione</h3><p>Il ruolo di ogni canale, la linea editoriale, e il motore che trasforma ogni presenza in patrimonio.</p></span>
+    </a>
+    <a class="toc-item" href="#crescita">
+      <span class="toc-num">VI</span>
+      <span><h3>Il motore di commercializzazione</h3><p>La scala del valore: dall'autorità gratuita ai prodotti, senza mai snaturare la prima.</p></span>
+    </a>
+    <a class="toc-item" href="#metodo">
+      <span class="toc-num">VII</span>
+      <span><h3>Il metodo operativo</h3><p>La macchina ripetibile: una matrice che diventa racconto, prodotto e crescita.</p></span>
+    </a>
+    <a class="toc-item" href="#piano">
+      <span class="toc-num">VIII</span>
+      <span><h3>Rischi e piano operativo</h3><p>Le scommesse dichiarate, il piano a 90 giorni, i ruoli, il modello economico e il lancio minimo.</p></span>
+    </a>
+  </div>
+</section>
+
+<div class="divider"><div class="rule"><span></span></div></div>
+
+<!-- ===================== I — DIAGNOSI ===================== -->
+<section class="band scroll-anchor" id="diagnosi">
+  <div class="opener reveal">
+    <div class="numeral">I</div>
+    <span class="eyebrow">La diagnosi</span>
+    <h2>Prima di disegnare un sistema, capire chi lo <em>guarderà</em>.</h2>
+    <p class="intro">Il punto di partenza non è debole. È solido. Ma un profilo solido e un sistema non sono la stessa cosa — e la distanza tra i due si misura, non si intuisce.</p>
+  </div>
+
+  <div class="sub reveal">
+    <div class="sub-label">I.1 — Chi guarda</div>
+    <h3>La psicologia di un pubblico <em>esperto</em>.</h3>
+    <p>Il true crime non si consuma per morbosità. O non solo. Il pubblico italiano del genere — adulto, in larga prevalenza femminile, mediamente colto — cerca quattro cose insieme, e le cerca nello stesso racconto: capire la paura per sentirsene meno esposto; riconoscere la vittima come persona, non come notizia; l'istinto antico di ricomporre l'enigma; e l'elaborazione morale di ciò che è giusto.</p>
+    <p>È un pubblico che ha consumato moltissimo: cronaca televisiva quotidiana, podcast, intere stagioni di attenzione collettiva su un singolo caso. Questo lo ha reso <strong>esperto</strong> — e diffidente. Ha imparato a distinguere, in pochi secondi, due cose che da fuori si somigliano: chi indaga e chi spettacolarizza. E ha sviluppato un rigetto preciso, quasi fisico, verso un gesto solo: la speculazione sul dolore di chi resta.</p>
+    <p>È la prima coordinata di archè. Il pubblico non chiede meno gravità. Chiede che la gravità sia trattata con rispetto. È una richiesta esigente — ed è esattamente lo spazio in cui Gabriella è più forte.</p>
+  </div>
+
+  <div class="sub reveal">
+    <div class="sub-label">I.2 — La fiducia</div>
+    <h3>Come si compra fiducia, in questo settore.</h3>
+    <p>In un mercato affollato, l'attenzione è facile e la fiducia è rara. La fiducia — quella che porta una persona a tornare ogni settimana, e poi un giorno a pagare — si costruisce in quattro gradini, in quest'ordine preciso.</p>
+    <ol class="steps">
+      <li><b>Competenza dimostrabile</b><span>Non dichiarata: vista. Il pubblico deve poter osservare qualcuno che sa — non leggere che sa.</span></li>
+      <li><b>Postura etica</b><span>Il modo in cui si nomina una vittima, il rifiuto di gonfiare un'indagine aperta. È il filtro che separa l'autorevole dal morboso.</span></li>
+      <li><b>Costanza</b><span>Un format riconoscibile e una cadenza regolare creano abitudine. L'abitudine, ripetuta, sedimenta in fiducia.</span></li>
+      <li><b>Una voce</b><span>L'affezione non va a un canale: va a una persona precisa, con un punto di vista che si impara a riconoscere.</span></li>
+    </ol>
+    <p style="margin-top:1.6rem;">Solo dopo questi quattro gradini arriva il quinto — la disponibilità a pagare. Un corso, un libro, un biglietto si vendono a chi ha già visto lavorare. Mai prima. È la ragione per cui, in questo documento, la commercializzazione viene per ultima: non per pudore, ma perché è lì che funziona.</p>
+  </div>
+
+  <div class="sub reveal">
+    <div class="sub-label">I.3 — Lo stato attuale</div>
+    <h3>Dove la presenza di oggi <em>non arriva</em>.</h3>
+    <p>Il punto di partenza non va sottovalutato: una professionista con credenziali forensi reali — consulente tecnico in casi di rilievo nazionale — e una presenza televisiva consolidata. Il problema non è la qualità. È che gli asset esistenti non compongono ancora un <strong>sistema</strong>. Quattro nodi, e la conseguenza concreta di ciascuno.</p>
+  </div>
+  <div class="cards reveal">
+    <div class="card">
+      <div class="cnum">01</div>
+      <h4>Quattro identità, nessun brand</h4>
+      <p>Un sito-persona dal tono poetico; un profilo Instagram ibrido tra vita privata e lavoro, senza sistema visivo; nessuna identità che unifichi. Quattro registri che non si parlano.</p>
+      <div class="conseg"><b>Conseguenza</b>Ogni canale la ripresenta da zero. Il pubblico non sedimenta un'immagine sola — e un'autorità non si costruisce su quattro volti.</div>
+    </div>
+    <div class="card">
+      <div class="cnum">02</div>
+      <h4>Il digitale non porta a una destinazione</h4>
+      <p>Il sito rimanda a un canale YouTube che non esiste ancora. L'unico canale vivo, Instagram, è un flusso di contenuti — non un imbuto che conduce da qualche parte.</p>
+      <div class="conseg"><b>Conseguenza</b>Ogni apparizione TV, ogni evento genera attenzione che evapora. Notorietà a intermittenza, e nessun luogo di proprietà che la trattenga.</div>
+    </div>
+    <div class="card">
+      <div class="cnum">03</div>
+      <h4>È una presenza, non un sistema</h4>
+      <p>Tutto dipende dalla presenza fisica: televisione, palco, post. Nessun format, nessuna linea editoriale operativa, nessuna produzione ripetibile.</p>
+      <div class="conseg"><b>Conseguenza</b>Il raggio d'azione è limitato dalle sue ore. E una presenza personale non è scalabile né trasferibile in una piattaforma: un sistema sì.</div>
+    </div>
+    <div class="card">
+      <div class="cnum">04</div>
+      <h4>Il posizionamento è dichiarato, non dimostrato</h4>
+      <p>L'autorità nel raccontare il crimine è affermata, ma non esiste ancora un artefatto — un episodio, un format — che il pubblico possa esperire.</p>
+      <div class="conseg"><b>Conseguenza</b>In un genere saturo ci si fida di ciò che si vede. Finché il primo episodio non esiste, archè è una promessa, non un brand.</div>
+    </div>
+  </div>
+
+  <div class="principle reveal">
+    <div class="mk"></div>
+    <p>La distanza tra dov'è oggi e dove può arrivare non è una distanza di <span class="gold">talento</span>. È una distanza di <span class="gold">struttura</span>.</p>
+    <div class="mk"></div>
+  </div>
+</section>
+
+<!-- ===================== DOMANDE ===================== -->
+<section class="band domande scroll-anchor" id="domande">
+  <div class="col reveal">
+    <span class="eyebrow">Interludio</span>
+    <h2 style="font-family:var(--display);font-size:clamp(1.7rem,1.3rem + 1.8vw,2.6rem);font-weight:500;margin-top:1.2rem;">Le domande che ci siamo posti prima di progettare.</h2>
+    <p style="margin-top:1.4rem;" class="dim">Un sistema vale quanto le domande da cui nasce. Prima di disegnare un solo canale, ci siamo posti queste sei.</p>
+  </div>
+  <ol class="qlist reveal">
+    <li>
+      <div class="q">Come si costruisce autorità in un settore dove il pubblico ha già imparato a diffidare?</div>
+      <div class="why">Perché in un mercato saturo la credibilità non si afferma: si dimostra, o non esiste.</div>
+    </li>
+    <li>
+      <div class="q">Cosa distingue, agli occhi di quel pubblico, una criminologa da un'opinionista di cronaca?</div>
+      <div class="why">Perché è la differenza tra un'autorità che dura e una visibilità che si consuma.</div>
+    </li>
+    <li>
+      <div class="q">Si può raccontare il crimine senza speculare sul dolore di chi resta?</div>
+      <div class="why">Perché la risposta a questa domanda è anche ciò che protegge la sua reputazione forense.</div>
+    </li>
+    <li>
+      <div class="q">Qual è l'unica cosa che Gabriella può fare, e che nessun concorrente può imitare?</div>
+      <div class="why">Perché un posizionamento inimitabile non si inventa: si trova nella biografia di chi lo incarna.</div>
+    </li>
+    <li>
+      <div class="q">Come si trasforma una presenza televisiva episodica in un patrimonio che cresce?</div>
+      <div class="why">Perché senza un sistema che la raccolga, ogni apparizione è valore che si disperde.</div>
+    </li>
+    <li>
+      <div class="q">Un brand personale può diventare un sistema che produce anche quando la persona non è in scena?</div>
+      <div class="why">Perché è la differenza tra un lavoro e un patrimonio.</div>
+    </li>
+  </ol>
+  <div class="col reveal" style="margin-top:2.4rem;text-align:center;">
+    <p class="small" style="font-style:italic;">Le pagine che seguono sono le risposte.</p>
+  </div>
+</section>
+
+<div class="divider"><div class="rule"><span></span></div></div>
+
+<!-- ===================== II — CONCETTO ===================== -->
+<section class="band scroll-anchor" id="concetto">
+  <div class="opener reveal">
+    <div class="numeral">II</div>
+    <span class="eyebrow">Il concetto</span>
+    <h2>archè — <em>dal mito alla mente</em>.</h2>
+    <p class="intro">Il cuore del progetto. Non un'idea di contenuto: il meccanismo che rende questo posizionamento impossibile da copiare.</p>
+  </div>
+
+  <div class="sub reveal">
+    <div class="sub-label">II.1 — Il nome</div>
+    <h3>Una parola greca, e una tesi.</h3>
+    <p><strong>archè</strong> (&#7936;&rho;&chi;&#942;) è una parola greca. Significa <em>origine, principio, ciò da cui ogni cosa comincia</em>. Non è un nome scelto per il suono. È la tesi del progetto condensata in una parola: il crimine non nasce dal nulla. Ha una matrice — antica, umana, riconoscibile — e capire quella matrice è il lavoro.</p>
+  </div>
+
+  <div class="sub reveal">
+    <div class="sub-label">II.2 — Il fossato</div>
+    <h3>La sintesi che <em>nessuno</em> può copiare.</h3>
+    <p>Il percorso di Gabriella Marano ha due radici, e di norma si raccontano separate. Una prima laurea in Lettere, indirizzo Beni Archeologici. Una seconda in Psicologia Clinica, con specializzazione forense in criminologia investigativa e criminal profiling. <strong>Archeologia e criminologia.</strong></p>
+    <p>La maggior parte delle strategie di personal branding sceglierebbe: o la criminologa, o la studiosa. archè fa l'opposto. Le tiene insieme — perché è esattamente nel loro incrocio che vive un posizionamento che nessun concorrente, per quanto bravo, può occupare.</p>
+    <p>Un narratore di true crime può avere uno storytelling migliore. Una criminologa televisiva può avere più ore di video alle spalle. Nessuno dei due può fare <em>questo</em>: leggere il gesto criminale contemporaneo attraverso la matrice del mito antico, con la competenza reale per farlo su entrambi i lati. Un posizionamento inimitabile non si dichiara. Si possiede — per biografia.</p>
+  </div>
+
+  <div class="sub reveal">
+    <div class="sub-label">II.3 — Il metodo</div>
+    <h3>Il teatro antico come <em>strumento di lettura</em>.</h3>
+    <p>Il teatro greco non era intrattenimento. Era un dispositivo sociale: il luogo dove una comunità osservava, elaborava e ritualizzava le proprie paure e le proprie colpe. archè riporta quella funzione nel presente — e usa la tragedia antica come cassa di risonanza per leggere i comportamenti devianti di oggi.</p>
+    <p>Il metodo si chiama <strong>dal mito alla mente</strong>, e funziona in due direzioni.</p>
+    <p><em>Dal mito al fenomeno:</em> si parte da un testo antico e lo si discende fino alle sue forme contemporanee — la dinamica psicologica che la tragedia aveva già descritto, secoli prima della psicologia.</p>
+    <p><em>Dal caso alla matrice:</em> si parte da un fatto di cronaca e si risale alla sua radice mitica — l'archè che lo rende non un'eccezione mostruosa, ma una variazione di qualcosa di umano e antico.</p>
+    <p>La seconda direzione è la più importante dal punto di vista strategico. È il punto in cui la presenza televisiva di Gabriella — i casi reali, l'attualità — entra nel sistema senza snaturarlo. archè non rincorre il delitto della settimana: lo <strong>eleva</strong>. Lo riconduce alla sua origine.</p>
+  </div>
+
+  <div class="principle reveal">
+    <div class="mk"></div>
+    <p>Il mito è la <span class="gold">lente</span>. Il caso non è mai il <span class="gold">prodotto</span>.</p>
+    <div class="mk"></div>
+    <p style="font-family:var(--serif);font-style:normal;font-size:clamp(1rem,.95rem + .35vw,1.13rem);color:var(--bone-dim);line-height:1.66;font-weight:300;">archè non commenta l'indagine aperta, non costruisce su un lutto fresco, non specula. Il caso entra solo quando un mito lo illumina, ed esce subito verso la lettura. È questa disciplina a rendere il posizionamento stabile invece che esposto — e a far sì che l'autorità forense di Gabriella e la sua presenza mediatica si rafforzino a vicenda, anziché logorarsi.</p>
+  </div>
+
+  <div class="sub reveal" style="max-width:var(--wide);">
+    <div class="sub-label">II.4 — La matrice degli archetipi</div>
+    <h3 style="max-width:30rem;">Cinque miti, cinque chiavi di lettura del male contemporaneo.</h3>
+  </div>
+  <div class="matrix reveal">
+    <div class="mrow">
+      <div class="myth">Medea<small>Euripide</small></div>
+      <div class="read"><b>Il figlicidio.</b> Maternità fragile, abbandono e ritorsione affettiva, tratti di personalità borderline. La distruzione dei figli come arma estrema contro chi si è amato.</div>
+    </div>
+    <div class="mrow">
+      <div class="myth">Elettra<small>Sofocle &middot; Euripide</small></div>
+      <div class="read"><b>Il trauma familiare.</b> Genitorialità tossica, lealtà spezzate, trasmissione intergenerazionale della violenza: la colpa che passa di padre in figlio.</div>
+    </div>
+    <div class="mrow">
+      <div class="myth">Aiace<small>Sofocle</small></div>
+      <div class="read"><b>Il crollo.</b> Depressione mascherata, perdita d'onore e d'identità, il suicidio del combattente. Il cedimento psichico che nessuno aveva visto arrivare.</div>
+    </div>
+    <div class="mrow">
+      <div class="myth">Eracle<small>Euripide</small></div>
+      <div class="read"><b>La perdita di controllo.</b> Follia omicida, dissociazione, e poi l'insight: il risveglio davanti a ciò che si è fatto, e la domanda sulla responsabilità.</div>
+    </div>
+    <div class="mrow">
+      <div class="myth">Le Troiane<small>Euripide</small></div>
+      <div class="read"><b>La vittimizzazione.</b> Trauma, violenza sulle donne, la guerra condotta sui corpi. Il punto di vista di chi subisce — restituito alla parola.</div>
+    </div>
+  </div>
+  <div class="col reveal" style="margin-top:1.8rem;">
+    <p class="small">Cinque matrici. Ogni episodio, ogni spettacolo, ogni serie di contenuti nasce da una di queste — e l'elenco è aperto.</p>
+  </div>
+
+  <div class="sub reveal" style="margin-top:clamp(3rem,6vw,4.5rem);">
+    <div class="sub-label">II.5 — Il format</div>
+    <h3>Una struttura unica, su ogni canale.</h3>
+    <p>Ogni unità di archè — un episodio video, una puntata di podcast, una serata a teatro — segue la stessa struttura. È ciò che la rende immediatamente riconoscibile.</p>
+    <ol class="steps">
+      <li><b>Apertura archeologica</b><span>Il mito, il suo contesto, la sua funzione originaria nella comunità che lo ha prodotto.</span></li>
+      <li><b>La scena</b><span>Il nucleo drammatico: messa in scena dal vivo a teatro, ricostruito nel video.</span></li>
+      <li><b>Decodifica criminologica e psicogiuridica</b><span>L'analisi: dinamiche, profili, la "sindrome tragica" e i suoi meccanismi.</span></li>
+      <li><b>Il presente</b><span>Il collegamento ai dati e ai fenomeni contemporanei — devianza minorile, violenza intrafamiliare, autolesionismo.</span></li>
+      <li><b>Restituzione</b><span>Strumenti di lettura, indicatori di rischio, riferimenti utili. Il pubblico non esce intrattenuto: esce con qualcosa in mano.</span></li>
+    </ol>
+  </div>
+
+  <div class="sub reveal">
+    <div class="sub-label">II.6 — La differenziazione</div>
+    <h3>Tre firme che <em>nessuno</em> può imitare.</h3>
+    <p>Il mercato di questo racconto ha tre voci dominanti: la criminologa che commenta in televisione, il narratore che costruisce podcast d'inchiesta, il creator che produce contenuti virali. Ognuna è forte in una cosa e scoperta nelle altre. archè non si infila in una di quelle caselle — porta tre firme concrete che le attraversano tutte. Tre cose che il pubblico riconosce in pochi secondi, e che nessun concorrente può replicare senza la doppia competenza di Gabriella.</p>
+    <ol class="steps">
+      <li><b>Si apre dal mito, non dal delitto</b><span>Ogni prodotto true crime apre con il caso: la scena, la vittima, il colpevole. archè apre con un testo di 2.500 anni fa. È la prima cosa che il pubblico percepisce — e la soglia che lo separa da tutto il resto del genere.</span></li>
+      <li><b>Lascia uno strumento, non solo un racconto</b><span>L'intrattenimento finisce quando finisce. Ogni unità di archè si chiude con una restituzione concreta: un indicatore di rischio, una chiave di lettura, un riferimento utile. Chi guarda non esce solo informato — esce più capace di leggere la realtà.</span></li>
+      <li><b>Ha il volto di un museo, non di una sala interrogatori</b><span>Niente estetica della cronaca nera: nessun nastro della polizia, nessun rosso d'allarme. Il mondo visivo di archè è quello dell'archeologia e del teatro antico — pietra, oro, gravità. Una promessa estetica che annuncia profondità, non sensazionalismo.</span></li>
+    </ol>
+  </div>
+
+  <div class="sub reveal">
+    <div class="sub-label">II.7 — La disciplina</div>
+    <h3>Cosa archè non farà <em>mai</em>.</h3>
+    <p>Un'autorità si definisce anche per ciò che rifiuta. Cinque confini, fissati una volta e non negoziabili: sono ciò che tiene archè dal lato giusto della linea che separa l'analisi dalla speculazione.</p>
+    <ul class="never">
+      <li>Non commenterà <b>un'indagine ancora aperta</b>.</li>
+      <li>Non userà <b>il nome di una vittima recente</b> come gancio.</li>
+      <li>Non pubblicherà <b>&laquo;il caso della settimana&raquo;</b>: non insegue il ciclo della cronaca.</li>
+      <li>Non offrirà <b>diagnosi su persone reali</b>, vive o coinvolte in procedimenti.</li>
+      <li>Non cederà al <b>sensazionalismo</b> per un picco di visualizzazioni.</li>
+    </ul>
+    <p style="margin-top:1.5rem;">Ogni "no" di questo elenco protegge, allo stesso tempo, la reputazione forense di Gabriella. La disciplina non limita archè: lo rende credibile — e la credibilità, in questo mercato, è l'unico vero capitale.</p>
+  </div>
+
+  <div class="principle reveal">
+    <div class="mk"></div>
+    <p>La devianza non nasce dal nulla. Nasce da dinamiche umane che le <span class="gold">tragedie</span> avevano già scritto.</p>
+    <div class="mk"></div>
+  </div>
+</section>
+
+<div class="divider"><div class="rule"><span></span></div></div>
+
+<!-- ===================== III — BRAND PERSONALE ===================== -->
+<section class="band alt scroll-anchor" id="persona">
+  <div class="opener reveal">
+    <div class="numeral">III</div>
+    <span class="eyebrow">Il brand personale</span>
+    <h2>Un format non ha autorità. Una <em>persona</em> sì.</h2>
+    <p class="intro">archè è il veicolo. È Gabriella Marano a dargli credibilità. I due non si costruiscono separatamente: crescono insieme — o si fermano insieme.</p>
+  </div>
+
+  <div class="sub reveal">
+    <div class="sub-label">III.1 — Due asset, una crescita</div>
+    <h3>Il format e la persona si <em>alimentano</em>.</h3>
+    <p>Il punto va detto subito, perché orienta tutto il resto del documento: archè e Gabriella Marano sono due asset distinti, ma la loro crescita è una sola. Non si può far crescere il format trascurando la persona — e non si può valorizzare la persona senza un format che le dia un terreno.</p>
+    <p>Il meccanismo è a doppia spinta. Ogni episodio di archè è anche una credenziale di Gabriella: dimostra competenza, dà corpo alla sua figura. E specularmente, ogni cosa che lei fa fuori da archè — una perizia, un'apparizione televisiva, un riconoscimento, un intervento pubblico — è carburante per il format. Il pubblico che impara a fidarsi di archè impara a fidarsi di lei; chi conosce lei arriva ad archè.</p>
+    <p>Per questo il brand personale non è un capitolo accessorio: è il secondo pilastro. Finora il documento ne aveva descritto soltanto il primo — il format. Questo blocco riequilibra: la persona riceve la stessa cura progettuale, perché senza non c'è progetto.</p>
+  </div>
+
+  <div class="principle reveal">
+    <div class="mk"></div>
+    <p>Se cresce il <span class="gold">format</span>, cresce la persona. Se cresce la persona, cresce il <span class="gold">format</span>. Vanno costruiti <span class="gold">insieme</span>.</p>
+    <div class="mk"></div>
+  </div>
+
+  <div class="sub reveal">
+    <div class="sub-label">III.2 — Lo stato, oggi</div>
+    <h3>Una presenza reale, una <em>regia</em> assente.</h3>
+    <p>Gabriella Marano non parte da zero: ha un nome, un volto noto alla televisione, credenziali forensi solide. Ma il suo posizionamento personale, oggi, ha la stessa natura del sistema fotografato nella diagnosi — c'è la presenza, manca la regia. Quattro mancanze concrete, da nominare con franchezza.</p>
+    <p><strong>LinkedIn è vuoto.</strong> Il canale dove le istituzioni cercano una professionista — teatri, festival, enti, scuole, redazioni, studi legali — non è presidiato. È l'assenza più grave: è lì che si valutano perizie, collaborazioni e partnership, ed è lì che oggi Gabriella, di fatto, non esiste.</p>
+    <p><strong>Le pagine social sono disorganizzate.</strong> Un flusso senza linea editoriale, senza sistema visivo, con vita privata e lavoro mescolati. Chi arriva non trova una figura definita: trova un diario.</p>
+    <p><strong>Non c'è una presentazione coerente.</strong> Si presenta in modo diverso su ogni canale: nessuna formula d'identità unica, nessuna headline che dica — sempre allo stesso modo — chi è e cosa fa.</p>
+    <p><strong>L'immagine pubblica è lasciata al caso.</strong> È costruita dalle apparizioni televisive, non da una direzione propria. Nessun materiale per chi la cerca, nessun governo del modo in cui appare: la sua figura, oggi, la raccontano gli altri.</p>
+  </div>
+
+  <div class="sub reveal">
+    <div class="sub-label">III.3 — Il personaggio</div>
+    <h3>Chi è Gabriella Marano, <em>in chiaro</em>.</h3>
+    <p>Costruire un brand personale significa prima di tutto definire una figura pubblica netta — un "personaggio" nel senso più serio del termine: una persona riconoscibile e coerente, della quale il pubblico sa cosa aspettarsi. Non "una criminologa": archeologa e criminologa, la sola figura capace di leggere il crimine attraverso il mito. La sua biografia — le due lauree, il doppio percorso — non è un dettaglio del curriculum: è la narrazione che fonda archè, e va raccontata come tale.</p>
+    <p>Quattro tratti definiscono la sua figura. Sono la stella polare di ogni contenuto, di ogni apparizione, di ogni pagina che porta il suo nome.</p>
+  </div>
+  <div class="rubriche reveal">
+    <div class="rub"><h4>Competenza doppia</h4><p>Archeologa e criminologa: la sola in grado di leggere il gesto criminale attraverso la matrice del mito. Il fondamento inimitabile dell'intero progetto.</p></div>
+    <div class="rub"><h4>Rigore forense</h4><p>Non opinione: perizia. Consulente tecnico in procedimenti di rilievo nazionale. È ciò che separa la sua voce da quella di un commentatore di cronaca.</p></div>
+    <div class="rub"><h4>Postura etica</h4><p>Dalla parte di chi subisce — l'impegno reale per le vittime, il rifiuto del sensazionalismo. La credibilità del progetto nasce da qui.</p></div>
+    <div class="rub"><h4>Voce divulgativa</h4><p>Rende comprensibile ciò che è complesso, senza impoverirlo. La capacità che la televisione ha già dimostrato — e che archè mette a sistema.</p></div>
+  </div>
+
+  <div class="sub reveal" style="max-width:var(--wide);margin-top:clamp(3rem,6vw,4.5rem);">
+    <div class="sub-label">III.4 — I canali personali</div>
+    <h3 style="max-width:24rem;">La mappa della sua presenza.</h3>
+    <p style="max-width:34rem;">Ogni canale che porta il nome di Gabriella ha un compito proprio. Vanno governati come un sistema — non lasciati a sé.</p>
+  </div>
+  <div class="props reveal">
+    <div class="prop">
+      <span class="tag">L'autorità</span>
+      <h4>gabriellamarano.it</h4>
+      <p>La sede dell'autorità forense: la figura, il lavoro di consulenza tecnica, l'impegno per le vittime. La pagina istituzionale di riferimento — sobria, credibile, ben organizzata.</p>
+    </div>
+    <div class="prop">
+      <span class="tag">Da costruire</span>
+      <h4>LinkedIn</h4>
+      <p>Oggi vuoto. È il canale delle istituzioni e dei partner: dove teatri, festival, enti e redazioni la cercano e la valutano. Va costruito da zero, con un profilo completo e una linea professionale propria.</p>
+      <p class="eth">Priorità immediata: è l'asset personale più scoperto — e il più rapido da attivare.</p>
+    </div>
+    <div class="prop">
+      <span class="tag">La voce quotidiana</span>
+      <h4>Instagram</h4>
+      <p>Il canale pubblico di tutti i giorni — oggi un diario disorganizzato. Va riordinato con un sistema visivo e ricondotto al nodo di acquisizione di archè, senza spegnerne il calore umano.</p>
+    </div>
+    <div class="prop">
+      <span class="tag">La vetrina</span>
+      <h4>La televisione</h4>
+      <p>La superficie più ampia, e non di proprietà. Ogni passaggio va trasformato in asset permanente: un contenuto, un aggiornamento dei canali, una traccia che resta.</p>
+    </div>
+  </div>
+
+  <div class="sub reveal" style="margin-top:clamp(3rem,6vw,4.5rem);">
+    <div class="sub-label">III.5 — Le implementazioni</div>
+    <h3>Cosa fare per il brand personale, <em>in concreto</em>.</h3>
+    <p>Sei interventi, ordinati per priorità. Sono il piano operativo del personal brand — da avviare in parallelo alla costruzione del format, non dopo di esso.</p>
+    <ol class="steps">
+      <li><b>Una headline unica</b><span>Un'unica formula d'identità — breve, precisa, memorabile — usata identica su ogni canale. Proposta di lavoro: <em>"Criminologa e archeologa. Leggo le origini del male."</em></span></li>
+      <li><b>Costruire LinkedIn da zero</b><span>Profilo completo e strategico: headline, una sezione che racconta la doppia competenza, le esperienze — consulenza tecnica, La Scuola di Atene, l'impegno con le vittime — e una linea di contenuti di taglio professionale, distinta da quella divulgativa di archè.</span></li>
+      <li><b>Un servizio fotografico professionale</b><span>Un set di immagini coordinate — ritratto, contesto, scena — coerenti con l'estetica di archè. Oggi manca: è materiale indispensabile per sito, stampa e canali. <span class="slot">servizio fotografico da pianificare</span>.</span></li>
+      <li><b>Una cartella stampa</b><span>Una press kit pronta per giornalisti, redazioni ed eventi: biografia in tre lunghezze, foto ufficiali, i temi su cui interviene, i contatti. Trasforma ogni richiesta dei media in un'occasione governata.</span></li>
+      <li><b>Il riordino dei profili social</b><span>Un sistema visivo coerente, la separazione netta tra vita privata e figura pubblica, il raccordo con il sistema archè. Dal diario al canale.</span></li>
+      <li><b>Governare le apparizioni televisive</b><span>Un protocollo fisso: ogni passaggio in TV viene annunciato, documentato e trasformato — in contenuto per archè e in aggiornamento dei canali personali. La vetrina diventa archivio.</span></li>
+    </ol>
+  </div>
+
+  <div class="principle reveal">
+    <div class="mk"></div>
+    <p>archè dà a Gabriella un <span class="gold">metodo</span>. Gabriella dà ad archè un <span class="gold">volto</span>. Nessuno dei due, da solo, è abbastanza.</p>
+    <div class="mk"></div>
+  </div>
+</section>
+
+<div class="divider"><div class="rule"><span></span></div></div>
+
+<!-- ===================== IV — ARCHITETTURA ===================== -->
+<section class="band alt scroll-anchor" id="architettura">
+  <div class="opener reveal">
+    <div class="numeral">IV</div>
+    <span class="eyebrow">Architettura digitale</span>
+    <h2>Due proprietà. <em>Due funzioni.</em> Una sola che cresce.</h2>
+    <p class="intro">Un errore frequente nei brand personali: chiedere a un solo sito di fare tutti i mestieri. archè non lo farà.</p>
+  </div>
+
+  <div class="sub reveal" style="max-width:var(--wide);">
+    <div class="sub-label">IV.1 — Le due proprietà</div>
+    <h3 style="max-width:28rem;">Il sistema digitale si regge su due sedi distinte.</h3>
+  </div>
+  <div class="props reveal">
+    <div class="prop">
+      <span class="tag">La sede professionale</span>
+      <h4>gabriellamarano.it</h4>
+      <p>Resta — ma cambia ruolo. Smette di provare a essere tutto e diventa la pagina forense sobria: la storia, il lavoro di consulenza tecnica, l'impegno per le vittime, i contatti professionali. È il luogo della credibilità istituzionale. Non vende, non ospita il racconto. Mantiene l'autorità del nome nei motori di ricerca.</p>
+      <p class="eth">Una persona che cerca aiuto perché vittima di violenza e una persona che valuta una masterclass non possono condividere la stessa pagina. È una separazione prima etica che strategica.</p>
+    </div>
+    <div class="prop">
+      <span class="tag">La piattaforma</span>
+      <h4><span class="dom">archè</span></h4>
+      <p>Nuova proprietà. È insieme la casa del brand e del format, l'archivio dei contenuti — episodi e podcast — il calendario degli appuntamenti dal vivo, e, in secondo piano, la scala dei prodotti. È la <strong>destinazione</strong>: il luogo verso cui tutti i canali in affitto convogliano. Costruita su misura — non un tema preconfezionato — per poter crescere con il progetto.</p>
+      <p class="eth">Indirizzo del sito e nomi dei profili social: <span class="slot">archè — dominio e handle da registrare</span>.</p>
+    </div>
+  </div>
+
+  <div class="sub reveal" style="margin-top:clamp(3rem,6vw,4.5rem);">
+    <div class="sub-label">IV.2 — Essere trovati</div>
+    <h3>La logica di posizionamento, in linguaggio di business.</h3>
+    <p>Due siti che portano lo stesso nome rischiano di farsi concorrenza nei motori di ricerca, dividendosi l'autorità invece di sommarla. La soluzione è una divisione netta degli <em>intenti</em>.</p>
+    <p><strong>gabriellamarano.it</strong> presidia le ricerche professionali: criminologa, consulente tecnico, psicologa forense. Chi cerca questi termini cerca la professionista.</p>
+    <p><strong>archè</strong> presidia le ricerche del progetto: il nome del brand, la criminologia culturale, il rapporto tra mito e crimine, la formazione. Chi cerca questi termini cerca il racconto.</p>
+    <p>I due siti si rimandano l'un l'altro in modo intenzionale: il sito-persona presenta archè come l'attività divulgativa; archè cita il sito-persona come la radice di credibilità. Nel tempo, archè — che si aggiorna ogni settimana — diventa naturalmente la proprietà primaria. gabriellamarano.it resta l'àncora che ne garantisce la serietà.</p>
+  </div>
+
+  <div class="sub reveal">
+    <div class="sub-label">IV.3 — Il nome al centro</div>
+    <h3>archè è il <em>veicolo</em>. Gabriella è il brand.</h3>
+    <p>Una precisazione che vale per tutta l'architettura. L'asset di fiducia non è "archè": è <strong>Gabriella Marano</strong>. È il suo nome che il pubblico cerca, è il suo volto che la televisione ha reso riconoscibile. archè, oggi, parte da zero notorietà.</p>
+    <p>Quindi: il suo nome resta dominante in ogni titolo, in ogni intestazione, in ogni descrizione del progetto. Non costruiamo archè nascondendo lei. Costruiamo archè per <strong>amplificarla</strong> — dandole una cornice, un metodo e un sistema che il solo nome non potrebbe sostenere.</p>
+  </div>
+
+  <div class="sub reveal" style="max-width:var(--wide);margin-top:clamp(3rem,6vw,4.5rem);">
+    <div class="sub-label">IV.4 — Il sito, in concreto</div>
+    <h3 style="max-width:24rem;">archè, pagina per pagina.</h3>
+    <p style="max-width:35rem;">Non un sito-vetrina. Una piattaforma editoriale: poche pagine, ciascuna con un compito preciso. Costruita su misura — mobile-first, veloce, pensata per crescere un episodio alla volta.</p>
+  </div>
+  <div class="sitemap reveal">
+    <div class="sitemap-root">archè<i>&#9670;</i></div>
+    <div class="sitemap-stem"></div>
+    <div class="sitemap-grid">
+      <div class="smpage"><span class="pnum">01 — La soglia</span><h4>Apertura</h4><p>Non una vetrina: una soglia. Il manifesto del progetto in poche righe, l'ultimo episodio in evidenza, tre porte — guarda, ascolta, partecipa.</p></div>
+      <div class="smpage"><span class="pnum">02 — Il cuore</span><h4>Il metodo</h4><p>La pagina che spiega "dal mito alla mente". È qui che un curioso diventa un seguace: capisce perché archè non è un altro canale di cronaca nera.</p></div>
+      <div class="smpage"><span class="pnum">03 — L'archivio</span><h4>Gli episodi</h4><p>Tutti gli episodi, navigabili in due modi — per mito e per fenomeno criminale. È la matrice di archè resa pubblica e consultabile.</p></div>
+      <div class="smpage"><span class="pnum">04 — La prova</span><h4>archè dal vivo</h4><p>Il calendario di spettacoli, incontri nelle scuole e conferenze — con la possibilità, per teatri e istituti, di richiedere una tappa.</p></div>
+      <div class="smpage"><span class="pnum">05 — L'approfondimento</span><h4>Formazione</h4><p>Corsi e masterclass. La pagina dei prodotti, costruita come catalogo formativo — non come negozio.</p></div>
+      <div class="smpage"><span class="pnum">06 — La persona</span><h4>Gabriella Marano</h4><p>Non un curriculum: il racconto della doppia competenza che rende archè possibile. Per la parte forense, rimanda a gabriellamarano.it.</p></div>
+    </div>
+  </div>
+  <div class="sub reveal" style="margin-top:2rem;">
+    <p>Ogni episodio ha una pagina propria — un indirizzo stabile e indicizzabile, che continua a essere trovato negli anni. È così che l'archivio smette di essere una lista e diventa un patrimonio: ogni puntata pubblicata allarga la superficie con cui archè intercetta chi cerca.</p>
+  </div>
+
+  <div class="frame reveal" style="margin-top:clamp(3rem,6vw,4.5rem);">
+    <div class="mock-label">Esempio di realizzazione — il sito</div>
+    <p class="mock-intro">La mappa qui sopra dice quali pagine esistono. Questi due esempi mostrano come si presenteranno: la pagina d'apertura che accoglie chi arriva, e la pagina di un singolo episodio. Bozze concettuali — la direzione visiva, non il progetto definitivo.</p>
+    <div class="bw">
+      <div class="bw-bar">
+        <div class="bw-dots"><i></i><i></i><i></i></div>
+        <div class="bw-url"><b>archè</b> — dal mito alla mente</div>
+      </div>
+      <div class="bw-body">
+        <div class="mk-top">
+          <span class="mk-logo">archè<i>&#9670;</i></span>
+          <nav class="mk-nav"><span>Metodo</span><span>Episodi</span><span>Dal vivo</span><span>Formazione</span></nav>
+        </div>
+        <div class="mk-hero">
+          <span class="eye">Criminologia culturale</span>
+          <h5>Dal mito alla mente.</h5>
+          <p>Leggere l'origine del crimine attraverso il teatro antico.</p>
+        </div>
+        <div class="mk-feat">
+          <div class="mk-still">
+            <span class="st-k">Episodio 01</span>
+            <span class="st-t">MEDEA</span>
+            <span class="st-s">la madre che distrugge</span>
+          </div>
+          <div>
+            <span class="fe-k">Ultimo episodio</span>
+            <h6>Medea — La madre che distrugge</h6>
+            <p>Il figlicidio, la maternità fragile, l'amore che si rovescia in arma.</p>
+          </div>
+        </div>
+        <div class="mk-doors">
+          <div class="mk-door"><div class="dk">Guarda</div><div class="dd">gli episodi</div></div>
+          <div class="mk-door"><div class="dk">Ascolta</div><div class="dd">il podcast</div></div>
+          <div class="mk-door"><div class="dk">Partecipa</div><div class="dd">dal vivo</div></div>
+        </div>
+        <div class="mk-method">
+          <span class="mk-mlabel">Il metodo — dal mito alla mente</span>
+          <p>Ogni episodio parte da una tragedia antica e ne discende la dinamica criminale contemporanea.</p>
+          <div class="mk-arch"><span>Medea</span><span>Aiace</span><span>Elettra</span><span>Le Troiane</span><span>Eracle</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="bw">
+      <div class="bw-bar">
+        <div class="bw-dots"><i></i><i></i><i></i></div>
+        <div class="bw-url"><b>archè</b> / episodi / medea</div>
+      </div>
+      <div class="bw-body">
+        <div class="mk-top">
+          <span class="mk-logo">archè<i>&#9670;</i></span>
+          <nav class="mk-nav"><span>Metodo</span><span>Episodi</span><span>Dal vivo</span><span>Formazione</span></nav>
+        </div>
+        <div class="mk-eyrow"><span class="ep-n">01</span><span class="ep-k">Archetipo &middot; Medea</span></div>
+        <h5 class="mk-eptitle">Medea — La madre che distrugge</h5>
+        <div class="mk-still mk-player">
+          <div class="mk-play"></div>
+          <span class="mk-dur">21:14</span>
+        </div>
+        <span class="mk-seclabel">In questo episodio</span>
+        <ol class="mk-chapters">
+          <li><span class="ch-n">I</span><span><span class="ch-t">Apertura archeologica.</span> Il mito di Medea e il suo contesto rituale.</span></li>
+          <li><span class="ch-n">II</span><span><span class="ch-t">La scena.</span> Il nucleo drammatico, ricostruito.</span></li>
+          <li><span class="ch-n">III</span><span><span class="ch-t">Decodifica criminologica.</span> Maternità fragile, abbandono, tratti borderline.</span></li>
+          <li><span class="ch-n">IV</span><span><span class="ch-t">Il presente.</span> Il figlicidio nei dati e nei casi contemporanei.</span></li>
+          <li><span class="ch-n">V</span><span><span class="ch-t">Restituzione.</span> Indicatori di rischio e riferimenti utili.</span></li>
+        </ol>
+      </div>
+    </div>
+    <p class="mock-cap">archè — pagina d'apertura e pagina-episodio. Bozze concettuali.</p>
+  </div>
+
+  <div class="sub reveal" style="max-width:var(--wide);margin-top:clamp(3rem,6vw,4.5rem);">
+    <div class="sub-label">IV.5 — Il sito-persona, riorganizzato</div>
+    <h3 style="max-width:26rem;">gabriellamarano.it, pagina per pagina.</h3>
+    <p style="max-width:35rem;">Oggi il sito-persona è dispersivo: prova a fare tutto, e non porta da nessuna parte. Riorganizzato, diventa una sede forense essenziale — sei pagine, ciascuna con uno scopo dichiarato.</p>
+  </div>
+  <div class="sitemap reveal">
+    <div class="sitemap-root">gabriellamarano.it</div>
+    <div class="sitemap-stem"></div>
+    <div class="sitemap-grid">
+      <div class="smpage"><span class="pnum">01 — La figura</span><h4>Chi è</h4><p>La doppia competenza, il percorso, la narrazione: archeologia e criminologia. La pagina che presenta la professionista.</p></div>
+      <div class="smpage"><span class="pnum">02 — Il lavoro</span><h4>Consulenza tecnica</h4><p>L'attività forense e di criminal profiling, descritta con sobrietà — per studi legali, tribunali, committenti. Senza spettacolarizzare i casi.</p></div>
+      <div class="smpage"><span class="pnum">03 — L'impegno</span><h4>Per le vittime</h4><p>Il lavoro a fianco di chi subisce violenza, e i riferimenti utili per chiedere aiuto. La funzione civile del sito.</p></div>
+      <div class="smpage"><span class="pnum">04 — I media</span><h4>Cartella stampa</h4><p>Biografia, foto ufficiali, temi d'intervento, contatti. Tutto ciò che a una redazione serve, raccolto in un solo luogo.</p></div>
+      <div class="smpage"><span class="pnum">05 — Il progetto</span><h4>archè</h4><p>Una pagina-ponte: presenta il progetto divulgativo e accompagna verso la piattaforma archè. I due mondi si rimandano.</p></div>
+      <div class="smpage"><span class="pnum">06 — Il contatto</span><h4>Contatti</h4><p>Un solo punto, chiaro, per consulenze professionali e collaborazioni istituzionali. Nessuna dispersione.</p></div>
+    </div>
+  </div>
+
+  <div class="sub reveal" style="margin-top:clamp(3rem,6vw,4.5rem);">
+    <div class="sub-label">IV.6 — Implementazioni e innovazioni</div>
+    <h3>Cosa costruire, oltre alle pagine.</h3>
+    <p>Una piattaforma non è un insieme di pagine: è un insieme di funzioni. Di seguito gli interventi concreti — divisi tra le fondamenta, indispensabili al lancio, e le evoluzioni, che rendono archè un riferimento e non solo un sito.</p>
+  </div>
+  <div class="sub reveal">
+    <div class="sub-label" style="color:var(--bone-faint);">Le fondamenta — necessarie dal primo giorno</div>
+    <ol class="steps">
+      <li><b>Archivio a doppia chiave</b><span>Ogni episodio ritrovabile per mito e per fenomeno criminale. La matrice di archè diventa uno strumento di navigazione, non una semplice lista.</span></li>
+      <li><b>Pagina-episodio autonoma</b><span>Ogni puntata ha un indirizzo proprio, stabile e indicizzabile: cresce la superficie con cui archè intercetta chi cerca, episodio dopo episodio.</span></li>
+      <li><b>Calendario dal vivo con richiesta-tappa</b><span>Gli appuntamenti a teatro e nelle scuole, e un modulo con cui istituti e teatri possono proporre una data.</span></li>
+      <li><b>Formazione con pagamento integrato</b><span>Corsi e libro acquistabili direttamente, senza intermediari: la scala del valore resa operativa sulla piattaforma.</span></li>
+    </ol>
+  </div>
+  <div class="sub reveal">
+    <div class="sub-label" style="color:var(--bone-faint);">Le evoluzioni — ciò che fa la differenza nel tempo</div>
+    <ol class="steps">
+      <li><b>La matrice come mappa navigabile</b><span>Una rappresentazione visuale e pubblica del rapporto mito–fenomeno–caso: un'esperienza che nessun concorrente possiede, e una porta d'ingresso al metodo.</span></li>
+      <li><b>Trascrizioni e sottotitoli di ogni episodio</b><span>Accessibilità reale per tutti — e, non secondario, una grande quantità di testo che rende archè trovabile sui motori di ricerca.</span></li>
+      <li><b>Un'area riservata per gli approfondimenti</b><span>Contenuti estesi, materiali di studio, dossier: il livello di relazione continuativa con il pubblico più fedele.</span></li>
+      <li><b>Il percorso per chi arriva nuovo</b><span>Una sequenza guidata di episodi e pagine che accompagna un visitatore alla prima visita fino a comprendere — e adottare — il metodo archè.</span></li>
+    </ol>
+  </div>
+
+  <div class="sub reveal" style="max-width:var(--wide);margin-top:clamp(3rem,6vw,4.5rem);">
+    <div class="sub-label">IV.7 — Cosa cambia, in concreto</div>
+    <h3 style="max-width:20rem;">Oggi, e con <em>archè</em>.</h3>
+  </div>
+  <div class="compare reveal">
+    <div class="crow head"><span></span><span class="chead-before">Oggi</span><span class="chead-after">Con archè</span></div>
+    <div class="crow"><span class="dim-label">Identità</span><span class="before">Quattro registri scollegati — sito, Instagram, televisione, palco — senza un marchio comune.</span><span class="after">Un solo marchio e un solo sistema visivo, riconoscibili su ogni canale.</span></div>
+    <div class="crow"><span class="dim-label">Il sito</span><span class="before">Un sito-persona dal tono poetico che prova a fare tutto, e rimanda a un canale che non esiste.</span><span class="after">Due proprietà con ruoli netti: la sede forense, e la piattaforma editoriale del progetto.</span></div>
+    <div class="crow"><span class="dim-label">I contenuti</span><span class="before">Presenza televisiva episodica e post non sistematici. Nessun format, nessun archivio.</span><span class="after">Un format riconoscibile, un episodio a settimana, un archivio navigabile che cresce.</span></div>
+    <div class="crow"><span class="dim-label">La destinazione</span><span class="before">Ogni apparizione genera attenzione che si disperde subito dopo.</span><span class="after">Ogni canale conduce a un luogo di proprietà che trattiene il pubblico.</span></div>
+    <div class="crow"><span class="dim-label">Il posizionamento</span><span class="before">"Criminologa che racconta il crimine" — affermato, ma indistinguibile da molti altri.</span><span class="after">"La criminologa-archeologa che ne legge l'origine" — dimostrato, e inimitabile.</span></div>
+    <div class="crow"><span class="dim-label">Il valore</span><span class="before">Il reddito dipende interamente dalla presenza fisica e dalle ore disponibili.</span><span class="after">Una scala di prodotti che genera valore anche quando Gabriella non è in scena.</span></div>
+  </div>
+</section>
+
+<div class="divider"><div class="rule"><span></span></div></div>
+
+<!-- ===================== V — PUBBLICAZIONE ===================== -->
+<section class="band scroll-anchor" id="pubblicazione">
+  <div class="opener reveal">
+    <div class="numeral">V</div>
+    <span class="eyebrow">Struttura di pubblicazione</span>
+    <h2>Un sistema editoriale, non una <em>raccolta di canali</em>.</h2>
+    <p class="intro">Ogni canale fa una cosa sola, e la fa bene. Confonderne i ruoli è il modo più rapido per indebolirli tutti.</p>
+  </div>
+
+  <div class="sub reveal" style="max-width:var(--wide);">
+    <div class="sub-label">V.1 — L'ecosistema</div>
+    <h3 style="max-width:24rem;">Il ruolo di ogni canale.</h3>
+  </div>
+  <div class="channels reveal">
+    <div class="chan">
+      <span class="role">Il cuore</span>
+      <h4>YouTube</h4>
+      <p>L'episodio archè nella sua forma completa — video-podcast, durata contenuta intorno ai venti-venticinque minuti. La disciplina del formato è parte della qualità. È qui che il metodo "dal mito alla mente" vive per intero.</p>
+    </div>
+    <div class="chan">
+      <span class="role">La profondità</span>
+      <h4>Podcast</h4>
+      <p>Lo stesso episodio in versione audio, per chi ascolta in movimento. È archè in audio — stesso nome, stesso marchio. Non un progetto separato: la stessa voce, un'altra forma.</p>
+    </div>
+    <div class="chan">
+      <span class="role">La soglia</span>
+      <h4>Instagram</h4>
+      <p>Il canale di acquisizione: clip brevi, pillole, dietro le quinte. Non approfondisce — incuriosisce, e accompagna verso YouTube, il podcast e la piattaforma.</p>
+    </div>
+    <div class="chan">
+      <span class="role">La destinazione</span>
+      <h4>La piattaforma archè</h4>
+      <p>Dove l'attenzione diventa relazione: l'archivio degli episodi, il calendario, e — in secondo piano — i prodotti. Il solo luogo di proprietà del sistema.</p>
+    </div>
+    <div class="chan">
+      <span class="role">La prova</span>
+      <h4>Il dal vivo</h4>
+      <p>Teatro, scuole, convegni: l'autorità che si tocca con mano. Stato dei contatti: <span class="slot">programmazione dal vivo da definire</span>.</p>
+    </div>
+    <div class="chan">
+      <span class="role">Il carburante</span>
+      <h4>La televisione</h4>
+      <p>Non più il prodotto finale. Materia prima: ogni apparizione alimenta giorni di contenuto per l'intero ecosistema.</p>
+    </div>
+  </div>
+
+  <div class="sub reveal" style="margin-top:clamp(3rem,6vw,4.5rem);">
+    <div class="sub-label">V.2 — La linea editoriale</div>
+    <h3>Cosa archè <em>pubblica</em>, in concreto.</h3>
+    <p>Un format e un calendario non bastano: servono i contenuti veri. Questa è la linea editoriale di archè — il primo ciclo di episodi, le rubriche ricorrenti, e l'esempio concreto di come un solo mito alimenta un'intera settimana di pubblicazioni.</p>
+  </div>
+
+  <div class="frame reveal">
+    <div class="sub-label" style="max-width:46rem;margin:0 auto;">Il primo ciclo &mdash; cinque episodi</div>
+    <ol class="episodes">
+      <li><span class="epn">01</span><div><div class="ept">Medea — La madre che distrugge</div><div class="epd">Il figlicidio, la maternità fragile, l'amore che si rovescia in arma. Cosa dice il mito sul gesto più impensabile.</div></div></li>
+      <li><span class="epn">02</span><div><div class="ept">Aiace — Il crollo del più forte</div><div class="epd">La depressione che si nasconde dietro la forza, il suicidio maschile, l'onore che diventa trappola.</div></div></li>
+      <li><span class="epn">03</span><div><div class="ept">Elettra — La colpa che si eredita</div><div class="epd">Il trauma familiare che passa di generazione in generazione, e la violenza vissuta come lealtà.</div></div></li>
+      <li><span class="epn">04</span><div><div class="ept">Le Troiane — Le donne come bottino</div><div class="epd">La violenza sulle donne, dalla guerra antica alla cronaca: la voce di chi subisce, restituita.</div></div></li>
+      <li><span class="epn">05</span><div><div class="ept">Eracle — Quando la mente cede</div><div class="epd">La dissociazione, la perdita di controllo, e la domanda che resta: dov'è la responsabilità?</div></div></li>
+    </ol>
+    <p class="small" style="max-width:46rem;margin:1.4rem auto 0;">Cinque episodi, cinque archetipi: un primo ciclo compiuto, che da solo copre oltre un mese di pubblicazioni. Da qui, l'archivio continua — la matrice è aperta.</p>
+  </div>
+
+  <div class="frame reveal" style="margin-top:clamp(2.6rem,5vw,3.8rem);">
+    <div class="sub-label" style="max-width:46rem;margin:0 auto;">Le rubriche ricorrenti &mdash; su Instagram</div>
+    <div class="rubriche">
+      <div class="rub"><h4>Il mito in tre minuti</h4><p>La storia antica raccontata in forma breve e accessibile: la porta d'ingresso per chi non conosce la tragedia.</p></div>
+      <div class="rub"><h4>La parola esatta</h4><p>Un termine criminologico spiegato con precisione — profiling, dissociazione, vittimizzazione. Contro l'uso impreciso del lessico della cronaca.</p></div>
+      <div class="rub"><h4>L'indicatore</h4><p>Un segnale di rischio spiegato con chiarezza: cosa osservare, in una relazione o in un comportamento, prima che sia tardi.</p></div>
+      <div class="rub"><h4>Dalla cronaca al mito</h4><p>Un fenomeno d'attualità ricondotto alla sua matrice antica — nel rispetto della regola: mai indagini aperte, mai lutti recenti.</p></div>
+    </div>
+  </div>
+
+  <div class="example reveal">
+    <span class="extag">Esempio concreto</span>
+    <h4>Una settimana di archè: <em>Medea</em></h4>
+    <div class="exday"><span class="exd">Lunedì</span><span class="exc"><b>Instagram</b>Clip "Il mito in tre minuti": chi era Medea, e perché la sua storia ci riguarda. L'aggancio della settimana.</span></div>
+    <div class="exday"><span class="exd">Martedì</span><span class="exc"><b>YouTube</b>Episodio 01 completo — "Medea, la madre che distrugge". Il metodo per intero.</span></div>
+    <div class="exday"><span class="exd">Mercoledì</span><span class="exc"><b>Instagram</b>Carosello "La parola esatta": cosa significa, in criminologia, &laquo;maternità fragile&raquo;.</span></div>
+    <div class="exday"><span class="exd">Giovedì</span><span class="exc"><b>Podcast</b>Lo stesso episodio in versione audio, per chi ascolta in movimento.</span></div>
+    <div class="exday"><span class="exd">Venerdì</span><span class="exc"><b>Instagram</b>Rubrica "L'indicatore": un segnale di fragilità nella relazione tra un genitore e un figlio.</span></div>
+    <div class="exday"><span class="exd">Weekend</span><span class="exc"><b>Stories</b>Risposte alle domande del pubblico, e anticipazione del mito della settimana che viene.</span></div>
+    <p style="margin:1.5rem 0 0;font-size:.95rem;color:var(--bone-faint);font-style:italic;">Un solo mito. Sei pubblicazioni coordinate, su tre canali. Questo è il sistema: non sei contenuti da inventare ogni settimana, ma uno solo, declinato.</p>
+  </div>
+
+  <div class="frame reveal" style="margin-top:clamp(2.6rem,5vw,3.8rem);">
+    <div class="mock-label">Esempio di realizzazione — i contenuti</div>
+    <p class="mock-intro">E così si presenteranno i contenuti sui canali. A sinistra un post Instagram della rubrica "La parola esatta"; a destra l'episodio su YouTube. Stesso mito, due grammatiche — un'unica coerenza visiva.</p>
+    <div class="mockpair">
+      <div class="mockcol">
+        <span class="mk-kicker">Instagram — un post</span>
+        <div class="igp">
+          <div class="igp-head">
+            <div class="igp-av">a</div>
+            <div class="igp-name">archè<span>criminologia culturale</span></div>
+            <span class="igp-dots">&middot;&middot;&middot;</span>
+          </div>
+          <div class="igp-media">
+            <div class="mk-still">
+              <span class="st-k">La parola esatta</span>
+              <span class="st-t">Maternità<br>fragile</span>
+            </div>
+          </div>
+          <div class="igp-actions">
+            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.3 7.3L4 21l1.7-5.7A8 8 0 1 1 21 12z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+            <span class="sp"></span>
+            <svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
+          </div>
+          <div class="igp-cap"><b>archè</b> Non è freddezza, né disamore. In criminologia la &laquo;maternità fragile&raquo; descrive una genitorialità segnata da vuoti profondi&hellip; <span class="more">altro</span></div>
+        </div>
+      </div>
+      <div class="mockcol">
+        <span class="mk-kicker">YouTube — un episodio</span>
+        <div class="ytv">
+          <div class="ytv-thumb mk-still">
+            <span class="st-k">Episodio 01 &middot; archè</span>
+            <span class="st-t">MEDEA</span>
+            <span class="st-s">la madre che distrugge</span>
+            <span class="mk-dur">21:14</span>
+          </div>
+          <div class="ytv-meta">
+            <div class="ytv-av">a</div>
+            <div>
+              <div class="ytv-title">Medea — La madre che distrugge | archè</div>
+              <div class="ytv-sub">archè &middot; dal mito alla mente &middot; Episodio 01</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="mock-cap">Lo stesso episodio, due superfici. Bozze concettuali — il sistema visivo sarà definito in produzione.</p>
+  </div>
+
+  <div class="sub reveal" style="margin-top:clamp(3rem,6vw,4.5rem);">
+    <div class="sub-label">V.3 — Il sistema di format</div>
+    <h3>Il canale vive di <em>format ricorrenti</em>.</h3>
+    <p>Un episodio ogni tanto non costruisce un'abitudine. Un <strong>format</strong> sì: è un contenitore riconoscibile che torna, che il pubblico impara ad attendere — e che riduce il lavoro settimanale a una declinazione, non a un'invenzione da zero. Attorno al pilastro — l'episodio archè — ruota un sistema di format brevi, format da salvare e format quotidiani. È così che il canale di Gabriella si amplia: da diario, a palinsesto.</p>
+  </div>
+
+  <div class="fmt-group reveal">
+    <div class="fmt-cat">I format brevi <em>— Reel, video verticali</em></div>
+    <div class="fmt-grid">
+      <div class="fmt-card"><h5>Il mito in tre minuti</h5><p>La tragedia antica raccontata in forma rapida e accessibile: la porta d'ingresso per chi non la conosce.</p><span class="fmt-meta">Settimanale</span></div>
+      <div class="fmt-card"><h5>Un minuto con Gabriella</h5><p>Lei, voce diretta alla camera, risponde a una domanda del pubblico. Il format che costruisce il volto del brand personale.</p><span class="fmt-meta">Settimanale</span></div>
+      <div class="fmt-card"><h5>Dalla cronaca al mito</h5><p>Un fenomeno d'attualità ricondotto alla sua matrice antica — nel rispetto della regola: mai indagini aperte.</p><span class="fmt-meta">Quindicinale</span></div>
+    </div>
+  </div>
+
+  <div class="fmt-group reveal">
+    <div class="fmt-cat">I format da salvare <em>— caroselli</em></div>
+    <div class="fmt-grid">
+      <div class="fmt-card"><h5>La parola esatta</h5><p>Un termine criminologico spiegato con precisione — contro l'uso impreciso del lessico della cronaca.</p><span class="fmt-meta">Settimanale</span></div>
+      <div class="fmt-card"><h5>Cinque segnali</h5><p>Indicatori di rischio in un comportamento o in una relazione. Il format più utile — e il più salvato e condiviso.</p><span class="fmt-meta">Quindicinale</span></div>
+      <div class="fmt-card"><h5>Ritratto d'archetipo</h5><p>Una figura della tragedia — Medea, Aiace, Elettra — e la dinamica psichica che incarna, in pochi quadri.</p><span class="fmt-meta">Mensile</span></div>
+    </div>
+  </div>
+
+  <div class="fmt-group reveal">
+    <div class="fmt-cat">I format quotidiani <em>— le storie</em></div>
+    <div class="fmt-grid">
+      <div class="fmt-card"><h5>Chiedi alla criminologa</h5><p>Il box domande ricorrente: il pubblico chiede, Gabriella risponde. Costruisce relazione e alimenta i Reel.</p><span class="fmt-meta">Ricorrente</span></div>
+      <div class="fmt-card"><h5>Dietro le quinte</h5><p>Il lavoro mentre accade — la produzione di un episodio, una giornata di studio. Il lato umano del progetto.</p><span class="fmt-meta">Ricorrente</span></div>
+      <div class="fmt-card"><h5>Il conto alla rovescia</h5><p>L'attesa costruita: nei giorni che precedono un nuovo episodio, l'anticipazione che porta il pubblico al lancio.</p><span class="fmt-meta">A ogni uscita</span></div>
+    </div>
+  </div>
+
+  <div class="frame reveal" style="margin-top:clamp(2.6rem,5vw,3.8rem);">
+    <div class="mock-label">Esempio di realizzazione — i format social</div>
+    <p class="mock-intro">Due format, resi visibili. A sinistra un Reel della serie "Un minuto con Gabriella"; a destra una storia del format "Chiedi alla criminologa". È così che il canale si presenta, ogni giorno.</p>
+    <div class="phonepair">
+      <div class="ph-wrap">
+        <span class="ph-kicker">Reel — un format breve</span>
+        <div class="phone"><div class="ph-still">
+          <div class="reel-body">
+            <span class="rk">Un minuto con Gabriella</span>
+            <span class="rt">&laquo;Perché il crimine ci attrae?&raquo;</span>
+          </div>
+          <div class="reel-rail">
+            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.3 7.3L4 21l1.7-5.7A8 8 0 1 1 21 12z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
+          </div>
+          <div class="reel-foot">
+            <div class="reel-acc"><span class="mini-av">a</span>archè</div>
+            <div class="reel-cap">Tre ragioni per cui la mente cerca il buio — e cosa dicono di noi.</div>
+          </div>
+        </div></div>
+      </div>
+      <div class="ph-wrap">
+        <span class="ph-kicker">Storia — un format quotidiano</span>
+        <div class="phone"><div class="ph-still">
+          <div class="story-bars"><i class="on"></i><i></i><i></i></div>
+          <div class="story-head"><span class="mini-av">a</span><span class="sh-n">archè</span><span class="sh-t">2 h</span></div>
+          <div class="story-body">
+            <span class="sk">Chiedi alla criminologa</span>
+            <div class="story-sticker">
+              <div class="ss-q">Cosa vuoi sapere sulla mente criminale?</div>
+              <div class="ss-box">Scrivi una domanda…</div>
+            </div>
+          </div>
+          <div class="story-foot">Invia un messaggio</div>
+        </div></div>
+      </div>
+    </div>
+    <p class="mock-cap">Reel e storia — bozze concettuali, nell'estetica del progetto.</p>
+  </div>
+
+  <div class="sub reveal" style="margin-top:clamp(3rem,6vw,4.5rem);">
+    <div class="sub-label">V.4 — Una voce, molte forme</div>
+    <h3>La comunicazione differenziata per canale.</h3>
+    <p>L'identità di archè è una sola. La sua espressione cambia da canale a canale — non per incoerenza, ma per rispetto del mezzo. La regola: <strong>stesso DNA, grammatica diversa</strong>.</p>
+    <p>Su YouTube e nel podcast, il <em>registro pieno</em>: analisi, profondità, il metodo per intero. Su Instagram, il <em>registro breve</em>: la singola intuizione, il gancio — mai l'approssimazione. Nei luoghi dal vivo, il <em>registro civile</em>: la comunità, il confronto, la restituzione.</p>
+    <p style="margin-top:1.5rem;"><strong>Una nota sul marchio.</strong> "parola di Gabri", nel logo, è caldo e personale: contro un'immagine pubblica fredda, è un valore. Ma archè tratterà anche dolore reale e famiglie reali. Per questo l'uso è differenziato: "parola di Gabri" vive nei punti di relazione e di comunità — la biografia Instagram, la firma di una newsletter, il dietro le quinte. Il format, gli episodi, la sede istituzionale usano <strong>archè</strong> nella sua forma piena. Calore dove serve calore; sobrietà dove serve sobrietà.</p>
+  </div>
+
+  <div class="sub reveal">
+    <div class="sub-label">V.5 — Il motore</div>
+    <h3>Ogni presenza diventa <em>patrimonio</em>.</h3>
+    <p>Questa è la regola che cambia l'economia del progetto. Ogni attività che Gabriella svolge fuori dai canali di archè — un'apparizione televisiva, un convegno, un intervento in una scuola, un'ospitata nel podcast di un altro, un premio — non è un punto d'arrivo. È materia prima. Niente si spreca.</p>
+    <p>Ogni occasione viene lavorata in tre tempi.</p>
+    <ol class="steps">
+      <li><b>Prima — l'annuncio</b><span>Il pubblico sa, attende, si prepara. L'evento comincia a generare valore prima di accadere.</span></li>
+      <li><b>Durante — la cattura</b><span>Si documenta: riprese, foto, appunti. Ciò che non viene registrato è perduto per sempre.</span></li>
+      <li><b>Dopo — la conversione</b><span>Il materiale diventa clip per Instagram, episodio di approfondimento, spunto di dibattito. Un'apparizione di un'ora alimenta settimane di contenuto.</span></li>
+    </ol>
+    <p style="margin-top:1.6rem;">Una presenza televisiva, da sola, è un lampo. Lo stesso evento, dentro questo motore, è carburante.</p>
+  </div>
+
+  <div class="sub reveal">
+    <div class="sub-label">V.6 — Il ritmo</div>
+    <h3>Una cadenza che crea <em>abitudine</em>.</h3>
+    <p>Una cadenza regolare crea l'abitudine, e l'abitudine è la fiducia che si deposita. Di seguito un modello settimanale — <span class="slot">da calibrare sulle ore reali di produzione</span>: la costanza sostenibile vale più della frequenza ambiziosa.</p>
+    <ul class="week">
+      <li><span class="day">Luned&igrave;</span><span class="act"><b>La soglia.</b> Su Instagram: l'aggancio della settimana, il mito che verr&agrave;.</span></li>
+      <li><span class="day">Marted&igrave;</span><span class="act"><b>L'episodio.</b> YouTube: la nuova puntata di archè, nella forma completa.</span></li>
+      <li><span class="day">Mercoled&igrave;</span><span class="act"><b>Il dietro le quinte.</b> Materiali dalle apparizioni e dal lavoro della settimana.</span></li>
+      <li><span class="day">Gioved&igrave;</span><span class="act"><b>La voce.</b> L'episodio nella versione podcast, per chi ascolta in movimento.</span></li>
+      <li><span class="day">Venerd&igrave;</span><span class="act"><b>Lo strumento.</b> Una pillola: un indicatore di rischio, una chiave di lettura.</span></li>
+      <li><span class="day">Weekend</span><span class="act"><b>La comunit&agrave;.</b> Confronto, risposte, anticipazioni della settimana che viene.</span></li>
+    </ul>
+  </div>
+
+  <div class="sub reveal">
+    <div class="sub-label">V.7 — Instagram</div>
+    <h3>Dal profilo personale al <em>nodo</em> del sistema.</h3>
+    <p>Il profilo Instagram attuale — oltre quindicimila persone lo seguono — è il profilo autentico di una professionista: un insieme di vita personale e lavoro, senza un sistema visivo. La trasformazione non è una cancellazione. Quel calore umano è un asset raro in un settore spesso freddo, e va protetto.</p>
+    <p>È un riordino: un sistema di modelli grafici, una griglia coerente, l'identità di archè applicata con metodo. L'obiettivo è portare il profilo a essere il nodo di acquisizione del sistema — senza spegnerne la voce.</p>
+  </div>
+</section>
+
+<div class="divider"><div class="rule"><span></span></div></div>
+
+<!-- ===================== VI — COMMERCIALIZZAZIONE ===================== -->
+<section class="band alt scroll-anchor" id="crescita">
+  <div class="opener reveal">
+    <div class="numeral">VI</div>
+    <span class="eyebrow">Modello di crescita</span>
+    <h2>La commercializzazione viene <em>per ultima</em>. È una scelta.</h2>
+    <p class="intro">Corrisponde al modo in cui questo pubblico funziona davvero: prima l'autorità, poi — e solo poi — il prodotto.</p>
+  </div>
+
+  <div class="sub reveal">
+    <div class="sub-label">VI.1 — Il principio</div>
+    <h3>Chi ha autorità non vende: <em>viene cercato</em>.</h3>
+    <p>archè dice una cosa sola, e la dice con forza: è un'autorità culturale. I prodotti — un libro, un corso, un biglietto — non sono mai l'argomento. Sono l'approfondimento naturale per chi, avendo visto il metodo, ne vuole di più.</p>
+    <p>Il sistema non insegue il cliente. È costruito per generare la <strong>ricerca</strong> — la condizione per cui è il pubblico a muoversi verso archè, e non il contrario. È la differenza tra promuovere e posizionare.</p>
+  </div>
+
+  <div class="sub reveal" style="max-width:var(--wide);">
+    <div class="sub-label">VI.2 — La scala del valore</div>
+    <h3 style="max-width:26rem;">Dall'autorità gratuita ai prodotti — un gradino alla volta.</h3>
+  </div>
+  <ul class="scale reveal">
+    <li>
+      <span class="tier">Il gratuito <i>— la porta</i></span>
+      <span class="desc">YouTube, podcast, Instagram. È qui che si dimostra il metodo e si costruisce la fiducia. Non genera ricavo diretto: genera la condizione di ogni ricavo.</span>
+    </li>
+    <li>
+      <span class="tier">Il libro <i>— la permanenza</i></span>
+      <span class="desc">"Archeologia del Crimine" — il primo prodotto. Costa poco, raggiunge lontano, e lascia un oggetto permanente con il suo nome. Titolo di lavoro: <span class="slot">titolo del volume da confermare</span>.</span>
+    </li>
+    <li>
+      <span class="tier">Corsi e masterclass <i>— la formazione</i></span>
+      <span class="desc">Online, strutturati: per professionisti, per studenti, e per il pubblico che vuole imparare a leggere ciò che archè racconta. È il cuore economico del progetto.</span>
+    </li>
+    <li>
+      <span class="tier">Il dal vivo <i>— l'esperienza</i></span>
+      <span class="desc">Spettacoli a teatro e cicli per le scuole: l'autorità che diventa evento, e il biglietto. La forma più alta — e più memorabile — del format.</span>
+    </li>
+    <li>
+      <span class="tier">Advisory e partnership <i>— la dimensione istituzionale</i></span>
+      <span class="desc">Consulenza a media e produzioni; collaborazioni con teatri, festival classici, soprintendenze. Possibili linee progettuali con accesso a fondi e bandi culturali.</span>
+    </li>
+  </ul>
+  <div class="col reveal" style="margin-top:1.8rem;">
+    <p class="small">Ogni gradino superiore è raggiungibile solo perché quello sotto ha fatto il suo lavoro. È una scala — non un listino.</p>
+  </div>
+
+  <div class="sub reveal" style="margin-top:clamp(3rem,6vw,4.5rem);">
+    <div class="sub-label">VI.3 — La piattaforma</div>
+    <h3>Dove la scala diventa <em>concreta</em>.</h3>
+    <p>La piattaforma archè è il luogo dove questa scala prende forma. Ospita il catalogo — libro, corsi, biglietti — con un sistema di pagamento solido e diretto. Può prevedere un'area riservata per i contenuti di approfondimento, accessibile a chi sceglie un rapporto continuativo.</p>
+    <p>Tutto in un ambiente di proprietà: nessun intermediario tra archè e il suo pubblico, nessuna piattaforma esterna che trattiene la relazione — o il margine.</p>
+  </div>
+
+  <div class="principle reveal">
+    <div class="mk"></div>
+    <p>Un'autorità ben costruita non insegue il cliente. Costruisce le <span class="gold">condizioni</span> perché sia il cliente a cercarla.</p>
+    <div class="mk"></div>
+  </div>
+</section>
+
+<div class="divider"><div class="rule"><span></span></div></div>
+
+<!-- ===================== VII — METODO ===================== -->
+<section class="band scroll-anchor" id="metodo">
+  <div class="opener reveal">
+    <div class="numeral">VII</div>
+    <span class="eyebrow">Il metodo operativo</span>
+    <h2>La macchina: una <em>matrice</em> che diventa tutto.</h2>
+    <p class="intro">Un sistema editoriale che dipende dall'ispirazione settimanale non è un sistema. archè parte da una struttura.</p>
+  </div>
+
+  <div class="sub reveal">
+    <div class="sub-label">VII.1 — La matrice</div>
+    <h3>Una struttura, <em>doppio uso</em>.</h3>
+    <p>Al centro della macchina c'è la <strong>matrice Mito &rarr; Caso</strong>: un archivio ragionato — non un elenco di idee. Ogni voce mette in relazione un mito, il fenomeno criminale che illumina, la chiave psico-criminologica, i riferimenti contemporanei.</p>
+    <p>Una sola voce della matrice contiene già tutto ciò che serve per: un episodio video, una puntata di podcast, una serie di contenuti per Instagram, un capitolo del libro, un modulo di un corso.</p>
+    <p>E la stessa matrice — lo stesso lavoro, fatto una volta — è due cose insieme: il <strong>piano editoriale</strong> del racconto e il <strong>catalogo dei prodotti</strong> della piattaforma. Una struttura, doppio uso. Niente lavoro fatto due volte.</p>
+  </div>
+
+  <div class="sub reveal">
+    <div class="sub-label">VII.2 — Il ciclo</div>
+    <h3>Dal concetto alla pubblicazione.</h3>
+    <ol class="steps">
+      <li><b>Selezione</b><span>Si sceglie una voce della matrice — guidati dal calendario e dai segnali dell'attualità.</span></li>
+      <li><b>Kit</b><span>Da quella voce si produce, in un solo processo, il pacchetto completo: copione dell'episodio, clip per i social, struttura della puntata podcast, materiali visivi.</span></li>
+      <li><b>Distribuzione</b><span>Il pacchetto si dispiega sui canali, ciascuno nel suo ruolo, secondo il ritmo settimanale.</span></li>
+      <li><b>Ascolto</b><span>Le reazioni del pubblico diventano dati: cosa ha funzionato, quale mito ha toccato un nervo. Quei dati orientano la selezione successiva.</span></li>
+    </ol>
+    <p style="margin-top:1.6rem;">Il ciclo si chiude e ricomincia. Ogni episodio prodotto rende il successivo più rapido e più mirato. La crescita non è lineare: è <strong>cumulativa</strong>. Una parte del lavoro di produzione è assistita da strumenti di nuova generazione — la qualità di una produzione editoriale seria, a costi sostenibili.</p>
+  </div>
+
+  <div class="sub reveal">
+    <div class="sub-label">VII.3 — Le fasi</div>
+    <h3>Quattro tempi, dalla fondazione al <em>riferimento</em>.</h3>
+    <p>Quattro fasi, con un orizzonte temporale indicativo — da calibrare sulle risorse reali. La solidità di ogni passaggio conta più della velocità.</p>
+    <ol class="steps">
+      <li><b>Setup — le prime settimane</b><span>Identità, infrastruttura, le prime voci della matrice. Si costruiscono il brand, le due proprietà web, lo studio — e si avvia in parallelo il brand personale, a partire da LinkedIn. Risorse di produzione: <span class="slot">budget da definire</span>.</span></li>
+      <li><b>Lancio — il primo ciclo di episodi</b><span>I primi cinque episodi. archè diventa esperibile: la promessa diventa prova.</span></li>
+      <li><b>Crescita — i primi mesi a regime</b><span>Ritmo settimanale stabile, ottimizzazione sui dati del pubblico, le prime partnership e i primi prodotti.</span></li>
+      <li><b>Consolidamento — dal primo anno</b><span>Il libro, la formazione strutturata, gli appuntamenti dal vivo. archè diventa un punto di riferimento, e Gabriella un'autrice.</span></li>
+    </ol>
+  </div>
+
+  <div class="sub reveal">
+    <div class="sub-label">VII.4 — Il mantenimento</div>
+    <h3>Il sistema che lavora <em>da solo</em>.</h3>
+    <p>L'obiettivo ultimo non è la crescita. È l'autosufficienza. Un sistema costruito bene produce valore anche quando Gabriella non è in scena: l'archivio resta consultabile, gli episodi continuano a essere trovati, la matrice continua a generare.</p>
+    <p>La sua presenza diventa ciò che dà <em>direzione</em> al sistema — non più ciò che lo tiene in piedi da sola. È la differenza tra un lavoro e un patrimonio. Questo documento descrive come si costruisce il secondo.</p>
+  </div>
+</section>
+
+<div class="divider"><div class="rule"><span></span></div></div>
+
+<!-- ===================== VIII — RISCHI E PIANO ===================== -->
+<section class="band alt scroll-anchor" id="piano">
+  <div class="opener reveal">
+    <div class="numeral">VIII</div>
+    <span class="eyebrow">Rischi e piano operativo</span>
+    <h2>Dove può rompersi — e come lo <em>presidiamo</em>.</h2>
+    <p class="intro">Una strategia è credibile quando nomina le proprie scommesse. Questo movimento le mette in chiaro — e trasforma la visione in un piano con date, ruoli e numeri.</p>
+  </div>
+
+  <div class="sub reveal" style="max-width:var(--wide);">
+    <div class="sub-label">VIII.1 — Le tre scommesse</div>
+    <h3 style="max-width:26rem;">I rischi reali, e come li governiamo.</h3>
+    <p style="max-width:34rem;">Nessun progetto serio è privo di rischi. Tre sono concreti, e meritano di essere detti — ciascuno con la condizione che lo neutralizza.</p>
+  </div>
+  <div class="risks reveal">
+    <div class="risk">
+      <span class="rk-k">Scommessa I — il pubblico</span>
+      <h4>Il mito potrebbe restringere il bacino.</h4>
+      <p class="rk-d">archè parte dal mito, non dal caso: è il suo fossato, ma è anche un filtro. Una parte del pubblico true crime cerca soltanto la cronaca, e la cornice culturale potrebbe sembrarle distante.</p>
+      <div class="rk-mit"><b>Come la presidiamo</b>Il metodo è bidirezionale: la direzione "dal caso al mito" è la porta larga — intercetta chi arriva dalla cronaca e lo accompagna in profondità. Instagram fa da soglia leggera. E la scelta è deliberata: archè non punta al pubblico più vasto, ma al più fedele e al più disposto a sostenere il progetto. Un bacino più stretto e più solido vale più di uno ampio e volatile.</div>
+    </div>
+    <div class="risk">
+      <span class="rk-k">Scommessa II — il tempo</span>
+      <h4>Il volano richiede una costanza che stanca.</h4>
+      <p class="rk-d">Gabriella ha già una professione. Il vero nemico dei progetti di brand personale non è la strategia sbagliata: è l'esaurimento di chi li porta. Una cadenza troppo ambiziosa si abbandona al terzo mese.</p>
+      <div class="rk-mit"><b>Come la presidiamo</b>La cadenza si calibra sulle sue ore reali — non il contrario. Il sistema di format e la matrice riducono il lavoro settimanale a una declinazione, non a un'invenzione da zero. La produzione assistita e un supporto esterno tolgono peso operativo. Principio: meglio un episodio al mese sostenuto che uno a settimana abbandonato.</div>
+    </div>
+    <div class="risk">
+      <span class="rk-k">Scommessa III — la dipendenza</span>
+      <h4>Oggi tutto poggia su una sola persona.</h4>
+      <p class="rk-d">All'avvio, archè è Gabriella. Se una perizia la assorbe per mesi, il flusso si ferma. È la fragilità di ogni progetto a guida singola.</p>
+      <div class="rk-mit"><b>Come la presidiamo</b>La matrice e l'archivio rendono il sistema progressivamente meno dipendente: ogni episodio prodotto è patrimonio che resta. I ruoli si distribuiscono — la direzione del progetto e la produzione non gravano su di lei. L'obiettivo dichiarato è che, a regime, la sua presenza dia direzione al sistema, non lo tenga in vita. Nei primi mesi la dipendenza è reale: la gestiamo, non la nascondiamo.</div>
+    </div>
+  </div>
+
+  <div class="sub reveal">
+    <div class="sub-label">VIII.2 — Chi fa cosa</div>
+    <h3>Un sistema con ruoli, non un lavoro <em>solitario</em>.</h3>
+    <p>archè non è un'impresa individuale. Quattro ruoli, distinti — è questa distribuzione a rendere il progetto sostenibile.</p>
+    <ol class="steps">
+      <li><b>Gabriella Marano — la voce e la garanzia</b><span>L'autorità scientifica, il volto, la linea editoriale. Decide i contenuti ed è in scena. Non si occupa di produzione né di gestione: la sua energia va dove è insostituibile.</span></li>
+      <li><b>La direzione strategica e creativa — la regia</b><span>Il governo del progetto: sistema, format, coerenza di marca, coordinamento e calendario. È il ruolo che tiene insieme l'insieme — e che permette a Gabriella di concentrarsi solo sul contenuto.</span></li>
+      <li><b>La produzione — ripresa e montaggio</b><span>La realizzazione tecnica degli episodi e dei contenuti. Risorsa interna o esterna: <span class="slot">assetto di produzione da definire</span>.</span></li>
+      <li><b>La produzione assistita — la leva di efficienza</b><span>Strumenti di nuova generazione per la parte ripetitiva: montaggio, sottotitoli, declinazioni social, trascrizioni. Qualità alta a costo contenuto — è ciò che rende sostenibile un sistema editoriale di questa ampiezza.</span></li>
+    </ol>
+  </div>
+
+  <div class="sub reveal" style="max-width:var(--wide);">
+    <div class="sub-label">VIII.3 — Il piano dei primi 90 giorni</div>
+    <h3 style="max-width:24rem;">Dalla visione alla prova, in tre mesi.</h3>
+    <p style="max-width:34rem;">Non un orizzonte vago: un percorso con tappe. Le settimane sono indicative — la calibrazione finale segue le ore reali di Gabriella.</p>
+  </div>
+  <div class="timeline reveal">
+    <div class="tl-phase">
+      <span class="tl-when">Settimane 1–2 &middot; Le fondamenta</span>
+      <h4>Identità e basi.</h4>
+      <p>Dominio e handle definitivi, headline unica, prime voci della matrice Mito&rarr;Caso. Set fotografico di Gabriella. Impostazione della piattaforma e costruzione del profilo LinkedIn.</p>
+    </div>
+    <div class="tl-phase">
+      <span class="tl-when">Settimane 3–6 &middot; Il primo episodio</span>
+      <h4>Si produce la prova.</h4>
+      <p>Produzione dell'Episodio 01 — Medea. Costruzione delle pagine essenziali del sito: apertura, metodo, episodio. I primi format social pronti e impaginati.</p>
+    </div>
+    <div class="tl-phase">
+      <span class="tl-when">Settimane 7–10 &middot; Il lancio</span>
+      <h4>archè diventa pubblico.</h4>
+      <p>Uscita del primo episodio su YouTube e podcast. Instagram parte con il sistema di format. LinkedIn attivo. La promessa diventa, finalmente, qualcosa che si può vedere.</p>
+    </div>
+    <div class="tl-phase">
+      <span class="tl-when">Settimane 11–13 &middot; Il ritmo</span>
+      <h4>Si misura e si calibra.</h4>
+      <p>Secondo e terzo episodio. Prime metriche reali. La cadenza a regime viene fissata sui dati e sulle ore effettivamente sostenibili — non su un'ipotesi.</p>
+    </div>
+  </div>
+
+  <div class="sub reveal">
+    <div class="sub-label">VIII.4 — Il modello economico</div>
+    <h3>I numeri: cosa si <em>investe</em>, cosa si misura.</h3>
+    <p>Un canale che non esiste ancora non si può forecastare con onestà: i ricavi non si promettono, si costruiscono. Ciò che si può fissare adesso è il modello — la struttura dei costi, le leve dei ricavi, le metriche che diranno se funziona.</p>
+    <p><strong>L'investimento.</strong> Si divide in due. Costi una tantum, legati al lancio: set fotografico, attrezzatura di produzione, sviluppo della piattaforma. Costi ricorrenti, legati al ritmo: produzione e montaggio degli episodi. La produzione assistita e un primo perimetro essenziale tengono l'investimento iniziale contenuto e proporzionato. Le cifre esatte: <span class="slot">budget da definire con Ivano</span>.</p>
+    <p><strong>Le leve dei ricavi.</strong> La scala del valore agisce su tre leve, e su nient'altro.</p>
+    <ol class="steps">
+      <li><b>L'ampiezza</b><span>Quante persone archè raggiunge. La governa il contenuto gratuito — YouTube, podcast, Instagram.</span></li>
+      <li><b>La fedeltà</b><span>Quale quota di quel pubblico diventa seguito stabile. La governano la costanza e la qualità del format.</span></li>
+      <li><b>La conversione</b><span>Quale quota del pubblico fedele acquista — libro, corsi, biglietti. La governano la fiducia accumulata e la scala del valore.</span></li>
+    </ol>
+    <p style="margin-top:1.5rem;"><strong>Cosa si misura, dal primo episodio.</strong> Visualizzazioni e ritenzione, crescita degli iscritti, tasso di salvataggio e condivisione, prime conversioni. Dopo il primo trimestre questi dati — reali, non stimati — fissano prezzi, obiettivi e proiezioni. È così che un modello resta onesto: misura prima di promettere.</p>
+  </div>
+
+  <div class="sub reveal" style="max-width:var(--wide);">
+    <div class="sub-label">VIII.5 — Il lancio minimo</div>
+    <h3 style="max-width:25rem;">Non si costruisce la cattedrale prima del primo mattone.</h3>
+    <p style="max-width:34rem;">Il sistema descritto in questo documento è la destinazione, non il punto di partenza. Si lancia con un perimetro essenziale; tutto il resto si aggiunge quando il pilota ne ha dimostrato la necessità.</p>
+  </div>
+  <div class="v1grid reveal">
+    <div class="v1col essential">
+      <span class="v1k">Il v1 — necessario per partire</span>
+      <h4>Cosa serve al giorno uno.</h4>
+      <ul>
+        <li>Un'identità definita: nome, marchio, headline.</li>
+        <li>Il primo episodio, prodotto e pubblicato.</li>
+        <li>Le pagine essenziali del sito: apertura, metodo, episodio.</li>
+        <li>Instagram attivo con il sistema di format.</li>
+        <li>Il profilo LinkedIn di Gabriella, completo.</li>
+      </ul>
+    </div>
+    <div class="v1col later">
+      <span class="v1k">Dopo — quando c'è trazione</span>
+      <h4>Cosa può attendere.</h4>
+      <ul>
+        <li>L'archivio completo e la matrice navigabile.</li>
+        <li>Il sistema di pagamenti e il catalogo prodotti.</li>
+        <li>L'area riservata per gli approfondimenti.</li>
+        <li>La programmazione dal vivo e le partnership.</li>
+        <li>Le evoluzioni della piattaforma.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="sub reveal" style="margin-top:2rem;">
+    <p>L'ordine è una scelta di prudenza: prima la prova — un episodio vero, esperibile — poi la struttura. Così l'investimento segue la trazione invece di precederla, e ogni risorsa spesa risponde a una domanda già verificata.</p>
+  </div>
+
+  <div class="principle reveal">
+    <div class="mk"></div>
+    <p>Un piano che nomina i propri <span class="gold">rischi</span> non è più debole. È l'unico di cui ci si possa <span class="gold">fidare</span>.</p>
+    <div class="mk"></div>
+  </div>
+</section>
+
+<div class="divider"><div class="rule"><span></span></div></div>
+
+<!-- ===================== CHIUSURA ===================== -->
+<section class="band deep closing scroll-anchor" id="chiusura">
+  <div class="reveal">
+    <span class="eyebrow">In sintesi</span>
+    <h2 style="margin-top:1.6rem;">archè non è un canale.<br>&Egrave; una <span class="gold">posizione</span>.</h2>
+  </div>
+  <div class="col reveal">
+    <p>La posizione di chi, sola, può fare una cosa precisa: restituire al crimine la sua origine, e alla criminologia la sua dignità culturale — mostrando che il male non è mai inspiegabile, perché le tragedie lo avevano già scritto.</p>
+    <p>Il mercato di questo racconto è affollato di voci. Nessuna di quelle voci ha ciò che ha Gabriella Marano. Questo documento è il disegno per renderlo evidente.</p>
+  </div>
+</section>
+
+<!-- ===================== COLOPHON ===================== -->
+<footer class="colophon">
+  <div class="cmark">archè<i>&#9670;</i></div>
+  <div class="meta">
+    Documento di Regia Strategica &middot; MMXXVI<br>
+    Posizionamento &middot; Sistema Editoriale &middot; Modello di Crescita
+  </div>
+  <div class="sign">Direzione strategica e creativa del progetto &mdash; <span class="slot">firma da confermare</span></div>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+/* progressive enhancement only — il documento è completo senza JS */
+(function(){
+  var r=document.documentElement;
+  r.classList.remove('no-js');r.classList.add('js');
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var els=document.querySelectorAll('.reveal');
+  if(reduce||!('IntersectionObserver'in window)){
+    for(var i=0;i<els.length;i++)els[i].classList.add('vis');
+    return;
+  }
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target);}
+    });
+  },{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+  for(var j=0;j<els.length;j++)io.observe(els[j]);
+})();
+</script>
+</body>
+</html>

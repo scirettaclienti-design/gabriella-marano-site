@@ -1,0 +1,5 @@
+allowBuilds:
+  esbuild: true
+  sharp: true
+minimumReleaseAgeExclude:
+  - '@scirettaclienti-design/arche-design-system@0.1.0'

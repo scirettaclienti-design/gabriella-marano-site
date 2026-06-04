@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+---
+
+<Base
+  title="Home"
+  description="Psicologa clinica e forense, criminologa, archeologa. Dal mito alla mente."
+>
+  <Hero
+    heading="La verità, in ogni dettaglio."
+    lead="Psicologa clinica e forense, criminologa, archeologa. Una voce sola, una lente sola: dal mito alla mente."
+  />
+
+  <script is:inline>
+    (function () {
+      const map = {
+        '#lamiastoria': '/storia',
+        '#ilmiolavoro': '/metodo',
+        '#lemieattività': '/media',
+        '#lemieattivita': '/media',
+        '#contattami': '/contatti',
+      };
+      const target = map[decodeURIComponent(window.location.hash)];
+      if (target) window.location.replace(target);
+    })();
+  </script>
+</Base>
