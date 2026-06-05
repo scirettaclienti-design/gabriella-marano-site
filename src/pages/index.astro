@@ -6,6 +6,7 @@ import Base from '../layouts/Base.astro';
   title="Home"
   description="Gabriella Marano: psicologa clinica e forense, criminologa. Nei tribunali, nei media, nelle aule — ascoltare, ricostruire, restituire."
 >
+  <main>
 
   {/* HERO — full viewport, theatrical. L'unica <h1> della pagina. */}
   <section
@@ -45,7 +46,7 @@ import Base from '../layouts/Base.astro';
         role="img"
         aria-label="Spazio riservato al ritratto"
       >
-        <span class="absolute bottom-4 left-4 font-sans text-xs uppercase tracking-eyebrow text-bone-faint">
+        <span class="absolute bottom-4 left-4 font-sans text-xs uppercase tracking-eyebrow text-bone-dim">
           ritratto
         </span>
       </div>
@@ -55,7 +56,7 @@ import Base from '../layouts/Base.astro';
     <a
       id="hero-scroll-hint"
       href="#storia-anticipo"
-      class="absolute bottom-8 left-6 font-sans text-xs uppercase tracking-eyebrow text-bone-faint transition hover:text-gold"
+      class="absolute bottom-8 left-6 font-sans text-xs uppercase tracking-eyebrow text-bone-dim transition hover:text-gold"
     >
       ↓ La mia storia
     </a>
@@ -227,6 +228,8 @@ import Base from '../layouts/Base.astro';
     </div>
   </section>
 
+
+  </main>
 
   {/* Hash legacy → redirect lato client (lascia in fondo per non bloccare il primo paint) */}
   <script is:inline>
