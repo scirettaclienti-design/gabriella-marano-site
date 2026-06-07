@@ -1,5 +1,7 @@
 ---
+import { Picture } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import gmHands from '../assets/images/gm/gm-portrait-2.jpg';
 
 const principi = [
   {
@@ -67,10 +69,37 @@ const principi = [
       </div>
     </section>
 
-    {/* Composed divider — same vocabulary as /storia */}
+    {/* Editorial banner — hands at work, anchors the metaphor for "Osservare". */}
+    <section class="relative px-6" style="padding-block: clamp(2rem, 5vw, 4rem);">
+      <div class="relative mx-auto max-w-text">
+        <div
+          data-reveal
+          class="metodo-banner relative aspect-[2.3/1] w-full overflow-hidden border"
+          style="border-color: var(--line);"
+        >
+          <Picture
+            src={gmHands}
+            alt=""
+            formats={['avif', 'webp']}
+            widths={[420, 624]}
+            sizes="(min-width: 768px) 39rem, 100vw"
+            quality={72}
+            loading="lazy"
+            class="metodo-banner-image h-full w-full object-cover"
+          />
+          <div
+            class="absolute inset-0"
+            style="background: linear-gradient(rgba(20,17,12,0.40), rgba(20,17,12,0.72));"
+          ></div>
+          <div data-curtain-veil aria-hidden="true" class="absolute inset-0 bg-ink"></div>
+        </div>
+      </div>
+    </section>
+
+    {/* Composed divider — gold hairline + diamond, same vocabulary as /storia */}
     <div
       class="relative mx-auto flex max-w-wide items-center justify-center px-6"
-      style="padding-block: clamp(2rem, 5vw, 4rem);"
+      style="padding-block: clamp(1.5rem, 3vw, 2.5rem);"
       aria-hidden="true"
     >
       <span class="block h-px w-16 md:w-28" style="background-color: var(--line)"></span>

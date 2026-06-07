@@ -4,6 +4,7 @@ import Base from '../layouts/Base.astro';
 import heroMarble from '../assets/images/hero-marble.jpg';
 import lavoroPaper from '../assets/images/lavoro-paper.jpg';
 import archeTheatre from '../assets/images/arche-theatre.jpg';
+import gmPortrait from '../assets/images/gm/gm-portrait-1.jpg';
 ---
 
 <Base
@@ -71,17 +72,22 @@ import archeTheatre from '../assets/images/arche-theatre.jpg';
           </p>
         </div>
 
-        {/* Portrait card — framed slot on the rich background.
-            TODO sostituire con la vera <Picture> del ritratto editoriale di Gabriella. */}
+        {/* Portrait — real editorial portrait of Gabriella, framed by a gold hairline */}
         <div
           id="hero-portrait"
-          class="portrait-frame relative aspect-[4/5] w-full"
-          role="img"
-          aria-label="Spazio riservato al ritratto"
+          class="portrait-frame relative aspect-[4/5] w-full overflow-hidden"
         >
-          <span class="absolute bottom-4 left-4 font-sans text-xs uppercase tracking-eyebrow text-bone-dim">
-            ritratto
-          </span>
+          <Picture
+            src={gmPortrait}
+            alt="Ritratto di Gabriella Marano"
+            formats={['avif', 'webp']}
+            widths={[420, 600, 900, 1050]}
+            sizes="(min-width: 768px) 44vw, 100vw"
+            quality={80}
+            loading="eager"
+            fetchpriority="high"
+            class="h-full w-full object-cover"
+          />
         </div>
 
       </div>
