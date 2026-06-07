@@ -24,8 +24,6 @@ import archeTheatre from '../assets/images/arche-theatre.jpg';
           quality={75}
           loading="eager"
           fetchpriority="high"
-          data-curtain
-          data-curtain-immediate
           class="arche-bg-image h-full w-full object-cover"
         />
         <div
@@ -36,6 +34,7 @@ import archeTheatre from '../assets/images/arche-theatre.jpg';
           class="arche-glow absolute inset-0"
           aria-hidden="true"
         ></div>
+        <div data-curtain-veil aria-hidden="true" class="absolute inset-0" style="background-color: #0F0C07;"></div>
       </div>
 
       {/* Giant faded "MITO" bleeding off left */}

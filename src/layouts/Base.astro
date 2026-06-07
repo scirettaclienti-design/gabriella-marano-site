@@ -85,21 +85,22 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
   .vt-storia-heading { view-transition-name: storia-heading; }
   */
 
-  /* Pre-hide for scroll-reveal so elements don't flash visible before JS arms.
-     Only when motion is enabled. */
+  /* Pre-hide for scroll-reveal — fires before JS arms, GSAP takes over. */
   .js-motion [data-reveal] {
     opacity: 0;
-    transform: translateY(32px);
+    transform: translateY(28px);
   }
-  /* Page-entry title block — a beefier version, fires immediately at page load. */
+  /* Page-entry title block — composes once at page load. */
   .js-motion [data-page-entry] {
     opacity: 0;
     transform: translateY(28px);
   }
-  /* Curtain wipe on images — uncovered top-to-bottom when GSAP plays. */
-  .js-motion [data-curtain] {
-    clip-path: inset(0 0 100% 0);
-    -webkit-clip-path: inset(0 0 100% 0);
+  /* Curtain veil — opaque overlay above the image, scaleY 1 covers the section.
+     GSAP scales it to 0 from the top, revealing the image GPU-smoothly. */
+  .js-motion [data-curtain-veil] {
+    transform: scaleY(1);
+    transform-origin: top center;
+    will-change: transform;
   }
 
   /* Pre-hide for the opening reveal (only when .js-opening-pending is set). */

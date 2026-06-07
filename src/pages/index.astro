@@ -30,8 +30,6 @@ import archeTheatre from '../assets/images/arche-theatre.jpg';
         quality={72}
         loading="eager"
         fetchpriority="high"
-        data-curtain
-        data-curtain-immediate
         class="hero-bg-image h-full w-full object-cover"
       />
       {/* Strong dark overlay so text stays the protagonist */}
@@ -44,6 +42,8 @@ import archeTheatre from '../assets/images/arche-theatre.jpg';
         class="absolute inset-0"
         style="background: radial-gradient(ellipse 65vw 55vh at 100% -5%, rgba(200,162,78,0.10), transparent 62%);"
       ></div>
+      {/* Curtain veil — GPU scaleY from top */}
+      <div data-curtain-veil aria-hidden="true" class="absolute inset-0 bg-ink"></div>
     </div>
 
     {/* Content layer */}
@@ -140,13 +140,13 @@ import archeTheatre from '../assets/images/arche-theatre.jpg';
         sizes="100vw"
         quality={65}
         loading="lazy"
-        data-curtain
         class="lavoro-bg-image h-full w-full object-cover"
       />
       <div
         class="absolute inset-0"
         style="background: linear-gradient(rgba(20,17,12,0.94), rgba(20,17,12,0.82));"
       ></div>
+      <div data-curtain-veil aria-hidden="true" class="absolute inset-0 bg-ink"></div>
     </div>
 
     <div class="relative z-10 mx-auto max-w-wide">
@@ -254,7 +254,6 @@ import archeTheatre from '../assets/images/arche-theatre.jpg';
         sizes="100vw"
         quality={72}
         loading="lazy"
-        data-curtain
         class="arche-bg-image h-full w-full object-cover"
       />
       <div
@@ -266,6 +265,7 @@ import archeTheatre from '../assets/images/arche-theatre.jpg';
         class="arche-glow absolute inset-0"
         aria-hidden="true"
       ></div>
+      <div data-curtain-veil aria-hidden="true" class="absolute inset-0" style="background-color: #0F0C07;"></div>
     </div>
 
     {/* Giant faded MITO, bleeding off left */}
