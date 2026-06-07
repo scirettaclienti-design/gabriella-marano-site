@@ -59,31 +59,52 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
   <body class="bg-ink text-bone font-body antialiased">
     <slot />
 
-    {/* Safety net: if motion JS failed to mount, reveal the hero anyway. */}
+    {/* Motion runtime — runs site-wide so /storia, /metodo, /perizie, /arche
+        all get the calm scroll-reveal. Hero opening only fires on the home. */}
+    <script>
+      import '../scripts/home-motion';
+    </script>
+
+    {/* Safety net: if motion JS failed to mount, reveal hero + all reveal targets. */}
     <script is:inline>
       setTimeout(function () {
         document.documentElement.classList.remove('js-opening-pending');
+        document.documentElement.classList.remove('js-motion');
       }, 5000);
     </script>
   </body>
 </html>
 
 <style is:global>
-  /* View-transition name hooks (must be global to morph across pages) */
+  /* MOVE 6 — name-match morph DISABLED.
+     <ViewTransitions /> stays active (default cross-fade, no white flash).
+     Re-enable by uncommenting these two rules. */
+  /*
   .vt-arche-heading { view-transition-name: arche-heading; }
   .vt-storia-heading { view-transition-name: storia-heading; }
+  */
 
-  /* Pre-hide for the opening reveal (only when .js-opening-pending is set) */
+  /* Pre-hide for scroll-reveal so elements don't flash visible before JS arms.
+     Only when motion is enabled. */
+  .js-motion [data-reveal] {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  /* Pre-hide for the opening reveal (only when .js-opening-pending is set). */
   .js-opening-pending .hero-word {
     display: inline-block;
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(10px);
     will-change: transform, opacity;
+  }
+  .js-opening-pending .hero-bg-image {
+    transform: scale(1.08);
+    will-change: transform;
   }
   .js-opening-pending #hero-portrait {
     opacity: 0;
-    transform: scale(1.04);
-    will-change: transform, opacity;
+    will-change: opacity;
   }
   .js-opening-pending #hero-eyebrow,
   .js-opening-pending #hero-lead,

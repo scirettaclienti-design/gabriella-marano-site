@@ -1,7 +1,13 @@
 /*
- * Home cinematic motion — the 7 moves.
- * Lazy-loaded, mounts after first paint, fully guarded by prefers-reduced-motion.
- * Re-init on Astro view-transition page swaps.
+ * Home motion — three intentional moves.
+ *
+ * 1. Opening reveal: hero h1 words fade up + bg image slow scale 1.08→1.
+ *    Portrait fades in last. No scroll-lock. Once per session.
+ * 2. Section-title scroll-reveal: eyebrow + h2 of each non-hero section
+ *    fade up once when entering viewport. Bodies and CTAs just appear.
+ * 3. Three doors hover: CSS-only (see index.astro <style> block).
+ *
+ * All guarded by prefers-reduced-motion.
  */
 
 import gsap from 'gsap';
@@ -12,9 +18,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const SESSION_KEY = 'homeOpeningSeen';
-
-const LENIS_LERP_NORMAL = 0.1;
-const LENIS_LERP_HEAVY = 0.05;
 
 let lenis: Lenis | null = null;
 let tickerHandler: ((time: number) => void) | null = null;
@@ -30,11 +33,13 @@ function revealHero(): void {
 }
 
 function clearWillChange(): void {
-  document.querySelectorAll<HTMLElement>(
-    '.hero-word, #hero-portrait, #hero-eyebrow, #hero-lead, #hero-scroll-hint'
-  ).forEach((el) => {
-    el.style.willChange = 'auto';
-  });
+  document
+    .querySelectorAll<HTMLElement>(
+      '.hero-word, .hero-bg-image, #hero-portrait, #hero-eyebrow, #hero-lead, #hero-scroll-hint'
+    )
+    .forEach((el) => {
+      el.style.willChange = 'auto';
+    });
 }
 
 function cleanup(): void {
@@ -57,16 +62,13 @@ function cleanup(): void {
   }
 }
 
-/* MOVE 1 — Opening reveal: solemn, skippable, once per session. */
+/* MOVE 1 — Opening reveal: h1 words + portrait + slow bg scale. */
 function moveOpeningReveal(): void {
   const seen = sessionStorage.getItem(SESSION_KEY) === '1';
   if (seen) {
     revealHero();
     return;
   }
-
-  if (lenis) lenis.stop();
-  document.body.style.overflow = 'hidden';
 
   let finished = false;
   const finish = () => {
@@ -75,42 +77,53 @@ function moveOpeningReveal(): void {
     tl.progress(1, false);
     revealHero();
     clearWillChange();
-    document.body.style.overflow = '';
-    if (lenis) lenis.start();
     sessionStorage.setItem(SESSION_KEY, '1');
     skipEvents.forEach((evt) => window.removeEventListener(evt, skip, true));
   };
 
   const tl = gsap.timeline({ onComplete: finish });
 
-  tl.to('.hero-word', {
-    opacity: 1,
-    y: 0,
-    duration: 0.7,
-    stagger: 0.18,
-    ease: 'power3.out',
-  })
+  // Slow bg "settle" runs the whole length of the reveal.
+  tl.to(
+    '.hero-bg-image',
+    { scale: 1, duration: 2.0, ease: 'power2.out' },
+    0
+  )
+    // Words fade up softly — calmer than before
     .to(
-      '#hero-portrait',
-      { opacity: 1, scale: 1, duration: 1.2, ease: 'power2.out' },
-      '-=0.4'
+      '.hero-word',
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        stagger: 0.08,
+        ease: 'power2.out',
+      },
+      0
     )
     .to(
       '#hero-eyebrow',
-      { opacity: 1, duration: 0.6, ease: 'power2.out' },
-      '-=1.0'
+      { opacity: 1, duration: 0.5, ease: 'power2.out' },
+      0.5
     )
     .to(
       '#hero-lead',
-      { opacity: 1, duration: 0.6, ease: 'power2.out' },
-      '-=0.4'
+      { opacity: 1, duration: 0.5, ease: 'power2.out' },
+      0.85
     )
     .to(
       '#hero-scroll-hint',
       { opacity: 1, duration: 0.4, ease: 'power2.out' },
-      '-=0.2'
+      1.15
+    )
+    // Portrait last
+    .to(
+      '#hero-portrait',
+      { opacity: 1, duration: 0.85, ease: 'power2.out' },
+      1.35
     );
 
+  // Skippable on any user input. No scroll-lock.
   const skip = () => finish();
   const skipEvents: Array<keyof WindowEventMap> = [
     'wheel',
@@ -123,120 +136,48 @@ function moveOpeningReveal(): void {
   );
 }
 
-/* MOVE 2 — Scroll-narrative stagger. */
-function moveScrollStagger(): void {
-  document.querySelectorAll<HTMLElement>('[data-stagger]').forEach((section) => {
-    const items = section.querySelectorAll<HTMLElement>('[data-stagger-item]');
+/* MOVE 2 — Scroll-reveal: each section reveals its [data-reveal] children in a
+   calm upward drift + fade, staggered. Runs on every page that has the markers.
+   Uses fromTo with explicit end state because the CSS pre-hide sets the natural
+   computed state to opacity 0 — a plain gsap.from() would animate "0 → 0". */
+function moveScrollReveal(): void {
+  document.querySelectorAll<HTMLElement>('section').forEach((section) => {
+    const items = section.querySelectorAll<HTMLElement>('[data-reveal]');
     if (!items.length) return;
-    gsap.from(items, {
-      opacity: 0,
-      y: 24,
-      duration: 0.7,
-      stagger: 0.12,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: section,
-        start: 'top 75%',
-        toggleActions: 'play none none none',
-      },
-    });
-  });
-}
-
-/* MOVE 3 — Living portrait: parallax + warm filter shift. */
-function movePortraitParallax(): void {
-  const portrait = document.querySelector<HTMLElement>('#hero-portrait');
-  const hero = document.querySelector<HTMLElement>('#hero');
-  if (!portrait || !hero) return;
-
-  gsap.to(portrait, {
-    yPercent: -15,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: hero,
-      start: 'top top',
-      end: 'bottom top',
-      scrub: true,
-    },
-  });
-
-  gsap.fromTo(
-    portrait,
-    { filter: 'brightness(1) sepia(0)' },
-    {
-      filter: 'brightness(0.92) sepia(0.06)',
-      ease: 'none',
-      scrollTrigger: {
-        trigger: hero,
-        start: 'top top',
-        end: 'bottom top',
-        scrub: true,
-      },
-    }
-  );
-}
-
-/* MOVE 5 — Roman numeral anchors (pin on desktop only). */
-function moveNumeralPins(): void {
-  if (window.matchMedia('(max-width: 767px)').matches) return;
-
-  document.querySelectorAll<HTMLElement>('.lavoro-doors .door').forEach((door) => {
-    const numeral = door.querySelector<HTMLElement>('[data-numeral]');
-    if (!numeral) return;
-    ScrollTrigger.create({
-      trigger: numeral,
-      start: 'top top+=80',
-      endTrigger: door,
-      end: 'bottom top+=200',
-      pin: numeral,
-      pinSpacing: false,
-    });
-  });
-}
-
-/* MOVE 7 — Archè threshold: heavier scroll feel + deeper bg + glow up. */
-function moveArcheThreshold(): void {
-  const arche = document.querySelector<HTMLElement>('#arche-bridge');
-  if (!arche) return;
-
-  ScrollTrigger.create({
-    trigger: arche,
-    start: 'top 70%',
-    end: 'bottom 30%',
-    onEnter: () => {
-      if (lenis) lenis.options.lerp = LENIS_LERP_HEAVY;
-      arche.classList.add('threshold-active');
-    },
-    onLeave: () => {
-      if (lenis) lenis.options.lerp = LENIS_LERP_NORMAL;
-      arche.classList.remove('threshold-active');
-    },
-    onEnterBack: () => {
-      if (lenis) lenis.options.lerp = LENIS_LERP_HEAVY;
-      arche.classList.add('threshold-active');
-    },
-    onLeaveBack: () => {
-      if (lenis) lenis.options.lerp = LENIS_LERP_NORMAL;
-      arche.classList.remove('threshold-active');
-    },
+    gsap.fromTo(
+      items,
+      { opacity: 0, y: 20 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.75,
+        stagger: 0.08,
+        ease: 'power2.out',
+        clearProps: 'transform',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 80%',
+          toggleActions: 'play none none none',
+        },
+      }
+    );
   });
 }
 
 function init(): void {
-  if (!isHomePage()) {
-    revealHero();
-    return;
-  }
-
   if (REDUCED) {
-    // a11y first: render fully visible, no transforms, no scroll-lock
+    // a11y first: render everything visible, no transforms
     revealHero();
+    document.querySelectorAll<HTMLElement>('[data-reveal]').forEach((el) => {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
     return;
   }
 
-  // Lenis smooth scroll + GSAP ticker bridge
+  // Smooth scroll on every page
   lenis = new Lenis({
-    lerp: LENIS_LERP_NORMAL,
+    lerp: 0.1,
     smoothWheel: true,
     duration: 1.1,
   });
@@ -248,14 +189,15 @@ function init(): void {
   gsap.ticker.add(tickerHandler);
   gsap.ticker.lagSmoothing(0);
 
-  // Moves 1, 2, 3, 5, 7 (Moves 4 and 6 are CSS-only / Astro built-in)
-  moveOpeningReveal();
-  moveScrollStagger();
-  movePortraitParallax();
-  moveNumeralPins();
-  moveArcheThreshold();
+  // Hero opening reveal only on the home (uses #hero-* nodes)
+  if (isHomePage()) {
+    moveOpeningReveal();
+  } else {
+    revealHero();
+  }
 
-  // Debounced resize refresh
+  moveScrollReveal();
+
   resizeHandler = () => {
     if (resizeTimer) clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => ScrollTrigger.refresh(), 200);
