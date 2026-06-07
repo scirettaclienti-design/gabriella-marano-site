@@ -1,16 +1,119 @@
 ---
 import Base from '../../layouts/Base.astro';
+
+const sections = [
+  {
+    num: 'I',
+    title: 'Televisione',
+    blurb:
+      "Apparizioni in approfondimenti come criminologa. L'analisi del comportamento e del movente, mai lo spettacolo del dolore.",
+    href: '/media/televisione',
+  },
+  {
+    num: 'II',
+    title: 'Scrittura',
+    blurb:
+      "Libri, articoli accademici e contributi editoriali. Manuali per chi forma e per chi indaga.",
+    href: '/media/scrittura',
+  },
+  {
+    num: 'III',
+    title: 'Formazione',
+    blurb:
+      "Percorsi formativi con La Scuola di Atene e collaborazioni con scuole ed enti.",
+    href: '/media/formazione',
+  },
+  {
+    num: 'IV',
+    title: 'Incontri',
+    blurb:
+      "Lectio pubbliche, conferenze, presentazioni in scuole e teatri.",
+    href: '/media/incontri',
+  },
+];
 ---
 
 <Base
   title="Media"
-  description="Hub: televisione, scrittura, formazione, incontri."
+  description="Le attività editoriali e pubbliche: televisione, scrittura, formazione, incontri."
 >
-  <section class="mx-auto max-w-3xl px-6 py-24">
-    <p class="eyebrow mb-6 text-bone-faint">Media</p>
-    <h2 class="font-display text-4xl md:text-6xl">Archivio editoriale.</h2>
-    <p class="mt-8 text-lg text-bone-dim">
-      Pagina in costruzione — hub per televisione, scrittura, formazione, incontri.
-    </p>
-  </section>
+  <main class="relative">
+
+    {/* INTRO */}
+    <section class="relative px-6" style="padding-block: var(--space-band)">
+      <div class="mx-auto max-w-text">
+        <p data-page-entry class="eyebrow mb-8">Le mie attività</p>
+        <h2
+          data-unearth-hero
+          class="font-display tracking-tight text-bone"
+          style="font-size: clamp(2.25rem, 6vw, 4.5rem); line-height: 1.0; letter-spacing: -0.012em;"
+        >
+          {"Archivio editoriale.".split(' ').map((w) => (
+            <span class="word mr-[0.22em] last:mr-0">{w}</span>
+          ))}
+        </h2>
+        <div data-ground-line aria-hidden="true" class="ground-line"></div>
+        <p data-page-entry class="mt-10 font-serif leading-loose text-bone">
+          Quattro territori, una sola voce. Qui sotto la mappa di dove
+          intervengo — in televisione come criminologa, sulla pagina come
+          autrice, in aula come formatrice, sul palco come presenza pubblica.
+        </p>
+      </div>
+    </section>
+
+    {/* FOUR CARDS */}
+    <section class="relative px-6" style="padding-block: var(--space-band)">
+      <div class="mx-auto grid max-w-wide grid-cols-1 gap-x-16 gap-y-20 md:grid-cols-2">
+        {sections.map((c) => (
+          <a data-reveal href={c.href} class="media-card group">
+            <span
+              aria-hidden="true"
+              class="font-secret leading-none"
+              style="font-size: clamp(3.5rem, 6vw, 5.5rem); color: rgba(200, 162, 78, 0.5);"
+            >{c.num}</span>
+            <h3 class="mt-6 font-display text-3xl tracking-tight text-bone md:text-4xl">
+              {c.title}
+            </h3>
+            <p class="mt-5 max-w-md font-serif leading-loose text-bone-dim">
+              {c.blurb}
+            </p>
+            <span class="media-card-cta mt-7 inline-block">
+              Esplora <span aria-hidden="true" class="ml-1.5">→</span>
+            </span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+  </main>
+
+  <style>
+    .media-card {
+      display: block;
+      padding: 2rem 0;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 320ms ease;
+    }
+    .media-card:hover { transform: translateY(-4px); }
+    .media-card-cta {
+      color: var(--color-gold);
+      font-family: var(--font-sans);
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      letter-spacing: var(--tracking-eyebrow);
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--color-gold);
+      padding-bottom: 0.35em;
+      transition: color 250ms ease, border-color 250ms;
+    }
+    .media-card:hover .media-card-cta {
+      color: var(--color-gold-bright);
+      border-bottom-color: var(--color-gold-bright);
+    }
+    .media-card:focus-visible {
+      outline: 1px solid var(--color-gold);
+      outline-offset: 8px;
+    }
+  </style>
 </Base>
