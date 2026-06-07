@@ -32,8 +32,10 @@ import gmPortrait from '../assets/images/gm/gm-portrait-1.jpg';
         <div class="max-w-text">
           <p data-page-entry class="eyebrow mb-8">Chi sono</p>
           <h2 data-unearth-hero class="vt-storia-heading font-display text-3xl leading-tight tracking-tight text-bone md:text-4xl">
-            {"Una storia, molte storie.".split(' ').map((w) => (
-              <span class="word mr-[0.25em] last:mr-0">{w}</span>
+            {"Una storia, molte storie.".split(' ').map((w, i, arr) => (
+              <Fragment>
+                <span class="word">{w}</span>{i < arr.length - 1 ? ' ' : ''}
+              </Fragment>
             ))}
           </h2>
           <div data-ground-line aria-hidden="true" class="ground-line"></div>

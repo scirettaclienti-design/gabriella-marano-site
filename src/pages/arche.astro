@@ -109,8 +109,10 @@ import archeTheatre from '../assets/images/arche-theatre.jpg';
           class="font-display tracking-tight text-bone"
           style="font-size: clamp(2rem, 4vw, 3rem); line-height: 1.05;"
         >
-          {"archecrime.com — presto online.".split(' ').map((w) => (
-            <span class="word inline-block mr-[0.25em] last:mr-0">{w}</span>
+          {"archecrime.com — presto online.".split(' ').map((w, i, arr) => (
+            <Fragment>
+              <span class="word">{w}</span>{i < arr.length - 1 ? ' ' : ''}
+            </Fragment>
           ))}
         </h3>
         <p data-reveal class="mt-6 font-serif leading-loose text-bone-dim">

@@ -47,8 +47,10 @@ const blocchi = [
           class="font-display tracking-tight"
           style="font-size: clamp(2rem, 5.5vw, 4.5rem); line-height: 1.0; letter-spacing: -0.01em; color: var(--color-ink);"
         >
-          {"Consulenze tecniche per la magistratura e le parti.".split(' ').map((w) => (
-            <span class="word mr-[0.22em] last:mr-0">{w}</span>
+          {"Consulenze tecniche per la magistratura e le parti.".split(' ').map((w, i, arr) => (
+            <Fragment>
+              <span class="word">{w}</span>{i < arr.length - 1 ? ' ' : ''}
+            </Fragment>
           ))}
         </h2>
         <div data-ground-line aria-hidden="true" class="ground-line ground-line--dark"></div>
@@ -66,17 +68,17 @@ const blocchi = [
         {blocchi.map((b, idx) => (
           <article
             data-reveal
-            class={`grid grid-cols-1 items-start gap-x-12 gap-y-8 md:grid-cols-[10rem_1fr] md:gap-x-16 ${idx > 0 ? 'mt-16 perizie-border-t pt-16 md:mt-24 md:pt-24' : ''}`}
+            class={`grid grid-cols-1 items-start gap-x-12 gap-y-6 md:grid-cols-[minmax(13rem,18rem)_1fr] md:gap-x-16 lg:gap-x-20 ${idx > 0 ? 'mt-16 perizie-border-t pt-16 md:mt-24 md:pt-24' : ''}`}
           >
-            <div class="flex items-start gap-4">
+            <div>
               <span
                 aria-hidden="true"
-                class="font-secret leading-none perizie-numeral"
-                style="font-size: clamp(3rem, 5vw, 4.5rem);"
+                class="font-secret leading-none perizie-numeral block"
+                style="font-size: clamp(2.75rem, 4.5vw, 4rem);"
               >{b.num}</span>
               <h3
-                class="font-display tracking-tight"
-                style="font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.05; color: var(--color-ink);"
+                class="font-display tracking-tight mt-3"
+                style="font-size: clamp(1.6rem, 2.4vw, 2.1rem); line-height: 1.05; color: var(--color-ink);"
               >{b.title}</h3>
             </div>
 

@@ -47,8 +47,10 @@ const channels = [
           class="font-display tracking-tight text-bone"
           style="font-size: clamp(2.25rem, 6vw, 4.5rem); line-height: 1.0; letter-spacing: -0.012em;"
         >
-          {"Tre canali, tre risposte.".split(' ').map((w) => (
-            <span class="word mr-[0.22em] last:mr-0">{w}</span>
+          {"Tre canali, tre risposte.".split(' ').map((w, i, arr) => (
+            <Fragment>
+              <span class="word">{w}</span>{i < arr.length - 1 ? ' ' : ''}
+            </Fragment>
           ))}
         </h2>
         <div data-ground-line aria-hidden="true" class="ground-line"></div>
