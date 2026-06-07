@@ -8,6 +8,9 @@ const editorialSchema = z.object({
   summary: z.string(),
   externalUrl: z.string().url().optional(),
   tags: z.array(z.string()).default([]),
+  // Optional cover (string path) — to be wired when Gabriella sends real images.
+  cover: z.string().optional(),
+  coverAlt: z.string().optional(),
 });
 
 const televisione = defineCollection({ type: 'content', schema: editorialSchema });

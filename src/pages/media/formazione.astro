@@ -51,17 +51,29 @@ const fmtMonthYear = (d: Date) =>
           <ul class="entries-list">
             {sorted.map((e) => (
               <li data-reveal class="entry">
-                <time datetime={e.data.date.toISOString()} class="entry-date">
-                  {fmtMonthYear(e.data.date)}
-                </time>
-                <div class="entry-body">
-                  {(e.data.outlet || e.data.publisher) && (
-                    <p class="entry-outlet">{e.data.outlet || e.data.publisher}</p>
+                <div class="entry-cover">
+                  {e.data.cover ? (
+                    <img src={e.data.cover} alt={e.data.coverAlt ?? ''} loading="lazy" />
+                  ) : (
+                    <div class="entry-cover-placeholder" aria-hidden="true">
+                      <span>F</span>
+                    </div>
                   )}
+                </div>
+                <div class="entry-body">
+                  <p class="entry-meta">
+                    <time datetime={e.data.date.toISOString()} class="entry-date">{fmtMonthYear(e.data.date)}</time>
+                    {(e.data.outlet || e.data.publisher) && (
+                      <Fragment>
+                        <span class="entry-meta-sep" aria-hidden="true">·</span>
+                        <span class="entry-outlet">{e.data.outlet || e.data.publisher}</span>
+                      </Fragment>
+                    )}
+                  </p>
                   <h3 class="entry-title">{e.data.title}</h3>
                   <p class="entry-summary">{e.data.summary}</p>
                   {e.data.externalUrl && (
-                    <a href={e.data.externalUrl} target="_blank" rel="noopener" class="entry-link">
+                    <a href={e.data.externalUrl} target="_blank" rel="noopener noreferrer" class="entry-link">
                       Maggiori informazioni →
                     </a>
                   )}
