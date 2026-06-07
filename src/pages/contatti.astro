@@ -1,16 +1,176 @@
 ---
 import Base from '../layouts/Base.astro';
+
+const channels = [
+  {
+    num: 'I',
+    title: 'Stampa e media',
+    blurb:
+      "Per interviste, interventi televisivi e contributi editoriali. Risposta entro pochi giorni.",
+    href:
+      'mailto:management@gabriellamarano.it?subject=[Stampa] Richiesta intervento',
+    cta: 'Scrivi a management',
+  },
+  {
+    num: 'II',
+    title: 'Incarichi e perizie',
+    blurb:
+      "Per magistratura e avvocati. Consulente Tecnico d'Ufficio (CTU) e di Parte (CTP) in ambito civile, penale e giuridico-forense.",
+    href:
+      'mailto:management@gabriellamarano.it?subject=[Incarico] Richiesta consulenza',
+    cta: 'Scrivi a management',
+  },
+  {
+    num: 'III',
+    title: 'Formazione',
+    blurb:
+      "Per scuole, enti, istituzioni. La Scuola di Atene e percorsi formativi su misura per professionisti e studenti.",
+    href:
+      'mailto:management@gabriellamarano.it?subject=[Formazione] Richiesta programma',
+    cta: 'Scrivi a management',
+  },
+];
 ---
 
 <Base
   title="Contatti"
-  description="Stampa, perizie, formazione: tre canali distinti."
+  description="Tre canali distinti: stampa, perizie, formazione. E una linea d'ascolto attiva 24 ore."
 >
-  <section class="mx-auto max-w-3xl px-6 py-24">
-    <p class="eyebrow mb-6 text-bone-faint">Contatti</p>
-    <h2 class="font-display text-4xl md:text-6xl">Tre canali, tre risposte.</h2>
-    <p class="mt-8 text-lg text-bone-dim">
-      Pagina in costruzione — stampa, perizie, formazione.
-    </p>
-  </section>
+  <main class="relative">
+
+    {/* INTRO band */}
+    <section class="relative px-6" style="padding-block: var(--space-band)">
+      <div class="mx-auto max-w-text">
+        <p data-page-entry class="eyebrow mb-8">Contatti</p>
+        <h2
+          data-unearth-hero
+          class="font-display tracking-tight text-bone"
+          style="font-size: clamp(2.25rem, 6vw, 4.5rem); line-height: 1.0; letter-spacing: -0.012em;"
+        >
+          {"Tre canali, tre risposte.".split(' ').map((w) => (
+            <span class="word mr-[0.22em] last:mr-0">{w}</span>
+          ))}
+        </h2>
+        <div data-ground-line aria-hidden="true" class="ground-line"></div>
+        <p data-page-entry class="mt-10 font-serif leading-loose text-bone">
+          Per qualsiasi richiesta professionale: <strong class="text-bone">management@gabriellamarano.it</strong>.
+          In fondo, la linea di ascolto per chi ha bisogno di parlare con qualcuno.
+        </p>
+      </div>
+    </section>
+
+    {/* THREE CHANNELS */}
+    <section class="relative px-6" style="padding-block: var(--space-band)">
+      <div class="mx-auto max-w-wide">
+        {channels.map((c, idx) => (
+          <article
+            data-reveal
+            class={`grid grid-cols-1 items-start gap-x-12 gap-y-6 md:grid-cols-[7rem_1fr_auto] md:gap-x-16 ${idx > 0 ? 'mt-16 border-t pt-16 md:mt-20 md:pt-20' : ''}`}
+            style={idx > 0 ? 'border-color: var(--line)' : ''}
+          >
+            <div class="flex items-baseline gap-4 md:block">
+              <span
+                aria-hidden="true"
+                class="font-secret leading-none"
+                style="font-size: clamp(3rem, 5vw, 4.5rem); color: rgba(200, 162, 78, 0.5);"
+              >{c.num}</span>
+            </div>
+
+            <div class="max-w-text">
+              <h3
+                class="font-display tracking-tight text-bone"
+                style="font-size: clamp(1.6rem, 2.6vw, 2.25rem); line-height: 1.1;"
+              >{c.title}</h3>
+              <p class="mt-4 font-serif leading-loose text-bone-dim">{c.blurb}</p>
+            </div>
+
+            <div class="md:pl-4">
+              <a href={c.href} class="contatti-cta">
+                {c.cta}
+                <span aria-hidden="true" class="ml-2">→</span>
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    {/* EMERGENCY — supportive tone, distinctly framed */}
+    <section class="relative px-6" style="padding-block: var(--space-band)">
+      <div class="mx-auto max-w-text">
+        <div data-reveal class="emergency-frame">
+          <p class="eyebrow mb-6">Ascolto / emergenza</p>
+          <p class="emergency-line">
+            Se hai bisogno di parlare con qualcuno — qualunque sia il tuo
+            dolore — c'è una linea attiva ventiquattro ore.
+          </p>
+          <a href="tel:+393898921276" class="emergency-tel" aria-label="Chiama la linea d'ascolto 24 ore">
+            +39 389 8921276
+          </a>
+          <p class="emergency-note">
+            Nessuna richiesta è giudicata. Nessuna domanda è inopportuna.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <style>
+    .contatti-cta {
+      display: inline-flex;
+      align-items: baseline;
+      color: var(--color-gold);
+      font-family: var(--font-sans);
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      letter-spacing: var(--tracking-eyebrow);
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--color-gold);
+      padding-bottom: 0.35em;
+      transition: color 250ms ease, border-color 250ms;
+      text-decoration: none;
+    }
+    .contatti-cta:hover {
+      color: var(--color-gold-bright);
+      border-color: var(--color-gold-bright);
+    }
+
+    .emergency-frame {
+      border: 1px solid var(--line);
+      padding: clamp(2rem, 5vw, 3.5rem);
+      background-color: rgba(20, 17, 12, 0.5);
+      text-align: center;
+    }
+    .emergency-line {
+      font-family: var(--font-serif);
+      font-style: italic;
+      color: var(--color-bone);
+      line-height: 1.6;
+      max-width: 32rem;
+      margin: 0 auto 2rem;
+    }
+    .emergency-tel {
+      display: inline-block;
+      font-family: var(--font-display);
+      color: var(--color-bone);
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      line-height: 1;
+      letter-spacing: -0.005em;
+      padding: 0.4em 0;
+      text-decoration: none;
+      border-bottom: 1px solid var(--color-gold);
+      transition: color 250ms, border-color 250ms;
+    }
+    .emergency-tel:hover {
+      color: var(--color-gold-bright);
+      border-bottom-color: var(--color-gold-bright);
+    }
+    .emergency-note {
+      font-family: var(--font-serif);
+      color: var(--color-bone-faint);
+      font-size: 0.95rem;
+      margin-top: 1.5rem;
+    }
+  </style>
 </Base>
