@@ -1,16 +1,132 @@
 ---
 import Base from '../layouts/Base.astro';
+
+const blocchi = [
+  {
+    num: 'I',
+    title: 'Civile',
+    items: [
+      "Valutazione del danno psichico da evento traumatico (incidente stradale, malasanità, mobbing).",
+      "Valutazione delle capacità genitoriali in caso di separazione.",
+      "Consulenze tecniche psicologiche su richiesta del giudice o delle parti.",
+    ],
+  },
+  {
+    num: 'II',
+    title: 'Penale',
+    items: [
+      "Valutazioni collegiali sulla capacità di intendere e di volere e di stare in giudizio.",
+      "Consulenze tecniche psicologiche e criminologiche.",
+    ],
+  },
+  {
+    num: 'III',
+    title: 'Giuridico-forense',
+    items: [
+      "Ricostruzione retrospettiva della vita di una persona deceduta o scomparsa (autopsia psicologica).",
+      "Accertamento delle cause di morte o scomparsa in casi equivoci.",
+      "Valutazione retrospettiva dello stato di salute mentale della persona oggetto d'indagine.",
+    ],
+  },
+];
 ---
 
 <Base
   title="Perizie"
-  description="Pagina fredda dedicata a magistrati e avvocati."
+  description="Consulenze tecniche per la magistratura e le parti. CTU e CTP in ambito civile, penale e giuridico-forense."
 >
-  <section class="mx-auto max-w-3xl px-6 py-24">
-    <p class="eyebrow mb-6 text-bone-faint">Perizie</p>
-    <h2 class="font-display text-4xl md:text-6xl">Perizie e consulenze.</h2>
-    <p class="mt-8 text-lg text-bone-dim">
-      Pagina in costruzione — informazioni essenziali per magistrati e avvocati.
-    </p>
-  </section>
+  <main class="relative">
+
+    {/* INTRO band */}
+    <section class="relative px-6" style="padding-block: var(--space-band)">
+      <div class="mx-auto max-w-text">
+        <p data-reveal class="eyebrow mb-8">Ambito forense</p>
+        <h2
+          data-reveal
+          class="font-display tracking-tight text-bone"
+          style="font-size: clamp(2.5rem, 5.5vw, 4.5rem); line-height: 1.0; letter-spacing: -0.01em;"
+        >Consulenze tecniche per la magistratura e le parti.</h2>
+        <p data-reveal class="mt-10 font-serif leading-loose text-bone">
+          Svolgo attività di Consulente Tecnico d'Ufficio (CTU) e di Parte (CTP)
+          in ambito civile, penale e giuridico-forense.
+        </p>
+      </div>
+    </section>
+
+    {/* THREE COMPETENCE BLOCKS — precise, readable, no decoration */}
+    <section class="relative px-6" style="padding-block: var(--space-band)">
+      <div class="mx-auto max-w-wide">
+
+        {blocchi.map((b, idx) => (
+          <article
+            data-reveal
+            class={`grid grid-cols-1 items-start gap-x-12 gap-y-8 md:grid-cols-[10rem_1fr] md:gap-x-16 ${idx > 0 ? 'mt-16 border-t pt-16 md:mt-24 md:pt-24' : ''}`}
+            style={idx > 0 ? 'border-color: var(--line)' : ''}
+          >
+            <div class="flex items-start gap-4">
+              <span
+                aria-hidden="true"
+                class="font-secret leading-none"
+                style="font-size: clamp(3rem, 5vw, 4.5rem); color: rgba(200, 162, 78, 0.55);"
+              >{b.num}</span>
+              <h3
+                class="font-display tracking-tight text-bone"
+                style="font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.05;"
+              >{b.title}</h3>
+            </div>
+
+            <ul class="perizie-list max-w-text font-serif leading-loose text-bone">
+              {b.items.map((line) => (
+                <li>{line}</li>
+              ))}
+            </ul>
+          </article>
+        ))}
+
+        <div data-reveal class="mt-20 border-t pt-12 md:mt-28" style="border-color: var(--line)">
+          <p class="font-serif text-lg leading-relaxed text-bone-dim">
+            Per un incarico o una consulenza:
+          </p>
+          <a href="/contatti" class="cta-link mt-4">Scrivi via /contatti →</a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <style>
+    .perizie-list { list-style: none; padding-left: 0; margin: 0; }
+    .perizie-list li {
+      position: relative;
+      padding-left: 1.8rem;
+      margin-bottom: 0.9em;
+    }
+    .perizie-list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--color-gold);
+      font-family: var(--font-serif);
+    }
+    .perizie-list li:last-child { margin-bottom: 0; }
+
+    .cta-link {
+      display: inline-block;
+      color: var(--color-gold);
+      font-family: var(--font-sans);
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      letter-spacing: var(--tracking-eyebrow);
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--color-gold);
+      padding-bottom: 0.35em;
+      transition: color 250ms ease, border-color 250ms;
+    }
+    .cta-link:hover {
+      color: var(--color-gold-bright);
+      border-color: var(--color-gold-bright);
+    }
+  </style>
 </Base>

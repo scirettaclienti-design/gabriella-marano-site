@@ -1,44 +1,175 @@
 ---
+import { Picture } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import archeTheatre from '../assets/images/arche-theatre.jpg';
 ---
 
 <Base
   title="archè"
-  description="Dal mito alla mente. Il progetto editoriale con cui Gabriella Marano restituisce al crimine la sua origine."
+  description="Dal mito alla mente. Ogni crimine contemporaneo ripete una scena già scritta — archè è la lente che la riporta alla tragedia che l'ha anticipata."
 >
-  <main>
-  <section
-    class="arche-bridge relative overflow-hidden px-6"
-    style="padding-block: var(--space-band);"
-  >
-    <div
-      aria-hidden="true"
-      class="arche-glow pointer-events-none absolute inset-0"
-    ></div>
+  <main class="relative">
 
-    <div class="relative mx-auto max-w-text text-center">
-      <p class="eyebrow mb-10">Il progetto editoriale</p>
+    {/* HERO of the page — theatre bg full bleed, treated. Strongest visual on the site. */}
+    <section
+      class="arche-bridge relative min-h-screen overflow-hidden px-6"
+    >
+      <div class="absolute inset-0 z-0">
+        <Picture
+          src={archeTheatre}
+          alt=""
+          formats={['avif', 'webp']}
+          widths={[420, 768, 1280, 1920, 2560]}
+          sizes="100vw"
+          quality={75}
+          loading="eager"
+          fetchpriority="high"
+          class="arche-bg-image h-full w-full object-cover"
+        />
+        <div
+          class="absolute inset-0"
+          style="background: linear-gradient(rgba(15,12,7,0.86), rgba(15,12,7,0.5));"
+        ></div>
+        <div
+          class="arche-glow absolute inset-0"
+          aria-hidden="true"
+        ></div>
+      </div>
 
-      <h2
-        class="vt-arche-heading font-display tracking-tight text-bone"
-        style="font-size: clamp(4rem, 9vw, 7rem); line-height: 0.95; letter-spacing: -0.015em;"
-      >archè</h2>
+      {/* Giant faded "MITO" bleeding off left */}
+      <span
+        aria-hidden="true"
+        class="pointer-events-none absolute -left-12 top-10 z-10 select-none font-secret italic leading-none md:-left-24 md:top-24"
+        style="font-size: clamp(9rem, 18vw, 18rem); color: rgba(200, 162, 78, 0.07);"
+      >MITO</span>
 
-      <p class="mt-4 font-secret text-xl italic text-bone-dim md:text-2xl">
-        Dal mito alla mente.
-      </p>
+      <div class="relative z-20 flex min-h-screen flex-col justify-center">
+        <div class="mx-auto max-w-text text-center">
+          <p data-reveal class="eyebrow mb-10">Il progetto editoriale</p>
 
-      <p class="mx-auto mt-14 max-w-md font-serif leading-loose text-bone">
-        Pagina in costruzione — landing ponte verso archecrime.com.
-      </p>
-    </div>
-  </section>
+          <h2
+            data-reveal
+            class="font-display tracking-tight text-bone"
+            style="font-size: clamp(5rem, 14vw, 14rem); line-height: 0.9; letter-spacing: -0.025em;"
+          >archè</h2>
+
+          <p data-reveal class="mt-6 font-secret text-2xl italic text-bone-dim md:text-3xl">
+            Dal mito alla mente.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {/* MANIFESTO — long-form reading band, ink background, max-w-text */}
+    <section class="relative px-6" style="padding-block: var(--space-band)">
+      <div class="mx-auto max-w-text">
+        <p data-reveal class="eyebrow mb-10">Manifesto</p>
+
+        <div class="manifesto font-serif leading-loose text-bone">
+          <p data-reveal>
+            C'è una domanda che mi accompagna da quando ho cominciato a leggere
+            i fatti umani più oscuri: perché si ripetono?
+          </p>
+          <p data-reveal>
+            La risposta non è nella cronaca. È molto più indietro, nei miti
+            che l'umanità si racconta da migliaia di anni — Medea, Edipo,
+            Saturno — storie che hanno già dato un nome a tutto ciò che oggi
+            chiamiamo movente, gelosia, vendetta, possesso.
+            <strong class="font-display tracking-tight">Il mito non spiega il crimine: lo precede.</strong>
+          </p>
+          <p data-reveal>
+            archè nasce da qui. Non è true crime, non è cronaca nera. È una
+            lente: prende il gesto contemporaneo e lo riporta alla tragedia
+            che lo ha anticipato.
+          </p>
+          <p data-reveal>
+            È il progetto con cui faccio quello che ho sempre fatto —
+            scavare fino all'origine — ma a voce alta.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {/* PRE-LAUNCH — email capture stub, gold-trimmed form */}
+    <section
+      class="relative overflow-hidden border-t px-6"
+      style="padding-block: var(--space-band); border-color: var(--line); background-color: #0F0C07;"
+    >
+      <div
+        class="arche-glow absolute inset-0"
+        aria-hidden="true"
+      ></div>
+
+      <div class="relative z-10 mx-auto max-w-text text-center">
+        <p data-reveal class="eyebrow mb-6">Pre-lancio</p>
+        <h3
+          data-reveal
+          class="font-display tracking-tight text-bone"
+          style="font-size: clamp(2rem, 4vw, 3rem); line-height: 1.05;"
+        >archecrime.com — presto online.</h3>
+        <p data-reveal class="mt-6 font-serif leading-loose text-bone-dim">
+          Lascia un'email: ti scrivo io il giorno del lancio.
+          Niente newsletter, niente altro.
+        </p>
+
+        <form
+          data-reveal
+          class="arche-form mt-12 flex flex-col items-stretch gap-3 md:flex-row md:items-center md:justify-center md:gap-4"
+          onsubmit="event.preventDefault(); this.querySelector('output').textContent = 'Grazie. La funzione di registrazione sarà attiva a breve.'; this.querySelector('input[type=email]').value = '';"
+        >
+          <input
+            type="email"
+            required
+            placeholder="la tua email"
+            aria-label="Indirizzo email per il lancio di archè"
+            class="arche-input flex-1 px-5 py-4 font-serif text-base text-bone md:max-w-sm"
+          />
+          <button
+            type="submit"
+            class="bg-gold px-7 py-4 font-sans text-sm font-semibold uppercase tracking-eyebrow text-ink transition hover:bg-gold-bright"
+          >
+            Avvisami al lancio
+          </button>
+        </form>
+        <output class="mt-4 block font-sans text-xs uppercase tracking-eyebrow text-bone-dim"></output>
+
+        {/* TODO wire-up reale: collegare a Buttondown / ConvertKit / route /api/subscribe quando archecrime.com è pronto. */}
+        <p class="mt-6 font-sans text-xs uppercase tracking-eyebrow text-bone-faint">
+          Funzione in arrivo · nessun dato salvato per ora
+        </p>
+      </div>
+    </section>
+
   </main>
 
   <style>
     .arche-bridge { background-color: #0F0C07; }
+    .arche-bg-image { filter: brightness(0.5) sepia(0.32) contrast(1.08); }
     .arche-glow {
-      background: radial-gradient(ellipse 75vw 65vh at 0% 100%, rgba(200, 162, 78, 0.12), transparent 62%);
+      background: radial-gradient(ellipse 75vw 65vh at 0% 100%, rgba(200, 162, 78, 0.14), transparent 62%);
+    }
+
+    /* Manifesto: paragraph rhythm + highlighted line in Bodoni */
+    .manifesto p { margin-bottom: 1.6em; }
+    .manifesto p:last-child { margin-bottom: 0; }
+    .manifesto strong {
+      display: inline;
+      font-weight: 500;
+      color: var(--color-bone);
+      letter-spacing: -0.005em;
+    }
+
+    /* Email field — gold hairline, transparent background */
+    .arche-input {
+      background-color: transparent;
+      border: 1px solid var(--line);
+      transition: border-color 220ms ease, background-color 220ms ease;
+    }
+    .arche-input::placeholder { color: var(--color-bone-faint); }
+    .arche-input:focus {
+      outline: none;
+      border-color: var(--color-gold);
+      background-color: rgba(20, 17, 12, 0.5);
     }
   </style>
 </Base>
