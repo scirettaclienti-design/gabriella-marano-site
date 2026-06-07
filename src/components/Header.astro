@@ -55,34 +55,38 @@ const NAV = [
       <span aria-hidden="true"></span>
     </button>
   </div>
-
-  <div
-    id="mobile-menu"
-    class="mobile-overlay"
-    role="dialog"
-    aria-modal="true"
-    aria-label="Menu"
-    data-mobile-overlay
-  >
-    <button class="mobile-close" aria-label="Chiudi menu" data-mobile-close>
-      <span aria-hidden="true">×</span>
-    </button>
-    <nav class="mobile-nav" aria-label="Menu principale">
-      <ul>
-        {NAV.map((n) => (
-          <li>
-            <a href={n.href} class={linkClass(n.href)} aria-current={ariaCurrent(n.href)}>{n.label}</a>
-          </li>
-        ))}
-        <li>
-          <a href="/arche" class={`mobile-arche${isActive('/arche') ? ' is-active' : ''}`} aria-current={ariaCurrent('/arche')}>
-            <span aria-hidden="true">✦</span> archè
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
 </header>
+
+{/* Mobile overlay sits OUTSIDE <header> so its position:fixed is
+    viewport-relative (the header gains backdrop-filter on scroll,
+    which would otherwise create a containing block and clip the
+    overlay to the header's box). */}
+<div
+  id="mobile-menu"
+  class="mobile-overlay"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Menu"
+  data-mobile-overlay
+>
+  <button class="mobile-close" aria-label="Chiudi menu" data-mobile-close>
+    <span aria-hidden="true">×</span>
+  </button>
+  <nav class="mobile-nav" aria-label="Menu principale">
+    <ul>
+      {NAV.map((n) => (
+        <li>
+          <a href={n.href} class={linkClass(n.href)} aria-current={ariaCurrent(n.href)}>{n.label}</a>
+        </li>
+      ))}
+      <li>
+        <a href="/arche" class={`mobile-arche${isActive('/arche') ? ' is-active' : ''}`} aria-current={ariaCurrent('/arche')}>
+          <span aria-hidden="true">✦</span> archè
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
 
 <style>
   .site-header {
@@ -287,8 +291,9 @@ const NAV = [
     onScroll();
 
     const toggle = header.querySelector<HTMLButtonElement>('[data-mobile-toggle]');
-    const overlay = header.querySelector<HTMLElement>('[data-mobile-overlay]');
-    const close = header.querySelector<HTMLButtonElement>('[data-mobile-close]');
+    // Overlay is now a sibling of <header>, not a descendant — query the doc
+    const overlay = document.querySelector<HTMLElement>('[data-mobile-overlay]');
+    const close = overlay?.querySelector<HTMLButtonElement>('[data-mobile-close]') ?? null;
 
     if (!toggle || !overlay || !close) return;
 
