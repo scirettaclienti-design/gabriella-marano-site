@@ -25,12 +25,20 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
     <title>{fullTitle}</title>
     {description && <meta name="description" content={description} />}
     <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content={fullTitle} />
     {description && <meta property="og:description" content={description} />}
     <meta property="og:url" content={canonical} />
-    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta
+      property="og:image"
+      content={new URL(ogImage ?? '/og.jpg', Astro.site).toString()}
+    />
+    <meta property="og:image:width" content="1050" />
+    <meta property="og:image:height" content="1180" />
+    <meta property="og:locale" content="it_IT" />
+    <meta name="twitter:image" content={new URL(ogImage ?? '/og.jpg', Astro.site).toString()} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
@@ -63,6 +71,25 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
       Same rules duplicated below in <style is:global> for prod consistency.
     */}
     <style is:inline>
+      /* Skip link a11y — hidden by default, visible on focus */
+      .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        background: var(--color-gold);
+        color: var(--color-ink);
+        padding: 0.7rem 1.2rem;
+        font-family: var(--font-sans);
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        text-decoration: none;
+        z-index: 100;
+        transition: top 180ms ease;
+      }
+      .skip-link:focus { top: 0; outline: 0; }
+
       /* Plain reveals (non-word [data-reveal] / [data-page-entry]) */
       .js-motion [data-reveal] { opacity: 0; transform: translateY(56px); }
       .js-motion [data-page-entry] { opacity: 0; transform: translateY(56px); }
@@ -114,6 +141,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
     <slot name="head" />
   </head>
   <body class:list={['bg-ink text-bone font-body antialiased', bodyClass]}>
+    <a href="#main" class="skip-link">Salta al contenuto</a>
     <Header />
     <slot />
     <Footer />
