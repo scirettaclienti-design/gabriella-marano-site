@@ -54,6 +54,27 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
       })();
     </script>
 
+    {/*
+      Pre-hide CSS shipped INLINE in <head> so it applies at first paint
+      in dev mode too (where <style is:global> would be loaded via JS).
+      Same rules duplicated below in <style is:global> for prod consistency.
+    */}
+    <style is:inline>
+      .js-motion [data-reveal] { opacity: 0; transform: translateY(56px); }
+      .js-motion [data-page-entry] { opacity: 0; transform: translateY(56px); }
+      .js-motion [data-reveal] .word,
+      .js-motion [data-page-entry] .word { opacity: 0; transform: translateY(56px); }
+      .js-motion [data-reveal]:has(.word),
+      .js-motion [data-page-entry]:has(.word) { opacity: 1; transform: none; }
+      .js-motion [data-curtain-veil] { transform: scaleY(1); transform-origin: top center; will-change: transform; }
+      .js-opening-pending .hero-word { display: inline-block; opacity: 0; transform: translateY(10px); will-change: transform, opacity; }
+      .js-opening-pending .hero-bg-image { transform: scale(1.08); will-change: transform; }
+      .js-opening-pending #hero-portrait { opacity: 0; will-change: opacity; }
+      .js-opening-pending #hero-eyebrow,
+      .js-opening-pending #hero-lead,
+      .js-opening-pending #hero-scroll-hint { opacity: 0; will-change: opacity; }
+    </style>
+
     <slot name="head" />
   </head>
   <body class="bg-ink text-bone font-body antialiased">
@@ -85,22 +106,21 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
   .vt-storia-heading { view-transition-name: storia-heading; }
   */
 
-  /* Pre-hide for scroll-reveal — fires before JS arms, GSAP takes over. */
+  /* Pre-hide for scroll-reveal — fires before JS arms, GSAP takes over.
+     Bigger numbers match the GSAP timeline so the motion is clearly seen. */
   .js-motion [data-reveal] {
     opacity: 0;
-    transform: translateY(32px);
+    transform: translateY(48px);
   }
-  /* Page-entry title block — composes once at page load. */
   .js-motion [data-page-entry] {
     opacity: 0;
-    transform: translateY(32px);
+    transform: translateY(56px);
   }
-  /* Word-split titles override: hide the words instead of the wrapper so
-     each word can rise independently. The wrapper itself stays visible. */
+  /* Word-split: hide the words, keep wrapper visible. */
   .js-motion [data-reveal] .word,
   .js-motion [data-page-entry] .word {
     opacity: 0;
-    transform: translateY(32px);
+    transform: translateY(48px);
   }
   .js-motion [data-reveal]:has(.word),
   .js-motion [data-page-entry]:has(.word) {

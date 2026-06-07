@@ -112,50 +112,51 @@ function expandTargets(items: Iterable<HTMLElement>): HTMLElement[] {
 }
 
 /* INNER PAGE ENTRY — composes the first section's title block at init.
-   If the title was split into .word spans (Astro template), each word stagger-rises. */
+   Long delay so the animation starts AFTER the user perceives the page,
+   not during paint. */
 function movePageEntry(): void {
   const items = document.querySelectorAll<HTMLElement>('[data-page-entry]');
   if (!items.length) return;
   const targets = expandTargets(items);
-  gsap.fromTo(
-    targets,
-    { opacity: 0, y: 32 },
-    {
-      opacity: 1,
-      y: 0,
-      duration: 0.8,
-      stagger: 0.05,
-      ease: 'expo.out',
-      delay: 0.2,
-      overwrite: 'auto',
-    }
-  );
+
+  // Force initial state synchronously — defensive against any CSS race.
+  gsap.set(targets, { opacity: 0, y: 56 });
+
+  gsap.to(targets, {
+    opacity: 1,
+    y: 0,
+    duration: 1.2,
+    stagger: 0.1,
+    ease: 'expo.out',
+    delay: 1.0,
+    overwrite: 'auto',
+    clearProps: 'will-change',
+  });
 }
 
-/* SCROLL-REVEAL — bidirectional, snappy, expo.out. Per-word when .word present. */
+/* SCROLL-REVEAL — bidirectional, expo.out, big enough to be felt. */
 function moveScrollReveal(): void {
   document.querySelectorAll<HTMLElement>('section').forEach((section) => {
     const items = section.querySelectorAll<HTMLElement>('[data-reveal]');
     if (!items.length) return;
     const targets = expandTargets(items);
-    gsap.fromTo(
-      targets,
-      { opacity: 0, y: 32 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.7,
-        stagger: 0.045,
-        ease: 'expo.out',
-        overwrite: 'auto',
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 82%',
-          end: 'bottom 18%',
-          toggleActions: TOGGLE_BIDIR,
-        },
-      }
-    );
+
+    gsap.set(targets, { opacity: 0, y: 56 });
+
+    gsap.to(targets, {
+      opacity: 1,
+      y: 0,
+      duration: 1.05,
+      stagger: 0.09,
+      ease: 'expo.out',
+      overwrite: 'auto',
+      scrollTrigger: {
+        trigger: section,
+        start: 'top 82%',
+        end: 'bottom 18%',
+        toggleActions: TOGGLE_BIDIR,
+      },
+    });
   });
 }
 
