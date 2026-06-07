@@ -136,13 +136,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 </html>
 
 <style is:global>
-  /* MOVE 6 — name-match morph DISABLED.
-     <ViewTransitions /> stays active (default cross-fade, no white flash).
-     Re-enable by uncommenting these two rules. */
-  /*
+  /* View Transition name-match: the archè title morphs from the home
+     bridge into the /arche page hero; the storia title morphs from the
+     home anticipo into the /storia page hero. No white flash. */
   .vt-arche-heading { view-transition-name: arche-heading; }
   .vt-storia-heading { view-transition-name: storia-heading; }
-  */
 
   /* The authoritative pre-hide CSS lives in <style is:inline> above so it
      applies before first paint in both dev and prod. Rules below remain
