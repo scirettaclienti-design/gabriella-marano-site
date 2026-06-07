@@ -9,9 +9,10 @@ interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  bodyClass?: string;
 }
 
-const { title, description, ogImage } = Astro.props;
+const { title, description, ogImage, bodyClass = '' } = Astro.props;
 const fullTitle = `${title} — Gabriella Marano`;
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 ---
@@ -112,7 +113,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 
     <slot name="head" />
   </head>
-  <body class="bg-ink text-bone font-body antialiased">
+  <body class:list={['bg-ink text-bone font-body antialiased', bodyClass]}>
     <Header />
     <slot />
     <Footer />
@@ -190,4 +191,22 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
     ::view-transition-old(*),
     ::view-transition-new(*) { animation: none !important; }
   }
+
+  /* ===== LIGHT PAGE — warm bone bg (#F2EAD3) + ink text — /perizie ===== */
+  body.is-light-page { background-color: #F2EAD3; color: var(--color-ink); }
+  body.is-light-page .site-header { color: var(--color-ink); }
+  body.is-light-page .site-header.is-scrolled {
+    background-color: rgba(242, 234, 211, 0.88);
+    border-bottom-color: rgba(140, 110, 54, 0.3);
+  }
+  body.is-light-page .site-header .wordmark,
+  body.is-light-page .site-header .nav-link { color: var(--color-ink); }
+  body.is-light-page .site-header .nav-link:hover { color: var(--color-gold-deep); }
+  body.is-light-page .site-header .nav-link.is-active {
+    color: var(--color-gold-deep);
+    border-bottom-color: var(--color-gold-deep);
+  }
+  body.is-light-page .site-header .arche-marker { color: var(--color-gold-deep); }
+  body.is-light-page .site-header .arche-marker:hover { color: var(--color-gold); }
+  body.is-light-page .site-header .mobile-toggle span { background: var(--color-ink); }
 </style>

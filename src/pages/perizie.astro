@@ -34,53 +34,53 @@ const blocchi = [
 <Base
   title="Perizie"
   description="Consulenze tecniche per la magistratura e le parti. CTU e CTP in ambito civile, penale e giuridico-forense."
+  bodyClass="is-light-page"
 >
-  <main class="relative">
+  <main class="perizie-light relative">
 
     {/* INTRO band */}
     <section class="relative px-6" style="padding-block: var(--space-band)">
       <div class="mx-auto max-w-text">
-        <p data-page-entry class="eyebrow mb-8">Ambito forense</p>
+        <p data-page-entry class="perizie-eyebrow mb-8">Ambito forense</p>
         <h2
           data-unearth-hero
-          class="font-display tracking-tight text-bone"
-          style="font-size: clamp(2rem, 5.5vw, 4.5rem); line-height: 1.0; letter-spacing: -0.01em;"
+          class="font-display tracking-tight"
+          style="font-size: clamp(2rem, 5.5vw, 4.5rem); line-height: 1.0; letter-spacing: -0.01em; color: var(--color-ink);"
         >
           {"Consulenze tecniche per la magistratura e le parti.".split(' ').map((w) => (
             <span class="word mr-[0.22em] last:mr-0">{w}</span>
           ))}
         </h2>
-        <div data-ground-line aria-hidden="true" class="ground-line"></div>
-        <p data-page-entry class="mt-10 font-serif leading-loose text-bone">
+        <div data-ground-line aria-hidden="true" class="ground-line ground-line--dark"></div>
+        <p data-page-entry class="mt-10 font-serif leading-loose perizie-body">
           Svolgo attività di Consulente Tecnico d'Ufficio (CTU) e di Parte (CTP)
           in ambito civile, penale e giuridico-forense.
         </p>
       </div>
     </section>
 
-    {/* THREE COMPETENCE BLOCKS — precise, readable, no decoration */}
+    {/* THREE COMPETENCE BLOCKS */}
     <section class="relative px-6" style="padding-block: var(--space-band)">
       <div class="mx-auto max-w-wide">
 
         {blocchi.map((b, idx) => (
           <article
             data-reveal
-            class={`grid grid-cols-1 items-start gap-x-12 gap-y-8 md:grid-cols-[10rem_1fr] md:gap-x-16 ${idx > 0 ? 'mt-16 border-t pt-16 md:mt-24 md:pt-24' : ''}`}
-            style={idx > 0 ? 'border-color: var(--line)' : ''}
+            class={`grid grid-cols-1 items-start gap-x-12 gap-y-8 md:grid-cols-[10rem_1fr] md:gap-x-16 ${idx > 0 ? 'mt-16 perizie-border-t pt-16 md:mt-24 md:pt-24' : ''}`}
           >
             <div class="flex items-start gap-4">
               <span
                 aria-hidden="true"
-                class="font-secret leading-none"
-                style="font-size: clamp(3rem, 5vw, 4.5rem); color: rgba(200, 162, 78, 0.55);"
+                class="font-secret leading-none perizie-numeral"
+                style="font-size: clamp(3rem, 5vw, 4.5rem);"
               >{b.num}</span>
               <h3
-                class="font-display tracking-tight text-bone"
-                style="font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.05;"
+                class="font-display tracking-tight"
+                style="font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.05; color: var(--color-ink);"
               >{b.title}</h3>
             </div>
 
-            <ul class="perizie-list max-w-text font-serif leading-loose text-bone">
+            <ul class="perizie-list max-w-text font-serif leading-loose perizie-body">
               {b.items.map((line) => (
                 <li>{line}</li>
               ))}
@@ -88,8 +88,8 @@ const blocchi = [
           </article>
         ))}
 
-        <div data-reveal class="mt-20 border-t pt-12 md:mt-28" style="border-color: var(--line)">
-          <p class="font-serif text-lg leading-relaxed text-bone-dim">
+        <div data-reveal class="mt-20 perizie-border-t pt-12 md:mt-28">
+          <p class="font-serif text-lg leading-relaxed perizie-body-dim">
             Per un incarico o una consulenza:
           </p>
           <a href="/contatti" class="cta-link mt-4">Scrivi via /contatti →</a>
@@ -101,6 +101,32 @@ const blocchi = [
   </main>
 
   <style>
+    /* Light page text/colour tokens */
+    .perizie-light { color: var(--color-ink); }
+    .perizie-body { color: var(--color-ink); }
+    .perizie-body-dim { color: #5A4F3B; }
+    .perizie-eyebrow {
+      font-family: var(--font-sans);
+      font-size: 0.71rem;
+      font-weight: 600;
+      letter-spacing: var(--tracking-eyebrow);
+      text-transform: uppercase;
+      color: var(--color-gold-deep);
+    }
+
+    /* Numerals: gold-deep on bone has AA contrast at this size */
+    .perizie-numeral { color: rgba(140, 110, 54, 0.6); }
+
+    /* Dividers: darker gold-deep at low opacity for visibility on bone */
+    .perizie-border-t { border-top: 1px solid rgba(140, 110, 54, 0.28); }
+
+    /* Ground line — darker variant on light bg */
+    .perizie-light .ground-line.ground-line--dark {
+      background-color: var(--color-gold-deep);
+      opacity: 0.6;
+    }
+
+    /* Editorial list with em-dash marker */
     .perizie-list { list-style: none; padding-left: 0; margin: 0; }
     .perizie-list li {
       position: relative;
@@ -112,26 +138,28 @@ const blocchi = [
       position: absolute;
       left: 0;
       top: 0;
-      color: var(--color-gold);
+      color: var(--color-gold-deep);
       font-family: var(--font-serif);
     }
     .perizie-list li:last-child { margin-bottom: 0; }
 
+    /* CTA — gold-deep for AA contrast on bone */
     .cta-link {
       display: inline-block;
-      color: var(--color-gold);
+      color: var(--color-gold-deep);
       font-family: var(--font-sans);
       font-size: var(--fs-sm);
       font-weight: 600;
       letter-spacing: var(--tracking-eyebrow);
       text-transform: uppercase;
-      border-bottom: 1px solid var(--color-gold);
+      border-bottom: 1px solid var(--color-gold-deep);
       padding-bottom: 0.35em;
+      text-decoration: none;
       transition: color 250ms ease, border-color 250ms;
     }
     .cta-link:hover {
-      color: var(--color-gold-bright);
-      border-color: var(--color-gold-bright);
+      color: var(--color-gold);
+      border-color: var(--color-gold);
     }
   </style>
 </Base>
