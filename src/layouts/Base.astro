@@ -2,6 +2,8 @@
 import '../styles/tailwind.css';
 import '@arche/tokens';
 import { ViewTransitions } from 'astro:transitions';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 
 interface Props {
   title: string;
@@ -111,7 +113,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
     <slot name="head" />
   </head>
   <body class="bg-ink text-bone font-body antialiased">
+    <Header />
     <slot />
+    <Footer />
 
     {/* Motion runtime — runs site-wide so /storia, /metodo, /perizie, /arche
         all get the calm scroll-reveal. Hero opening only fires on the home. */}

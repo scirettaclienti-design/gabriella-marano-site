@@ -1,0 +1,323 @@
+---
+const path = Astro.url.pathname;
+
+function isActive(href: string): boolean {
+  if (href === '/') return path === '/';
+  if (path === href) return true;
+  return path.startsWith(href + '/');
+}
+
+const linkClass = (href: string) => `nav-link${isActive(href) ? ' is-active' : ''}`;
+const ariaCurrent = (href: string) => (isActive(href) ? 'page' : undefined);
+
+const NAV = [
+  { href: '/storia', label: 'Storia' },
+  { href: '/metodo', label: 'Metodo' },
+  { href: '/perizie', label: 'Perizie' },
+  { href: '/media', label: 'Media' },
+  { href: '/contatti', label: 'Contatti' },
+];
+---
+
+<header id="site-header" class="site-header" data-site-header>
+  <div class="header-inner">
+    <a href="/" class="wordmark" aria-label="Gabriella Marano — home">Gabriella Marano</a>
+
+    <nav class="primary-nav" aria-label="Menu principale">
+      <ul>
+        {NAV.map((n) => (
+          <li>
+            <a href={n.href} class={linkClass(n.href)} aria-current={ariaCurrent(n.href)}>{n.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <a
+      href="/arche"
+      class={`arche-marker${isActive('/arche') ? ' is-active' : ''}`}
+      aria-label="archè — il progetto editoriale"
+      aria-current={ariaCurrent('/arche')}
+    >
+      <span aria-hidden="true">✦</span>
+      <span>archè</span>
+    </a>
+
+    <button
+      class="mobile-toggle"
+      aria-label="Apri il menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      data-mobile-toggle
+    >
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </button>
+  </div>
+
+  <div
+    id="mobile-menu"
+    class="mobile-overlay"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Menu"
+    data-mobile-overlay
+  >
+    <button class="mobile-close" aria-label="Chiudi menu" data-mobile-close>
+      <span aria-hidden="true">×</span>
+    </button>
+    <nav class="mobile-nav" aria-label="Menu principale">
+      <ul>
+        {NAV.map((n) => (
+          <li>
+            <a href={n.href} class={linkClass(n.href)} aria-current={ariaCurrent(n.href)}>{n.label}</a>
+          </li>
+        ))}
+        <li>
+          <a href="/arche" class={`mobile-arche${isActive('/arche') ? ' is-active' : ''}`} aria-current={ariaCurrent('/arche')}>
+            <span aria-hidden="true">✦</span> archè
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    transition: background-color 300ms ease, backdrop-filter 300ms ease, border-color 300ms ease;
+    background-color: transparent;
+    border-bottom: 1px solid transparent;
+  }
+  .site-header.is-scrolled {
+    background-color: rgba(20, 17, 12, 0.86);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-bottom-color: var(--line);
+  }
+
+  .header-inner {
+    max-width: var(--col-wide);
+    margin: 0 auto;
+    padding: 1.1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+  .wordmark {
+    font-family: var(--font-display);
+    color: var(--color-bone);
+    font-size: 1.05rem;
+    letter-spacing: 0.005em;
+    text-decoration: none;
+    flex-shrink: 0;
+    transition: color 250ms;
+  }
+  .wordmark:hover { color: var(--color-gold-bright); }
+
+  .primary-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 1.8rem;
+  }
+  .nav-link {
+    color: var(--color-bone);
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    text-decoration: none;
+    padding-bottom: 0.35em;
+    border-bottom: 1px solid transparent;
+    transition: color 250ms, border-color 250ms;
+  }
+  .nav-link:hover { color: var(--color-gold-bright); }
+  .nav-link.is-active {
+    color: var(--color-gold);
+    border-bottom-color: var(--color-gold);
+  }
+
+  .arche-marker {
+    color: var(--color-gold);
+    font-family: var(--font-display);
+    font-size: 0.92rem;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: color 250ms, filter 300ms;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.35em;
+    flex-shrink: 0;
+  }
+  .arche-marker:hover {
+    color: var(--color-gold-bright);
+    filter: drop-shadow(0 0 8px rgba(200, 162, 78, 0.5));
+  }
+  .arche-marker.is-active {
+    color: var(--color-gold-bright);
+    filter: drop-shadow(0 0 6px rgba(200, 162, 78, 0.45));
+  }
+
+  /* MOBILE TOGGLE */
+  .mobile-toggle {
+    display: none;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    padding: 0;
+    width: 48px;
+    height: 48px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+  .mobile-toggle span {
+    display: block;
+    width: 22px;
+    height: 1px;
+    background: var(--color-bone);
+    transition: background 250ms;
+  }
+  .mobile-toggle:hover span { background: var(--color-gold); }
+
+  /* MOBILE OVERLAY */
+  .mobile-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--color-ink);
+    z-index: 60;
+    padding: 5rem 2rem 2rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-12px);
+    transition: opacity 320ms ease, transform 320ms ease, visibility 320ms ease;
+  }
+  .mobile-overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .mobile-close {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+    background: transparent;
+    border: 0;
+    color: var(--color-bone);
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    line-height: 1;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    transition: color 250ms;
+  }
+  .mobile-close:hover { color: var(--color-gold-bright); }
+
+  .mobile-nav ul {
+    list-style: none;
+    margin: 1.5rem 0 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .mobile-nav li {
+    border-bottom: 1px solid var(--line);
+  }
+  .mobile-nav li:last-child { border-bottom: 0; }
+  .mobile-nav a {
+    display: block;
+    padding: 1.25rem 0;
+    font-family: var(--font-display);
+    font-size: 1.65rem;
+    color: var(--color-bone);
+    text-decoration: none;
+    transition: color 250ms;
+    letter-spacing: -0.005em;
+  }
+  .mobile-nav a:hover { color: var(--color-gold-bright); }
+  .mobile-nav a.is-active { color: var(--color-gold); }
+
+  .mobile-arche {
+    color: var(--color-gold) !important;
+    letter-spacing: 0.04em;
+  }
+  .mobile-arche:hover,
+  .mobile-arche.is-active { color: var(--color-gold-bright) !important; }
+
+  @media (max-width: 767px) {
+    .primary-nav, .arche-marker { display: none; }
+    .mobile-toggle { display: flex; }
+    .header-inner { padding: 0.85rem 1rem; gap: 1rem; }
+    .wordmark { font-size: 0.95rem; }
+  }
+
+  :where(.wordmark, .nav-link, .arche-marker, .mobile-toggle, .mobile-close, .mobile-nav a):focus-visible {
+    outline: 1px solid var(--color-gold);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+</style>
+
+<script>
+  function initSiteHeader() {
+    const header = document.querySelector<HTMLElement>('[data-site-header]');
+    if (!header) return;
+
+    let prevScrolled = false;
+    const onScroll = () => {
+      const scrolled = window.scrollY > 80;
+      if (scrolled !== prevScrolled) {
+        header.classList.toggle('is-scrolled', scrolled);
+        prevScrolled = scrolled;
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    const toggle = header.querySelector<HTMLButtonElement>('[data-mobile-toggle]');
+    const overlay = header.querySelector<HTMLElement>('[data-mobile-overlay]');
+    const close = header.querySelector<HTMLButtonElement>('[data-mobile-close]');
+
+    if (!toggle || !overlay || !close) return;
+
+    let prevFocus: HTMLElement | null = null;
+
+    const openMenu = () => {
+      prevFocus = document.activeElement as HTMLElement | null;
+      overlay.classList.add('is-open');
+      toggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+      close.focus();
+    };
+    const closeMenu = () => {
+      overlay.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      if (prevFocus) prevFocus.focus();
+    };
+
+    toggle.addEventListener('click', openMenu);
+    close.addEventListener('click', closeMenu);
+    overlay.querySelectorAll('a').forEach((a) => a.addEventListener('click', closeMenu));
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeMenu();
+    });
+  }
+
+  document.addEventListener('astro:page-load', initSiteHeader);
+  if (document.readyState !== 'loading') initSiteHeader();
+  else document.addEventListener('DOMContentLoaded', initSiteHeader);
+</script>

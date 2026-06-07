@@ -1,0 +1,233 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-cols">
+
+      <div class="col col--lead">
+        <p class="footer-wordmark">Gabriella Marano</p>
+        <p class="footer-tagline">Psicologa forense · Criminologa · Archeologa</p>
+      </div>
+
+      <div class="col">
+        <p class="col-title">Pagine</p>
+        <ul>
+          <li><a href="/storia">Storia</a></li>
+          <li><a href="/metodo">Metodo</a></li>
+          <li><a href="/perizie">Perizie</a></li>
+          <li><a href="/media">Media</a></li>
+          <li><a href="/arche">archè</a></li>
+          <li><a href="/contatti">Contatti</a></li>
+        </ul>
+      </div>
+
+      <div class="col">
+        <p class="col-title">Contatti</p>
+        <ul>
+          <li><a href="mailto:management@gabriellamarano.it">management@gabriellamarano.it</a></li>
+        </ul>
+
+        <p class="col-title col-title--sec">Ascolto / emergenza</p>
+        <p class="emergency-tel"><a href="tel:+393898921276">+39 389 8921276</a></p>
+        <p class="emergency-note">Linea attiva 24 ore.</p>
+      </div>
+
+      <div class="col">
+        <p class="col-title">Affiliazioni</p>
+        <ul>
+          <li>Presidente · <a href="https://www.lascuoladiatene.org" target="_blank" rel="noopener">La Scuola di Atene APS</a></li>
+          <li>Psicologa volontaria · <a href="https://www.penelopeitalia.org" target="_blank" rel="noopener">Penelope Italia</a></li>
+        </ul>
+
+        <p class="col-title col-title--sec">Canali</p>
+        <ul class="social-row" role="list">
+          <li>
+            <a
+              href="https://www.instagram.com/gabriella_marano"
+              target="_blank"
+              rel="noopener"
+              aria-label="Instagram: @gabriella_marano"
+            >
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="4.5" />
+                <circle cx="12" cy="12" r="3.8" />
+                <circle cx="17.2" cy="6.8" r="0.9" fill="currentColor" stroke="none" />
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.facebook.com/profile.php?id=61575661268642"
+              target="_blank"
+              rel="noopener"
+              aria-label="Facebook"
+            >
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M14.5 8.5h-2A1 1 0 0 0 11.5 9.5v2H14.5l-.5 3H11.5V21H8.5v-6.5H6.5v-3h2v-2A3 3 0 0 1 11.5 6.5h3v2z" fill="currentColor" stroke="none" />
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.youtube.com/@gabriellamarano"
+              target="_blank"
+              rel="noopener"
+              aria-label="YouTube"
+            >
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="2.5" y="6.5" width="19" height="11" rx="2.5" />
+                <polygon points="10.5,9.5 15,12 10.5,14.5" fill="currentColor" stroke="none" />
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bar">
+      <p class="footer-legal">
+        P.IVA 03137080598 · © {year} Gabriella Marano
+      </p>
+      <p class="footer-legal-links">
+        <a href="/privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="/cookie">Cookie</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: var(--color-ink-2);
+    color: var(--color-bone-dim);
+    border-top: 1px solid var(--line);
+    padding: 4rem 1.5rem 2rem;
+    font-family: var(--font-serif);
+  }
+  .footer-inner {
+    max-width: var(--col-wide);
+    margin: 0 auto;
+  }
+
+  .footer-cols {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+  @media (min-width: 768px) {
+    .footer-cols {
+      grid-template-columns: 1.5fr 1fr 1.2fr 1.3fr;
+      gap: 3rem;
+    }
+  }
+
+  .footer-wordmark {
+    font-family: var(--font-display);
+    color: var(--color-bone);
+    font-size: 1.5rem;
+    letter-spacing: -0.005em;
+    margin: 0 0 0.5em;
+  }
+  .footer-tagline {
+    font-size: 0.92rem;
+    color: var(--color-bone-faint);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .col-title {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--color-gold);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    margin: 0 0 1rem;
+  }
+  .col-title--sec { margin-top: 1.8rem; }
+
+  .col ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    line-height: 1.7;
+  }
+  .col li {
+    font-size: 0.92rem;
+  }
+  .col a {
+    color: var(--color-bone-dim);
+    text-decoration: none;
+    transition: color 220ms;
+  }
+  .col a:hover { color: var(--color-gold-bright); }
+
+  .emergency-tel {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    margin: 0 0 0.35em;
+  }
+  .emergency-tel a { color: var(--color-bone); }
+  .emergency-tel a:hover { color: var(--color-gold-bright); }
+  .emergency-note {
+    font-size: 0.85rem;
+    color: var(--color-bone-faint);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .social-row {
+    display: flex !important;
+    gap: 1rem !important;
+    align-items: center;
+  }
+  .social-row a {
+    display: inline-flex;
+    color: var(--color-bone-dim);
+    transition: color 220ms, transform 220ms;
+    padding: 0.4rem;
+  }
+  .social-row a:hover {
+    color: var(--color-gold-bright);
+    transform: translateY(-1px);
+  }
+
+  .footer-bar {
+    border-top: 1px solid var(--line);
+    padding-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    align-items: center;
+    text-align: center;
+    font-family: var(--font-sans);
+    font-size: 0.74rem;
+    color: var(--color-bone-faint);
+    letter-spacing: 0.04em;
+  }
+  @media (min-width: 768px) {
+    .footer-bar {
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+    }
+  }
+  .footer-legal-links a {
+    color: var(--color-bone-faint);
+    text-decoration: none;
+    transition: color 220ms;
+  }
+  .footer-legal-links a:hover { color: var(--color-gold-bright); }
+  .footer-legal-links span { margin: 0 0.4em; opacity: 0.6; }
+
+  :where(.col a, .footer-legal-links a, .social-row a):focus-visible {
+    outline: 1px solid var(--color-gold);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+</style>
