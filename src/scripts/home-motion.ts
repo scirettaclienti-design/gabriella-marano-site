@@ -1,11 +1,19 @@
 /*
- * Home motion — three intentional moves.
+ * Site motion — three intentional moves, applied site-wide.
  *
- * 1. Opening reveal: hero h1 words fade up + bg image slow scale 1.08→1.
- *    Portrait fades in last. No scroll-lock. Once per session.
- * 2. Section-title scroll-reveal: eyebrow + h2 of each non-hero section
- *    fade up once when entering viewport. Bodies and CTAs just appear.
- * 3. Three doors hover: CSS-only (see index.astro <style> block).
+ * 1. PAGE ENTRY
+ *    - On the home: the existing cinematic opening (h1 words + portrait).
+ *    - On other pages: a calm composition of the first section's title block
+ *      ([data-page-entry]) so the visitor "feels" landing.
+ *    - In both cases, eager background images marked [data-curtain]
+ *      [data-curtain-immediate] reveal with a clip-path curtain wipe
+ *      top-to-bottom — the "unearthing" gesture for the archaeological brand.
+ *
+ * 2. SCROLL-REVEAL on [data-reveal] children of each section — y 32, dur 0.95,
+ *    stagger 0.12, ease power3.out. Felt, not chaotic.
+ *
+ * 3. SCROLL-CURTAIN on [data-curtain] images that are NOT immediate — same
+ *    clip-path wipe, triggered when the image enters the viewport.
  *
  * All guarded by prefers-reduced-motion.
  */
@@ -18,6 +26,9 @@ gsap.registerPlugin(ScrollTrigger);
 
 const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const SESSION_KEY = 'homeOpeningSeen';
+
+const CURTAIN_FROM = 'inset(0 0 100% 0)';
+const CURTAIN_TO = 'inset(0 0 0% 0)';
 
 let lenis: Lenis | null = null;
 let tickerHandler: ((time: number) => void) | null = null;
@@ -62,11 +73,17 @@ function cleanup(): void {
   }
 }
 
-/* MOVE 1 — Opening reveal: h1 words + portrait + slow bg scale. */
+/* HOME — Cinematic opening reveal: bg image curtain + words + portrait last. */
 function moveOpeningReveal(): void {
   const seen = sessionStorage.getItem(SESSION_KEY) === '1';
   if (seen) {
     revealHero();
+    // Still play the curtain on the hero bg on return (light cue)
+    gsap.fromTo(
+      '.hero-bg-image[data-curtain]',
+      { clipPath: CURTAIN_FROM },
+      { clipPath: CURTAIN_TO, duration: 1.1, ease: 'power2.inOut' }
+    );
     return;
   }
 
@@ -83,47 +100,44 @@ function moveOpeningReveal(): void {
 
   const tl = gsap.timeline({ onComplete: finish });
 
-  // Slow bg "settle" runs the whole length of the reveal.
-  tl.to(
-    '.hero-bg-image',
-    { scale: 1, duration: 2.0, ease: 'power2.out' },
+  tl.fromTo(
+    '.hero-bg-image[data-curtain]',
+    { clipPath: CURTAIN_FROM },
+    { clipPath: CURTAIN_TO, duration: 1.4, ease: 'power2.inOut' },
     0
   )
-    // Words fade up softly — calmer than before
     .to(
       '.hero-word',
       {
         opacity: 1,
         y: 0,
-        duration: 0.5,
-        stagger: 0.08,
-        ease: 'power2.out',
+        duration: 0.6,
+        stagger: 0.1,
+        ease: 'power3.out',
       },
-      0
+      0.15
     )
     .to(
       '#hero-eyebrow',
-      { opacity: 1, duration: 0.5, ease: 'power2.out' },
-      0.5
+      { opacity: 1, duration: 0.55, ease: 'power2.out' },
+      0.55
     )
     .to(
       '#hero-lead',
-      { opacity: 1, duration: 0.5, ease: 'power2.out' },
-      0.85
+      { opacity: 1, duration: 0.55, ease: 'power2.out' },
+      0.95
     )
     .to(
       '#hero-scroll-hint',
       { opacity: 1, duration: 0.4, ease: 'power2.out' },
-      1.15
+      1.25
     )
-    // Portrait last
     .to(
       '#hero-portrait',
       { opacity: 1, duration: 0.85, ease: 'power2.out' },
-      1.35
+      1.45
     );
 
-  // Skippable on any user input. No scroll-lock.
   const skip = () => finish();
   const skipEvents: Array<keyof WindowEventMap> = [
     'wheel',
@@ -136,23 +150,60 @@ function moveOpeningReveal(): void {
   );
 }
 
-/* MOVE 2 — Scroll-reveal: each section reveals its [data-reveal] children in a
-   calm upward drift + fade, staggered. Runs on every page that has the markers.
-   Uses fromTo with explicit end state because the CSS pre-hide sets the natural
-   computed state to opacity 0 — a plain gsap.from() would animate "0 → 0". */
+/* INNER PAGES — Calm page entry: title composes + immediate curtain wipe. */
+function movePageEntry(): void {
+  const titleItems = Array.from(
+    document.querySelectorAll<HTMLElement>('[data-page-entry]')
+  );
+  const immediateCurtain = Array.from(
+    document.querySelectorAll<HTMLElement>(
+      '[data-curtain][data-curtain-immediate]'
+    )
+  );
+
+  if (!titleItems.length && !immediateCurtain.length) return;
+
+  const tl = gsap.timeline();
+
+  if (immediateCurtain.length) {
+    tl.fromTo(
+      immediateCurtain,
+      { clipPath: CURTAIN_FROM },
+      { clipPath: CURTAIN_TO, duration: 1.2, ease: 'power2.inOut' },
+      0
+    );
+  }
+
+  if (titleItems.length) {
+    tl.fromTo(
+      titleItems,
+      { opacity: 0, y: 28 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.95,
+        stagger: 0.14,
+        ease: 'power3.out',
+      },
+      0.25
+    );
+  }
+}
+
+/* Scroll-reveal on [data-reveal] children, per section. */
 function moveScrollReveal(): void {
   document.querySelectorAll<HTMLElement>('section').forEach((section) => {
     const items = section.querySelectorAll<HTMLElement>('[data-reveal]');
     if (!items.length) return;
     gsap.fromTo(
       items,
-      { opacity: 0, y: 20 },
+      { opacity: 0, y: 32 },
       {
         opacity: 1,
         y: 0,
-        duration: 0.75,
-        stagger: 0.08,
-        ease: 'power2.out',
+        duration: 0.95,
+        stagger: 0.12,
+        ease: 'power3.out',
         clearProps: 'transform',
         scrollTrigger: {
           trigger: section,
@@ -164,14 +215,52 @@ function moveScrollReveal(): void {
   });
 }
 
+/* Scroll-curtain on [data-curtain] images that are NOT immediate. */
+function moveScrollCurtain(): void {
+  const images = document.querySelectorAll<HTMLElement>(
+    '[data-curtain]:not([data-curtain-immediate])'
+  );
+  images.forEach((img) => {
+    gsap.fromTo(
+      img,
+      { clipPath: CURTAIN_FROM },
+      {
+        clipPath: CURTAIN_TO,
+        duration: 1.0,
+        ease: 'power2.inOut',
+        scrollTrigger: {
+          trigger: img,
+          start: 'top 90%',
+          toggleActions: 'play none none none',
+        },
+      }
+    );
+  });
+}
+
 function init(): void {
+  // Clear the Base.astro safety-net timeout so .js-motion stays as long as we need.
+  const safety = (window as unknown as { __motionSafety?: ReturnType<typeof setTimeout> })
+    .__motionSafety;
+  if (safety) {
+    clearTimeout(safety);
+    (window as unknown as { __motionSafety?: undefined }).__motionSafety = undefined;
+  }
+
   if (REDUCED) {
-    // a11y first: render everything visible, no transforms
+    // a11y first: render everything visible, no transforms, no clip
     revealHero();
-    document.querySelectorAll<HTMLElement>('[data-reveal]').forEach((el) => {
-      el.style.opacity = '1';
-      el.style.transform = 'none';
-    });
+    document
+      .querySelectorAll<HTMLElement>('[data-reveal], [data-page-entry]')
+      .forEach((el) => {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      });
+    document
+      .querySelectorAll<HTMLElement>('[data-curtain]')
+      .forEach((el) => {
+        el.style.clipPath = 'none';
+      });
     return;
   }
 
@@ -189,14 +278,15 @@ function init(): void {
   gsap.ticker.add(tickerHandler);
   gsap.ticker.lagSmoothing(0);
 
-  // Hero opening reveal only on the home (uses #hero-* nodes)
   if (isHomePage()) {
     moveOpeningReveal();
   } else {
     revealHero();
+    movePageEntry();
   }
 
   moveScrollReveal();
+  moveScrollCurtain();
 
   resizeHandler = () => {
     if (resizeTimer) clearTimeout(resizeTimer);

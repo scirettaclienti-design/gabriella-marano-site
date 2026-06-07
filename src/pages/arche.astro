@@ -24,6 +24,8 @@ import archeTheatre from '../assets/images/arche-theatre.jpg';
           quality={75}
           loading="eager"
           fetchpriority="high"
+          data-curtain
+          data-curtain-immediate
           class="arche-bg-image h-full w-full object-cover"
         />
         <div
@@ -39,21 +41,21 @@ import archeTheatre from '../assets/images/arche-theatre.jpg';
       {/* Giant faded "MITO" bleeding off left */}
       <span
         aria-hidden="true"
-        class="pointer-events-none absolute -left-12 top-10 z-10 select-none font-secret italic leading-none md:-left-24 md:top-24"
-        style="font-size: clamp(9rem, 18vw, 18rem); color: rgba(200, 162, 78, 0.07);"
+        class="pointer-events-none absolute -left-6 -top-2 z-10 select-none font-secret italic leading-none md:-left-24 md:top-24"
+        style="font-size: clamp(4rem, 18vw, 18rem); color: rgba(200, 162, 78, 0.07);"
       >MITO</span>
 
       <div class="relative z-20 flex min-h-screen flex-col justify-center">
         <div class="mx-auto max-w-text text-center">
-          <p data-reveal class="eyebrow mb-10">Il progetto editoriale</p>
+          <p data-page-entry class="eyebrow mb-10">Il progetto editoriale</p>
 
           <h2
-            data-reveal
+            data-page-entry
             class="font-display tracking-tight text-bone"
-            style="font-size: clamp(5rem, 14vw, 14rem); line-height: 0.9; letter-spacing: -0.025em;"
+            style="font-size: clamp(3.5rem, 14vw, 14rem); line-height: 0.9; letter-spacing: -0.025em;"
           >archè</h2>
 
-          <p data-reveal class="mt-6 font-secret text-2xl italic text-bone-dim md:text-3xl">
+          <p data-page-entry class="mt-6 font-secret text-2xl italic text-bone-dim md:text-3xl">
             Dal mito alla mente.
           </p>
         </div>
