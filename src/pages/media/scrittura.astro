@@ -1,16 +1,75 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const entries = await getCollection('scrittura');
+const sorted = entries.sort((a, b) => +b.data.date - +a.data.date);
+
+const fmtMonthYear = (d: Date) =>
+  new Intl.DateTimeFormat('it-IT', { month: 'long', year: 'numeric' }).format(d);
 ---
 
 <Base
   title="Scrittura"
-  description="Libri e pubblicazioni di Gabriella Marano."
+  description="Libri, articoli accademici e contributi editoriali di Gabriella Marano."
 >
-  <section class="mx-auto max-w-3xl px-6 py-24">
-    <p class="eyebrow mb-6 text-bone-faint">Scrittura</p>
-    <h2 class="font-display text-4xl md:text-6xl">Libri e pubblicazioni.</h2>
-    <p class="mt-8 text-lg text-bone-dim">
-      Pagina in costruzione — catalogo libri e contributi.
-    </p>
-  </section>
+  <main class="relative">
+
+    <section class="relative px-6" style="padding-block: var(--space-band)">
+      <div class="mx-auto max-w-text">
+        <p data-page-entry class="eyebrow mb-8">Le mie attività · Scrittura</p>
+        <h2
+          data-unearth-hero
+          class="font-display tracking-tight text-bone"
+          style="font-size: clamp(2.25rem, 6vw, 4.5rem); line-height: 1.0; letter-spacing: -0.012em;"
+        >
+          {"Libri e pubblicazioni.".split(' ').map((w) => (
+            <span class="word mr-[0.22em] last:mr-0">{w}</span>
+          ))}
+        </h2>
+        <div data-ground-line aria-hidden="true" class="ground-line"></div>
+        <p data-page-entry class="mt-10 font-serif leading-loose text-bone">
+          La voce sulla pagina: manuali, articoli scientifici, contributi
+          editoriali per chi forma, per chi indaga, per chi studia.
+        </p>
+      </div>
+    </section>
+
+    <section class="px-6" style="padding-block: var(--space-band)">
+      <div class="mx-auto max-w-wide">
+        {sorted.length === 0 ? (
+          <div class="empty-state mx-auto max-w-md py-16 text-center">
+            <p class="mb-4 font-sans text-xs font-semibold uppercase tracking-eyebrow text-gold">Archivio</p>
+            <p class="font-serif italic leading-loose text-bone-dim">
+              In aggiornamento. Le pubblicazioni verranno elencate
+              progressivamente.
+            </p>
+          </div>
+        ) : (
+          <ul class="entries-list">
+            {sorted.map((e) => (
+              <li data-reveal class="entry">
+                <time datetime={e.data.date.toISOString()} class="entry-date">
+                  {fmtMonthYear(e.data.date)}
+                </time>
+                <div class="entry-body">
+                  {(e.data.outlet || e.data.publisher) && (
+                    <p class="entry-outlet">{e.data.outlet || e.data.publisher}</p>
+                  )}
+                  <h3 class="entry-title">{e.data.title}</h3>
+                  <p class="entry-summary">{e.data.summary}</p>
+                  {e.data.externalUrl && (
+                    <a href={e.data.externalUrl} target="_blank" rel="noopener" class="entry-link">
+                      Vai alla pubblicazione →
+                    </a>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </section>
+
+  </main>
 </Base>

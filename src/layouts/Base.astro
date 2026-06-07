@@ -192,6 +192,70 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
     ::view-transition-new(*) { animation: none !important; }
   }
 
+  /* ===== ENTRIES LIST — shared editorial archive layout =====
+     Used by /media/televisione /scrittura /formazione /incontri. */
+  .entries-list { list-style: none; padding: 0; margin: 0; }
+  .entry {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--line);
+  }
+  .entry:last-child { border-bottom: 1px solid var(--line); }
+  @media (min-width: 768px) {
+    .entry { grid-template-columns: 9rem 1fr; gap: 3rem; }
+  }
+  .entry-date {
+    font-family: var(--font-sans);
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-gold);
+    align-self: start;
+  }
+  .entry-body { max-width: var(--col-text); }
+  .entry-outlet {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-bone-dim);
+    margin: 0;
+  }
+  .entry-title {
+    margin: 0.45em 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    line-height: 1.15;
+    letter-spacing: -0.005em;
+    color: var(--color-bone);
+  }
+  .entry-summary {
+    margin: 0.8em 0 0;
+    font-family: var(--font-serif);
+    line-height: 1.7;
+    color: var(--color-bone-dim);
+  }
+  .entry-link {
+    display: inline-block;
+    margin-top: 1.2em;
+    font-family: var(--font-sans);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-gold);
+    border-bottom: 1px solid var(--color-gold);
+    padding-bottom: 0.3em;
+    text-decoration: none;
+    transition: color 250ms, border-color 250ms;
+  }
+  .entry-link:hover { color: var(--color-gold-bright); border-bottom-color: var(--color-gold-bright); }
+  .entry-link:focus-visible { outline: 1px solid var(--color-gold); outline-offset: 4px; }
+
   /* ===== LIGHT PAGE — warm bone bg (#F2EAD3) + ink text — /perizie ===== */
   body.is-light-page { background-color: #F2EAD3; color: var(--color-ink); }
   body.is-light-page .site-header { color: var(--color-ink); }

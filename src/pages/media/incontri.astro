@@ -1,16 +1,75 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const entries = await getCollection('incontri');
+const sorted = entries.sort((a, b) => +b.data.date - +a.data.date);
+
+const fmtMonthYear = (d: Date) =>
+  new Intl.DateTimeFormat('it-IT', { month: 'long', year: 'numeric' }).format(d);
 ---
 
 <Base
   title="Incontri"
-  description="Eventi pubblici e incontri con Gabriella Marano."
+  description="Eventi pubblici, lectio, presentazioni in scuole e teatri."
 >
-  <section class="mx-auto max-w-3xl px-6 py-24">
-    <p class="eyebrow mb-6 text-bone-faint">Incontri</p>
-    <h2 class="font-display text-4xl md:text-6xl">Eventi pubblici.</h2>
-    <p class="mt-8 text-lg text-bone-dim">
-      Pagina in costruzione — calendario eventi e incontri.
-    </p>
-  </section>
+  <main class="relative">
+
+    <section class="relative px-6" style="padding-block: var(--space-band)">
+      <div class="mx-auto max-w-text">
+        <p data-page-entry class="eyebrow mb-8">Le mie attività · Incontri</p>
+        <h2
+          data-unearth-hero
+          class="font-display tracking-tight text-bone"
+          style="font-size: clamp(2.25rem, 6vw, 4.5rem); line-height: 1.0; letter-spacing: -0.012em;"
+        >
+          {"Eventi pubblici.".split(' ').map((w) => (
+            <span class="word mr-[0.22em] last:mr-0">{w}</span>
+          ))}
+        </h2>
+        <div data-ground-line aria-hidden="true" class="ground-line"></div>
+        <p data-page-entry class="mt-10 font-serif leading-loose text-bone">
+          Lectio, conferenze, presentazioni: incontri con chi vuole capire,
+          confrontarsi, ricomporre i frammenti.
+        </p>
+      </div>
+    </section>
+
+    <section class="px-6" style="padding-block: var(--space-band)">
+      <div class="mx-auto max-w-wide">
+        {sorted.length === 0 ? (
+          <div class="empty-state mx-auto max-w-md py-16 text-center">
+            <p class="mb-4 font-sans text-xs font-semibold uppercase tracking-eyebrow text-gold">Archivio</p>
+            <p class="font-serif italic leading-loose text-bone-dim">
+              In aggiornamento. Gli incontri pubblici verranno elencati
+              progressivamente.
+            </p>
+          </div>
+        ) : (
+          <ul class="entries-list">
+            {sorted.map((e) => (
+              <li data-reveal class="entry">
+                <time datetime={e.data.date.toISOString()} class="entry-date">
+                  {fmtMonthYear(e.data.date)}
+                </time>
+                <div class="entry-body">
+                  {(e.data.outlet || e.data.publisher) && (
+                    <p class="entry-outlet">{e.data.outlet || e.data.publisher}</p>
+                  )}
+                  <h3 class="entry-title">{e.data.title}</h3>
+                  <p class="entry-summary">{e.data.summary}</p>
+                  {e.data.externalUrl && (
+                    <a href={e.data.externalUrl} target="_blank" rel="noopener" class="entry-link">
+                      Dettagli evento →
+                    </a>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </section>
+
+  </main>
 </Base>
