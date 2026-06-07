@@ -96,18 +96,35 @@ function moveHomeOpening(): void {
   );
 }
 
-/* INNER PAGE ENTRY — composes the first section's title block at init. */
+/* Helpers: if an element contains .word children (split-by-word title),
+   target those for granular per-word animation; otherwise target the element. */
+function expandTargets(items: Iterable<HTMLElement>): HTMLElement[] {
+  const out: HTMLElement[] = [];
+  for (const item of items) {
+    const words = item.querySelectorAll<HTMLElement>('.word');
+    if (words.length > 0) {
+      for (const w of words) out.push(w);
+    } else {
+      out.push(item);
+    }
+  }
+  return out;
+}
+
+/* INNER PAGE ENTRY — composes the first section's title block at init.
+   If the title was split into .word spans (Astro template), each word stagger-rises. */
 function movePageEntry(): void {
   const items = document.querySelectorAll<HTMLElement>('[data-page-entry]');
   if (!items.length) return;
+  const targets = expandTargets(items);
   gsap.fromTo(
-    items,
-    { opacity: 0, y: 28 },
+    targets,
+    { opacity: 0, y: 32 },
     {
       opacity: 1,
       y: 0,
-      duration: 0.85,
-      stagger: 0.1,
+      duration: 0.8,
+      stagger: 0.05,
       ease: 'expo.out',
       delay: 0.2,
       overwrite: 'auto',
@@ -115,19 +132,20 @@ function movePageEntry(): void {
   );
 }
 
-/* SCROLL-REVEAL — bidirectional, snappy, expo.out. */
+/* SCROLL-REVEAL — bidirectional, snappy, expo.out. Per-word when .word present. */
 function moveScrollReveal(): void {
   document.querySelectorAll<HTMLElement>('section').forEach((section) => {
     const items = section.querySelectorAll<HTMLElement>('[data-reveal]');
     if (!items.length) return;
+    const targets = expandTargets(items);
     gsap.fromTo(
-      items,
-      { opacity: 0, y: 28 },
+      targets,
+      { opacity: 0, y: 32 },
       {
         opacity: 1,
         y: 0,
         duration: 0.7,
-        stagger: 0.06,
+        stagger: 0.045,
         ease: 'expo.out',
         overwrite: 'auto',
         scrollTrigger: {

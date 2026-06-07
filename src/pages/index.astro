@@ -112,7 +112,9 @@ import archeTheatre from '../assets/images/arche-theatre.jpg';
     <div class="relative mx-auto max-w-text">
       <p data-reveal class="eyebrow mb-8">La mia storia</p>
       <h2 data-reveal class="font-display text-3xl leading-tight tracking-tight text-bone md:text-4xl">
-        Una storia, molte storie.
+        {"Una storia, molte storie.".split(' ').map((w) => (
+          <span class="word inline-block mr-[0.25em] last:mr-0">{w}</span>
+        ))}
       </h2>
       <p data-reveal class="home-storia-lead mt-10 font-serif leading-loose text-bone">
         Prima di occuparmi di crimini, mi sono occupata di rovine. Una laurea
@@ -219,7 +221,9 @@ import archeTheatre from '../assets/images/arche-theatre.jpg';
     <div class="mx-auto max-w-text">
       <p data-reveal class="eyebrow mb-8">Le mie attività · Nei media</p>
       <h2 data-reveal class="font-display text-3xl leading-tight tracking-tight text-bone md:text-4xl">
-        L'analisi, non la cronaca.
+        {"L'analisi, non la cronaca.".split(' ').map((w) => (
+          <span class="word inline-block mr-[0.25em] last:mr-0">{w}</span>
+        ))}
       </h2>
       <p data-reveal class="mt-10 font-serif leading-loose text-bone">
         Intervengo nei principali format di approfondimento come criminologa.

@@ -88,12 +88,24 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
   /* Pre-hide for scroll-reveal — fires before JS arms, GSAP takes over. */
   .js-motion [data-reveal] {
     opacity: 0;
-    transform: translateY(28px);
+    transform: translateY(32px);
   }
   /* Page-entry title block — composes once at page load. */
   .js-motion [data-page-entry] {
     opacity: 0;
-    transform: translateY(28px);
+    transform: translateY(32px);
+  }
+  /* Word-split titles override: hide the words instead of the wrapper so
+     each word can rise independently. The wrapper itself stays visible. */
+  .js-motion [data-reveal] .word,
+  .js-motion [data-page-entry] .word {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  .js-motion [data-reveal]:has(.word),
+  .js-motion [data-page-entry]:has(.word) {
+    opacity: 1;
+    transform: none;
   }
   /* Curtain veil — opaque overlay above the image, scaleY 1 covers the section.
      GSAP scales it to 0 from the top, revealing the image GPU-smoothly. */

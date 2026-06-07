@@ -45,7 +45,11 @@ const blocchi = [
           data-page-entry
           class="font-display tracking-tight text-bone"
           style="font-size: clamp(2rem, 5.5vw, 4.5rem); line-height: 1.0; letter-spacing: -0.01em;"
-        >Consulenze tecniche per la magistratura e le parti.</h2>
+        >
+          {"Consulenze tecniche per la magistratura e le parti.".split(' ').map((w) => (
+            <span class="word inline-block mr-[0.22em] last:mr-0">{w}</span>
+          ))}
+        </h2>
         <p data-page-entry class="mt-10 font-serif leading-loose text-bone">
           Svolgo attività di Consulente Tecnico d'Ufficio (CTU) e di Parte (CTP)
           in ambito civile, penale e giuridico-forense.
