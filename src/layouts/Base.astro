@@ -60,16 +60,49 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
       Same rules duplicated below in <style is:global> for prod consistency.
     */}
     <style is:inline>
+      /* Plain reveals (non-word [data-reveal] / [data-page-entry]) */
       .js-motion [data-reveal] { opacity: 0; transform: translateY(56px); }
       .js-motion [data-page-entry] { opacity: 0; transform: translateY(56px); }
-      .js-motion [data-reveal] .word,
-      .js-motion [data-page-entry] .word { opacity: 0; transform: translateY(56px); }
       .js-motion [data-reveal]:has(.word),
-      .js-motion [data-page-entry]:has(.word) { opacity: 1; transform: none; }
+      .js-motion [data-page-entry]:has(.word),
+      .js-motion [data-unearth-hero] { opacity: 1; transform: none; }
+
+      /* Stratigraphic word unearth pre-state.
+         Only clip-path here — it alone hides the word at first paint.
+         GSAP layers the rest (blur, tracking, opacity) inline at set(). */
+      .js-motion .word {
+        display: inline-block;
+        clip-path: inset(0 0 100% 0);
+        -webkit-clip-path: inset(0 0 100% 0);
+        will-change: clip-path, filter;
+      }
+
+      /* Ground line — drawn from left, fades to resting low opacity */
+      .ground-line {
+        display: block;
+        height: 1px;
+        width: 5rem;
+        background-color: var(--color-gold);
+        margin-top: 0.7em;
+        transform: scaleX(1);
+        transform-origin: left center;
+        opacity: 0.25;
+      }
+      .ground-line.is-centered { margin-left: auto; margin-right: auto; transform-origin: center center; }
+      .js-motion .ground-line { transform: scaleX(0); opacity: 0.9; will-change: transform, opacity; }
+
+      /* Hero background image — clip wipe in sync with the title */
+      .js-motion [data-unearth-bg] {
+        clip-path: inset(0 0 100% 0);
+        -webkit-clip-path: inset(0 0 100% 0);
+        will-change: clip-path;
+      }
+
+      /* Section bg veil (lavoro paper on home, archè bridge on home) */
       .js-motion [data-curtain-veil] { transform: scaleY(1); transform-origin: top center; will-change: transform; }
-      .js-opening-pending .hero-word { display: inline-block; opacity: 0; transform: translateY(10px); will-change: transform, opacity; }
-      .js-opening-pending .hero-bg-image { transform: scale(1.08); will-change: transform; }
-      .js-opening-pending #hero-portrait { opacity: 0; will-change: opacity; }
+
+      /* Home opening — support elements (eyebrow, lead, scroll-hint, portrait) */
+      .js-opening-pending #hero-portrait,
       .js-opening-pending #hero-eyebrow,
       .js-opening-pending #hero-lead,
       .js-opening-pending #hero-scroll-hint { opacity: 0; will-change: opacity; }
@@ -106,36 +139,26 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
   .vt-storia-heading { view-transition-name: storia-heading; }
   */
 
-  /* Pre-hide for scroll-reveal — fires before JS arms, GSAP takes over.
-     Bigger numbers match the GSAP timeline so the motion is clearly seen. */
-  .js-motion [data-reveal] {
-    opacity: 0;
-    transform: translateY(48px);
-  }
-  .js-motion [data-page-entry] {
-    opacity: 0;
-    transform: translateY(56px);
-  }
-  /* Word-split: hide the words, keep wrapper visible. */
-  .js-motion [data-reveal] .word,
-  .js-motion [data-page-entry] .word {
-    opacity: 0;
-    transform: translateY(48px);
-  }
+  /* The authoritative pre-hide CSS lives in <style is:inline> above so it
+     applies before first paint in both dev and prod. Rules below remain
+     for safety; they mirror the inline ones. */
+  .js-motion [data-reveal] { opacity: 0; transform: translateY(56px); }
+  .js-motion [data-page-entry] { opacity: 0; transform: translateY(56px); }
   .js-motion [data-reveal]:has(.word),
-  .js-motion [data-page-entry]:has(.word) {
-    opacity: 1;
-    transform: none;
+  .js-motion [data-page-entry]:has(.word),
+  .js-motion [data-unearth-hero] { opacity: 1; transform: none; }
+  .js-motion .word {
+    display: inline-block;
+    clip-path: inset(0 0 100% 0);
+    -webkit-clip-path: inset(0 0 100% 0);
   }
-  /* Curtain veil — opaque overlay above the image, scaleY 1 covers the section.
-     GSAP scales it to 0 from the top, revealing the image GPU-smoothly. */
-  .js-motion [data-curtain-veil] {
-    transform: scaleY(1);
-    transform-origin: top center;
-    will-change: transform;
+  .js-motion [data-unearth-bg] {
+    clip-path: inset(0 0 100% 0);
+    -webkit-clip-path: inset(0 0 100% 0);
   }
+  .js-motion [data-curtain-veil] { transform: scaleY(1); transform-origin: top center; }
 
-  /* Pre-hide for the opening reveal (only when .js-opening-pending is set). */
+  /* Pre-hide for the opening reveal — unused but kept for back-compat. */
   .js-opening-pending .hero-word {
     display: inline-block;
     opacity: 0;

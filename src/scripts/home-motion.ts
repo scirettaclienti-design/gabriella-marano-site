@@ -1,13 +1,21 @@
 /*
- * Site motion — fluid, persistent, GPU-friendly.
+ * Site motion — "stratigraphic unearthing"
  *
- * Principles
- * - Bidirectional: every scroll-triggered reveal plays on enter AND reverses
- *   on leave, so the effect is persistent — scroll back up and it replays.
- * - Transform-only: clip-path replaced by an overlay <div> animating scaleY,
- *   which the browser composites on the GPU. No repaints per frame.
- * - Expo curves: more cinematic trail than power3, better "settle" feel.
- * - Lenis cinematic preset: lerp 0.08, duration 1.3, touch 1.5.
+ * Signature gesture: each title word is excavated from earth — clip-path
+ * rises from a ground line, the word starts blurred and slightly tracked
+ * out, then sharpens and settles. A thin gold hairline draws at the
+ * ground line; on page heros, the background image reveals with the same
+ * clip-path wipe in sync.
+ *
+ * Variants
+ * - PAGE HERO TITLE: full unearth (clip + blur + tracking + opacity)
+ *   + ground line hairline + bg image clip-path wipe in sync.
+ *   Plays at init, ~1.8 s total, ~0.3 s after paint. Sessions per page.
+ * - SECTION TITLES on scroll: lighter unearth (no hairline, no bg sync).
+ *   Bidirectional via toggleActions.
+ * - NON-TITLE reveals: plain fade-up (existing behavior preserved).
+ *
+ * All guarded by prefers-reduced-motion.
  */
 
 import gsap from 'gsap';
@@ -17,9 +25,13 @@ import Lenis from 'lenis';
 gsap.registerPlugin(ScrollTrigger);
 
 const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const SESSION_KEY = 'homeOpeningSeen';
+const SESSION_KEY_HOME = 'homeOpeningSeen';
+const UNEARTH_SEEN_PREFIX = 'unearthSeen:';
 
 const TOGGLE_BIDIR: 'play reverse play reverse' = 'play reverse play reverse';
+
+// Final tracking the title settles into (matches CSS tracking-tight on display fonts)
+const FINAL_TRACK = '-0.015em';
 
 let lenis: Lenis | null = null;
 let tickerHandler: ((time: number) => void) | null = null;
@@ -54,102 +66,209 @@ function cleanup(): void {
   }
 }
 
-/* HOME OPENING — cinematic word reveal, plays once per session. */
-function moveHomeOpening(): void {
-  const seen = sessionStorage.getItem(SESSION_KEY) === '1';
-  if (seen) {
-    revealAll();
+/* PAGE HERO UNEARTH — the signature gesture. */
+function moveUnearthHero(): void {
+  const heroTitle = document.querySelector<HTMLElement>('[data-unearth-hero]');
+  if (!heroTitle) return;
+
+  // Per-page sessionStorage flag so the gesture plays once per session per page.
+  const key = UNEARTH_SEEN_PREFIX + location.pathname;
+  if (sessionStorage.getItem(key) === '1') {
+    // Skip — show everything in final state
+    settleUnearth(heroTitle);
     return;
   }
 
-  let finished = false;
-  const finish = () => {
-    if (finished) return;
-    finished = true;
-    tl.progress(1, false);
-    revealAll();
-    sessionStorage.setItem(SESSION_KEY, '1');
-    skipEvents.forEach((evt) => window.removeEventListener(evt, skip, true));
-  };
+  const wordsList = heroTitle.querySelectorAll<HTMLElement>('.word');
+  const wordTargets: HTMLElement[] = wordsList.length > 0
+    ? Array.from(wordsList)
+    : [heroTitle];
 
-  const tl = gsap.timeline({ onComplete: finish });
+  const groundLine = findGroundLine(heroTitle);
+  const bgImage = document.querySelector<HTMLElement>('[data-unearth-bg]');
 
+  // Defensive: lock initial state synchronously.
+  gsap.set(wordTargets, {
+    clipPath: 'inset(0 0 100% 0)',
+    webkitClipPath: 'inset(0 0 100% 0)',
+    filter: 'blur(8px)',
+    letterSpacing: '0.06em',
+    opacity: 0.4,
+  });
+  if (groundLine) {
+    gsap.set(groundLine, {
+      scaleX: 0,
+      transformOrigin: groundLine.classList.contains('is-centered') ? 'center center' : 'left center',
+      opacity: 0.9,
+    });
+  }
+  if (bgImage) {
+    gsap.set(bgImage, {
+      clipPath: 'inset(0 0 100% 0)',
+      webkitClipPath: 'inset(0 0 100% 0)',
+    });
+  }
+
+  const tl = gsap.timeline({
+    delay: 0.3,
+    onComplete: () => {
+      sessionStorage.setItem(key, '1');
+      revealAll();
+    },
+  });
+
+  // 1. Ground line draws (left edge of the excavation trench)
+  if (groundLine) {
+    tl.to(groundLine, { scaleX: 1, duration: 0.6, ease: 'power2.inOut' }, 0);
+  }
+
+  // 2. Background image clip wipe — synced with the trench, slightly behind
+  if (bgImage) {
+    tl.to(
+      bgImage,
+      {
+        clipPath: 'inset(0 0 0% 0)',
+        webkitClipPath: 'inset(0 0 0% 0)',
+        duration: 1.2,
+        ease: 'power3.out',
+      },
+      0.15
+    );
+  }
+
+  // 3. Words unearth — clip rises from ground, blur lifts, tracking settles,
+  //    opacity comes home. The word emerges, dusts off, comes into focus.
+  //    NOTE: no clearProps — leave the final inline values so the CSS
+  //    pre-hide rule can't reassert and revert the words.
   tl.to(
-    '.hero-word',
-    { opacity: 1, y: 0, duration: 0.65, stagger: 0.08, ease: 'expo.out' },
-    0.25
-  )
-    .to('#hero-eyebrow', { opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.55)
-    .to('#hero-lead', { opacity: 1, duration: 0.55, ease: 'power2.out' }, 0.9)
-    .to('#hero-scroll-hint', { opacity: 1, duration: 0.4, ease: 'power2.out' }, 1.2)
-    .to('#hero-portrait', { opacity: 1, duration: 0.85, ease: 'power2.out' }, 1.35);
+    wordTargets,
+    {
+      clipPath: 'inset(0 0 0% 0)',
+      webkitClipPath: 'inset(0 0 0% 0)',
+      filter: 'blur(0px)',
+      letterSpacing: FINAL_TRACK,
+      opacity: 1,
+      duration: 0.9,
+      stagger: 0.14,
+      ease: 'power3.out',
+    },
+    0.35
+  );
 
-  const skip = () => finish();
-  const skipEvents: Array<keyof WindowEventMap> = [
-    'wheel',
-    'touchstart',
-    'keydown',
-    'click',
-  ];
+  // 4. Ground line settles to its resting low-opacity state
+  if (groundLine) {
+    tl.to(groundLine, { opacity: 0.25, duration: 0.6, ease: 'power2.inOut' }, '>0.05');
+  }
+
+  // Allow user input to skip the sequence cleanly
+  const skipEvents: Array<keyof WindowEventMap> = ['wheel', 'touchstart', 'keydown', 'click'];
+  const skip = () => {
+    if (tl.progress() >= 1) return;
+    tl.progress(1, false);
+  };
   skipEvents.forEach((evt) =>
-    window.addEventListener(evt, skip, { capture: true, passive: true })
+    window.addEventListener(evt, skip, { capture: true, passive: true, once: true })
   );
 }
 
-/* Helpers: if an element contains .word children (split-by-word title),
-   target those for granular per-word animation; otherwise target the element. */
-function expandTargets(items: Iterable<HTMLElement>): HTMLElement[] {
-  const out: HTMLElement[] = [];
-  for (const item of items) {
-    const words = item.querySelectorAll<HTMLElement>('.word');
-    if (words.length > 0) {
-      for (const w of words) out.push(w);
-    } else {
-      out.push(item);
-    }
+function findGroundLine(heroTitle: HTMLElement): HTMLElement | null {
+  let sib = heroTitle.nextElementSibling;
+  while (sib) {
+    if (sib instanceof HTMLElement && sib.matches('[data-ground-line]')) return sib;
+    sib = sib.nextElementSibling;
   }
-  return out;
+  // Fallback: look inside the parent container
+  return heroTitle.parentElement?.querySelector<HTMLElement>('[data-ground-line]') ?? null;
 }
 
-/* INNER PAGE ENTRY — composes the first section's title block at init.
-   Long delay so the animation starts AFTER the user perceives the page,
-   not during paint. */
+function settleUnearth(heroTitle: HTMLElement): void {
+  const words = heroTitle.querySelectorAll<HTMLElement>('.word');
+  words.forEach((w) => {
+    w.style.clipPath = 'inset(0 0 0% 0)';
+    (w.style as CSSStyleDeclaration & { webkitClipPath?: string }).webkitClipPath = 'inset(0 0 0% 0)';
+    w.style.filter = 'blur(0px)';
+    w.style.letterSpacing = FINAL_TRACK;
+    w.style.opacity = '1';
+  });
+  const gl = findGroundLine(heroTitle);
+  if (gl) {
+    gl.style.transform = 'scaleX(1)';
+    gl.style.opacity = '0.25';
+  }
+  const bg = document.querySelector<HTMLElement>('[data-unearth-bg]');
+  if (bg) {
+    bg.style.clipPath = 'inset(0 0 0% 0)';
+    (bg.style as CSSStyleDeclaration & { webkitClipPath?: string }).webkitClipPath = 'inset(0 0 0% 0)';
+  }
+}
+
+/* HOME OPENING — combines unearth (h1 + bg) with cinematic fade of
+   eyebrow / lead / scroll-hint / portrait. Plays once per session. */
+function moveHomeOpening(): void {
+  const seen = sessionStorage.getItem(SESSION_KEY_HOME) === '1';
+  if (seen) {
+    revealAll();
+    settleUnearth(document.querySelector<HTMLElement>('[data-unearth-hero]')!);
+    return;
+  }
+
+  // Pretend the unearth is part of the opening — moveUnearthHero will
+  // run on its own and set the per-page session flag. We add only the
+  // supporting fades here.
+  const tl = gsap.timeline({
+    delay: 0.55,
+    onComplete: () => {
+      sessionStorage.setItem(SESSION_KEY_HOME, '1');
+      revealAll();
+    },
+  });
+
+  tl.to('#hero-eyebrow', { opacity: 1, duration: 0.55, ease: 'power2.out' }, 0)
+    .to('#hero-lead', { opacity: 1, duration: 0.55, ease: 'power2.out' }, 0.35)
+    .to('#hero-scroll-hint', { opacity: 1, duration: 0.4, ease: 'power2.out' }, 0.7)
+    .to('#hero-portrait', { opacity: 1, duration: 0.85, ease: 'power2.out' }, 0.85);
+}
+
+/* PAGE ENTRY — non-unearth elements ([data-page-entry] without .word).
+   Plain fade-up for eyebrows, body p, chapter marks, etc. */
 function movePageEntry(): void {
-  const items = document.querySelectorAll<HTMLElement>('[data-page-entry]');
+  const items = Array.from(
+    document.querySelectorAll<HTMLElement>('[data-page-entry]:not([data-unearth-hero])')
+  ).filter((el) => el.querySelectorAll('.word').length === 0);
+
   if (!items.length) return;
-  const targets = expandTargets(items);
 
-  // Force initial state synchronously — defensive against any CSS race.
-  gsap.set(targets, { opacity: 0, y: 56 });
-
-  gsap.to(targets, {
+  gsap.set(items, { opacity: 0, y: 56 });
+  gsap.to(items, {
     opacity: 1,
     y: 0,
     duration: 1.2,
     stagger: 0.1,
     ease: 'expo.out',
-    delay: 1.0,
+    delay: 0.85,
     overwrite: 'auto',
-    clearProps: 'will-change',
   });
 }
 
-/* SCROLL-REVEAL — bidirectional, expo.out, big enough to be felt. */
+/* SCROLL-REVEAL — bidirectional. Words get a lighter unearth (no hairline).
+   Non-word items keep the existing fade-up. */
 function moveScrollReveal(): void {
   document.querySelectorAll<HTMLElement>('section').forEach((section) => {
     const items = section.querySelectorAll<HTMLElement>('[data-reveal]');
     if (!items.length) return;
-    const targets = expandTargets(items);
 
-    gsap.set(targets, { opacity: 0, y: 56 });
+    const wordTargets: HTMLElement[] = [];
+    const plainItems: HTMLElement[] = [];
+    items.forEach((it) => {
+      const ws = it.querySelectorAll<HTMLElement>('.word');
+      if (ws.length > 0) {
+        ws.forEach((w) => wordTargets.push(w));
+      } else {
+        plainItems.push(it);
+      }
+    });
 
-    gsap.to(targets, {
-      opacity: 1,
-      y: 0,
-      duration: 1.05,
-      stagger: 0.09,
-      ease: 'expo.out',
-      overwrite: 'auto',
+    const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
         start: 'top 82%',
@@ -157,12 +276,50 @@ function moveScrollReveal(): void {
         toggleActions: TOGGLE_BIDIR,
       },
     });
+
+    if (wordTargets.length > 0) {
+      gsap.set(wordTargets, {
+        clipPath: 'inset(0 0 100% 0)',
+        webkitClipPath: 'inset(0 0 100% 0)',
+        filter: 'blur(6px)',
+        letterSpacing: '0.04em',
+        opacity: 0.5,
+      });
+      tl.to(
+        wordTargets,
+        {
+          clipPath: 'inset(0 0 0% 0)',
+          webkitClipPath: 'inset(0 0 0% 0)',
+          filter: 'blur(0px)',
+          letterSpacing: FINAL_TRACK,
+          opacity: 1,
+          duration: 0.75,
+          stagger: 0.1,
+          ease: 'power3.out',
+        },
+        0
+      );
+    }
+
+    if (plainItems.length > 0) {
+      gsap.set(plainItems, { opacity: 0, y: 56 });
+      tl.to(
+        plainItems,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1.0,
+          stagger: 0.08,
+          ease: 'expo.out',
+        },
+        wordTargets.length > 0 ? 0.15 : 0
+      );
+    }
   });
 }
 
-/* CURTAIN VEILS — overlay scaleY 1→0 from top, GPU-composited.
-   Bidirectional: the veil falls back when the section leaves and rises
-   again on return. Built on transform only, no clip-path. */
+/* CURTAIN VEILS — kept for section bg images that aren't part of the page
+   hero unearth (lavoro paper on home, archè bridge on home). Bidirectional. */
 function moveCurtainVeils(): void {
   document
     .querySelectorAll<HTMLElement>('[data-curtain-veil]')
@@ -197,7 +354,6 @@ function init(): void {
   }
 
   if (REDUCED) {
-    // a11y first: everything visible, no transforms, no veils
     revealAll();
     document
       .querySelectorAll<HTMLElement>('[data-reveal], [data-page-entry]')
@@ -206,9 +362,29 @@ function init(): void {
         el.style.transform = 'none';
       });
     document
+      .querySelectorAll<HTMLElement>('.word')
+      .forEach((el) => {
+        el.style.opacity = '1';
+        el.style.clipPath = 'none';
+        el.style.filter = 'none';
+        el.style.letterSpacing = '';
+        el.style.transform = 'none';
+      });
+    document
       .querySelectorAll<HTMLElement>('[data-curtain-veil]')
       .forEach((el) => {
         el.style.transform = 'scaleY(0)';
+      });
+    document
+      .querySelectorAll<HTMLElement>('[data-unearth-bg]')
+      .forEach((el) => {
+        el.style.clipPath = 'none';
+      });
+    document
+      .querySelectorAll<HTMLElement>('[data-ground-line]')
+      .forEach((el) => {
+        el.style.transform = 'scaleX(1)';
+        el.style.opacity = '0.25';
       });
     return;
   }
@@ -230,8 +406,10 @@ function init(): void {
 
   if (isHomePage()) {
     moveHomeOpening();
+    moveUnearthHero();
   } else {
     revealAll();
+    moveUnearthHero();
     movePageEntry();
   }
 

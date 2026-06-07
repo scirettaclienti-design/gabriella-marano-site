@@ -24,6 +24,7 @@ import archeTheatre from '../assets/images/arche-theatre.jpg';
           quality={75}
           loading="eager"
           fetchpriority="high"
+          data-unearth-bg
           class="arche-bg-image h-full w-full object-cover"
         />
         <div
@@ -34,7 +35,6 @@ import archeTheatre from '../assets/images/arche-theatre.jpg';
           class="arche-glow absolute inset-0"
           aria-hidden="true"
         ></div>
-        <div data-curtain-veil aria-hidden="true" class="absolute inset-0" style="background-color: #0F0C07;"></div>
       </div>
 
       {/* Giant faded "MITO" bleeding off left */}
@@ -49,10 +49,11 @@ import archeTheatre from '../assets/images/arche-theatre.jpg';
           <p data-page-entry class="eyebrow mb-10">Il progetto editoriale</p>
 
           <h2
-            data-page-entry
+            data-unearth-hero
             class="font-display tracking-tight text-bone"
             style="font-size: clamp(3.5rem, 14vw, 14rem); line-height: 0.9; letter-spacing: -0.025em;"
-          >archè</h2>
+          ><span class="word">archè</span></h2>
+          <div data-ground-line aria-hidden="true" class="ground-line is-centered"></div>
 
           <p data-page-entry class="mt-6 font-secret text-2xl italic text-bone-dim md:text-3xl">
             Dal mito alla mente.

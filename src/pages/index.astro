@@ -31,6 +31,7 @@ import gmPortrait from '../assets/images/gm/gm-portrait-1.jpg';
         quality={72}
         loading="eager"
         fetchpriority="high"
+        data-unearth-bg
         class="hero-bg-image h-full w-full object-cover"
       />
       {/* Strong dark overlay so text stays the protagonist */}
@@ -43,8 +44,6 @@ import gmPortrait from '../assets/images/gm/gm-portrait-1.jpg';
         class="absolute inset-0"
         style="background: radial-gradient(ellipse 65vw 55vh at 100% -5%, rgba(200,162,78,0.10), transparent 62%);"
       ></div>
-      {/* Curtain veil — GPU scaleY from top */}
-      <div data-curtain-veil aria-hidden="true" class="absolute inset-0 bg-ink"></div>
     </div>
 
     {/* Content layer */}
@@ -57,15 +56,17 @@ import gmPortrait from '../assets/images/gm/gm-portrait-1.jpg';
           </p>
           <h1
             id="hero-h1"
+            data-unearth-hero
             class="font-display tracking-tight text-bone"
             style="font-size: clamp(2.75rem, 9vw, 8rem); line-height: 0.92; letter-spacing: -0.015em;"
           >
-            <span class="hero-word">La</span>
-            <span class="hero-word">verità,</span><br />
-            <span class="hero-word">in</span>
-            <span class="hero-word">ogni</span>
-            <span class="hero-word">dettaglio.</span>
+            <span class="word">La</span>
+            <span class="word">verità,</span><br />
+            <span class="word">in</span>
+            <span class="word">ogni</span>
+            <span class="word">dettaglio.</span>
           </h1>
+          <div data-ground-line aria-hidden="true" class="ground-line"></div>
           <p id="hero-lead" class="mt-10 max-w-md font-serif text-lg leading-relaxed text-bone-dim md:text-xl">
             Nei tribunali, nei media, nelle aule. Ascolto, ricostruisco,
             restituisco. Con gli altri, per gli altri.
