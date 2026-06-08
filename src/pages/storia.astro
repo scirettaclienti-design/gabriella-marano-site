@@ -113,9 +113,56 @@ import gmPortrait from '../assets/images/gm/gm-portrait-1.jpg';
 
       </div>
     </section>
+
+    {/* Downloads — CV + press kit */}
+    <section class="relative px-6" style="padding-block: var(--space-band)">
+      <div class="mx-auto max-w-text">
+        <p data-reveal class="eyebrow mb-8">Materiale</p>
+        <p data-reveal class="font-serif leading-loose text-bone-dim mb-10">
+          Per chi cerca un quadro più dettagliato — giornalisti, redazioni,
+          istituzioni — il curriculum completo e il press kit sono
+          scaricabili. Le versioni definitive sono in preparazione.
+        </p>
+        <div data-reveal class="flex flex-wrap gap-x-10 gap-y-4 items-baseline">
+          <a href="/downloads/cv.pdf" download class="storia-download-cta">
+            Scarica il CV (PDF) <span aria-hidden="true" class="ml-2">↓</span>
+          </a>
+          <a href="/downloads/press-kit.pdf" download class="storia-download-cta storia-download-cta-secondary">
+            Scarica il press kit <span aria-hidden="true" class="ml-2">↓</span>
+          </a>
+        </div>
+      </div>
+    </section>
   </main>
 
   <style>
+    .storia-download-cta {
+      display: inline-flex;
+      align-items: baseline;
+      color: var(--color-gold);
+      font-family: var(--font-sans);
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      letter-spacing: var(--tracking-eyebrow);
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--color-gold);
+      padding-bottom: 0.35em;
+      text-decoration: none;
+      transition: color 240ms, border-color 240ms;
+    }
+    .storia-download-cta:hover {
+      color: var(--color-gold-bright);
+      border-color: var(--color-gold-bright);
+    }
+    .storia-download-cta-secondary {
+      color: var(--color-bone-dim);
+      border-color: rgba(200, 162, 78, 0.4);
+    }
+    .storia-download-cta-secondary:hover {
+      color: var(--color-bone);
+      border-color: var(--color-gold-bright);
+    }
+
     .persona-lead::first-letter {
       font-family: var(--font-display);
       font-weight: 600;

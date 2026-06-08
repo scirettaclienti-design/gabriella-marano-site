@@ -10,6 +10,7 @@ const channels = [
     href:
       'mailto:management@gabriellamarano.it?subject=[Stampa] Richiesta intervento',
     cta: 'Scrivi a management',
+    extra: { href: '/downloads/press-kit.pdf', label: 'Scarica press kit ↓' },
   },
   {
     num: 'II',
@@ -92,6 +93,11 @@ const channels = [
                 {c.cta}
                 <span aria-hidden="true" class="ml-2">→</span>
               </a>
+              {c.extra && (
+                <a href={c.extra.href} download class="contatti-cta contatti-cta-secondary mt-3">
+                  {c.extra.label}
+                </a>
+              )}
             </div>
           </article>
         ))}
@@ -136,6 +142,15 @@ const channels = [
     }
     .contatti-cta:hover {
       color: var(--color-gold-bright);
+      border-color: var(--color-gold-bright);
+    }
+    .contatti-cta-secondary {
+      color: var(--color-bone-dim);
+      border-color: rgba(200, 162, 78, 0.4);
+      display: inline-flex;
+    }
+    .contatti-cta-secondary:hover {
+      color: var(--color-bone);
       border-color: var(--color-gold-bright);
     }
 
