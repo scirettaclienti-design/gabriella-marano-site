@@ -52,15 +52,17 @@ const fmtMonthYear = (d: Date) =>
           <ul class="entries-list">
             {sorted.map((e) => (
               <li data-reveal class="entry">
-                <div class="entry-cover">
-                  {e.data.cover ? (
-                    <img src={e.data.cover} alt={e.data.coverAlt ?? ''} loading="lazy" />
-                  ) : (
-                    <div class="entry-cover-placeholder" aria-hidden="true">
-                      <span>T</span>
-                    </div>
-                  )}
-                </div>
+                <a href={`/media/televisione/${e.slug}`} class="entry-cover-link" aria-label={`Apri: ${e.data.title}`}>
+                  <div class="entry-cover">
+                    {e.data.cover ? (
+                      <img src={e.data.cover} alt={e.data.coverAlt ?? ''} loading="lazy" />
+                    ) : (
+                      <div class="entry-cover-placeholder" aria-hidden="true">
+                        <span>T</span>
+                      </div>
+                    )}
+                  </div>
+                </a>
                 <div class="entry-body">
                   <p class="entry-meta">
                     <time datetime={e.data.date.toISOString()} class="entry-date">{fmtMonthYear(e.data.date)}</time>
@@ -71,13 +73,18 @@ const fmtMonthYear = (d: Date) =>
                       </Fragment>
                     )}
                   </p>
-                  <h3 class="entry-title">{e.data.title}</h3>
+                  <h3 class="entry-title">
+                    <a href={`/media/televisione/${e.slug}`}>{e.data.title}</a>
+                  </h3>
                   <p class="entry-summary">{e.data.summary}</p>
-                  {e.data.externalUrl && (
-                    <a href={e.data.externalUrl} target="_blank" rel="noopener noreferrer" class="entry-link">
-                      Vedi il contributo →
-                    </a>
-                  )}
+                  <div class="entry-actions">
+                    <a href={`/media/televisione/${e.slug}`} class="entry-link">Apri scheda →</a>
+                    {e.data.externalUrl && (
+                      <a href={e.data.externalUrl} target="_blank" rel="noopener noreferrer" class="entry-link entry-link-external">
+                        Vedi il contributo ↗
+                      </a>
+                    )}
+                  </div>
                 </div>
               </li>
             ))}
