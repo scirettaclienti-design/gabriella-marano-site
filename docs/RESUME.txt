@@ -2,8 +2,14 @@ Ciao Claude. Sto riprendendo il lavoro sul sito di Gabriella Marano dopo una pau
 
 Prima di rispondere o proporre qualunque cosa, leggi questi file in ordine per allinearti al contesto, al tono e al punto esatto dove ci siamo fermati:
 
-1. /Users/mac2023ivanosciretta/Projects/arche-studio/gabriella-marano-site/docs/RESUME.md   (riepilogo completo della sessione precedente, stato repo, cosa è fatto, cosa resta, punteggio onesto)
+1. /Users/mac2023ivanosciretta/Projects/arche-studio/gabriella-marano-site/docs/RESUME.md   (riepilogo completo della sessione precedente, stato repo, stato deploy Vercel, cosa è fatto, cosa resta, punteggio onesto, lezioni sul setup auth GitHub Packages)
 2. /Users/mac2023ivanosciretta/Projects/arche-studio/gabriella-marano-site/CLAUDE.md         (disciplina copy + visiva + performance target del progetto)
 3. /Users/mac2023ivanosciretta/Projects/arche-studio/gabriella-marano-site/.claude/skills/arche-brand/SKILL.md   (regole brand archè)
 
-Dopo aver letto, fammi un punto della situazione in 5 righe massimo (cosa è in repo, su che branch siamo, cosa è ancora placeholder, cosa potremmo fare adesso) e poi aspetta che ti dica da dove ripartiamo. Non toccare file finché non te lo chiedo.
+Punti critici da tenere a mente prima di toccare qualcosa:
+- Il design system è su GitHub Packages npm e RICHIEDE auth (anche se "public"). Su Vercel la env var si chiama GH_PKG_TOKEN — NON usare NPM_TOKEN, Vercel la dirotta sul registry sbagliato.
+- Non cliccare "Redeploy" sui tre puntini di un deploy specifico in Deployments di Vercel: ribuilda sempre lo stesso commit. Per un deploy pulito, pusha un commit nuovo (o vuoto) su main, oppure usa il banner Redeploy in Settings → Environment Variables.
+- HEAD di main al momento dello stop: 68fd2b9. Branch di lavoro: feature/home-cinematic.
+- L'ultima cosa irrisolta: il dominio gabriella-marano-site.vercel.app dava DEPLOYMENT_NOT_FOUND. Da verificare in Vercel → Deployments lo stato del deploy del commit 68fd2b9 (Ready/Building/Failed, e se Production o Preview).
+
+Dopo aver letto i file, fammi un punto della situazione in 5 righe massimo (cosa è in repo, stato deploy, cosa è ancora placeholder, cosa potremmo fare adesso) e poi aspetta che ti dica da dove ripartiamo. Non toccare file finché non te lo chiedo.
