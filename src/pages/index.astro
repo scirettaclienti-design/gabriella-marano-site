@@ -57,6 +57,7 @@ import gmPortrait from '../assets/images/gm/gm-portrait-1.jpg';
           <h1
             id="hero-h1"
             data-unearth-hero
+            data-vary
             class="font-display tracking-tight text-bone"
             style="font-size: clamp(2.75rem, 9vw, 8rem); line-height: 0.92; letter-spacing: -0.015em;"
           >
@@ -118,7 +119,7 @@ import gmPortrait from '../assets/images/gm/gm-portrait-1.jpg';
 
     <div class="relative mx-auto max-w-text">
       <p data-reveal class="eyebrow mb-8">La mia storia</p>
-      <h2 data-reveal class="vt-storia-heading font-display text-3xl leading-tight tracking-tight text-bone md:text-4xl">
+      <h2 data-reveal data-vary class="vt-storia-heading font-display text-3xl leading-tight tracking-tight text-bone md:text-4xl">
         {"Una storia, molte storie.".split(' ').map((w, i, arr) => (
           <Fragment>
             <span class="word">{w}</span>{i < arr.length - 1 ? ' ' : ''}
@@ -229,7 +230,7 @@ import gmPortrait from '../assets/images/gm/gm-portrait-1.jpg';
   >
     <div class="mx-auto max-w-text">
       <p data-reveal class="eyebrow mb-8">Le mie attività · Nei media</p>
-      <h2 data-reveal class="font-display text-3xl leading-tight tracking-tight text-bone md:text-4xl">
+      <h2 data-reveal data-vary class="font-display text-3xl leading-tight tracking-tight text-bone md:text-4xl">
         {"L'analisi, non la cronaca.".split(' ').map((w, i, arr) => (
           <Fragment>
             <span class="word">{w}</span>{i < arr.length - 1 ? ' ' : ''}
@@ -382,6 +383,7 @@ import gmPortrait from '../assets/images/gm/gm-portrait-1.jpg';
 
       <h2
         data-reveal
+        data-vary
         class="vt-arche-heading font-display tracking-tight text-bone"
         style="font-size: clamp(3.5rem, 12vw, 11rem); line-height: 0.92; letter-spacing: -0.02em;"
       >archè</h2>

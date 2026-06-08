@@ -318,6 +318,31 @@ function moveScrollReveal(): void {
   });
 }
 
+/* VARIABLE TYPOGRAPHY — Bodoni Moda weight axis (wght 400→700) animates
+   as the title scrolls through viewport. Bodoni Moda is a variable font
+   shipped by the design system with @font-face font-weight: 400 700.
+   The axis interpolation is GPU-cheap and pairs with the archaeological
+   "focus" gesture — the word literally sharpens as you read it. */
+function moveVariableType(): void {
+  document.querySelectorAll<HTMLElement>('[data-vary]').forEach((el) => {
+    gsap.fromTo(
+      el,
+      { fontVariationSettings: '"wght" 400' },
+      {
+        fontVariationSettings: '"wght" 700',
+        ease: 'none',
+        overwrite: 'auto',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 80%',
+          end: 'top 25%',
+          scrub: 0.6,
+        },
+      }
+    );
+  });
+}
+
 /* CURTAIN VEILS — kept for section bg images that aren't part of the page
    hero unearth (lavoro paper on home, archè bridge on home). Bidirectional. */
 function moveCurtainVeils(): void {
@@ -386,6 +411,11 @@ function init(): void {
         el.style.transform = 'scaleX(1)';
         el.style.opacity = '0.25';
       });
+    document
+      .querySelectorAll<HTMLElement>('[data-vary]')
+      .forEach((el) => {
+        el.style.fontVariationSettings = '"wght" 600';
+      });
     return;
   }
 
@@ -415,6 +445,7 @@ function init(): void {
 
   moveScrollReveal();
   moveCurtainVeils();
+  moveVariableType();
 
   resizeHandler = () => {
     if (resizeTimer) clearTimeout(resizeTimer);
