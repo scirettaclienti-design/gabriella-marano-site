@@ -1,0 +1,9 @@
+Ciao Claude. Sto riprendendo il lavoro sul sito di Gabriella Marano dopo una pausa.
+
+Prima di rispondere o proporre qualunque cosa, leggi questi file in ordine per allinearti al contesto, al tono e al punto esatto dove ci siamo fermati:
+
+1. /Users/mac2023ivanosciretta/Projects/arche-studio/gabriella-marano-site/docs/RESUME.md   (riepilogo completo della sessione precedente, stato repo, cosa è fatto, cosa resta, punteggio onesto)
+2. /Users/mac2023ivanosciretta/Projects/arche-studio/gabriella-marano-site/CLAUDE.md         (disciplina copy + visiva + performance target del progetto)
+3. /Users/mac2023ivanosciretta/Projects/arche-studio/gabriella-marano-site/.claude/skills/arche-brand/SKILL.md   (regole brand archè)
+
+Dopo aver letto, fammi un punto della situazione in 5 righe massimo (cosa è in repo, su che branch siamo, cosa è ancora placeholder, cosa potremmo fare adesso) e poi aspetta che ti dica da dove ripartiamo. Non toccare file finché non te lo chiedo.
