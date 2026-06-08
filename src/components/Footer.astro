@@ -29,6 +29,12 @@ const year = new Date().getFullYear();
           <li><a href="mailto:management@gabriellamarano.it">management@gabriellamarano.it</a></li>
         </ul>
 
+        <p class="col-title col-title--sec">Referente management</p>
+        <p class="management-ref">
+          Davide Tosi<br />
+          <a href="tel:+393332437962">+39 333 243 7962</a>
+        </p>
+
         <p class="col-title col-title--sec">Ascolto / emergenza</p>
         <p class="emergency-tel"><a href="tel:+393898921276">+39 389 8921276</a></p>
         <p class="emergency-note">Linea attiva 24 ore.</p>
@@ -166,6 +172,25 @@ const year = new Date().getFullYear();
     transition: color 220ms;
   }
   .col a:hover { color: var(--color-gold-bright); }
+
+  .management-ref {
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--color-bone);
+    margin: 0 0 0;
+  }
+  .management-ref a {
+    color: var(--color-bone-dim);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    text-decoration-color: rgba(200, 162, 78, 0.4);
+    transition: color 220ms, text-decoration-color 220ms;
+  }
+  .management-ref a:hover {
+    color: var(--color-gold-bright);
+    text-decoration-color: var(--color-gold-bright);
+  }
 
   .emergency-tel {
     font-family: var(--font-display);

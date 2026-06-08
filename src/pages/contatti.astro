@@ -58,6 +58,8 @@ const channels = [
         <div data-ground-line aria-hidden="true" class="ground-line"></div>
         <p data-page-entry class="mt-10 font-serif leading-loose text-bone">
           Per qualsiasi richiesta professionale: <strong class="text-bone">management@gabriellamarano.it</strong>.
+          Referente di management: <strong class="text-bone">Davide Tosi</strong> ·
+          <a href="tel:+393332437962" class="management-tel">+39 333 243 7962</a>.
           In fondo, la linea di ascolto per chi ha bisogno di parlare con qualcuno.
         </p>
       </div>
@@ -152,6 +154,17 @@ const channels = [
     .contatti-cta-secondary:hover {
       color: var(--color-bone);
       border-color: var(--color-gold-bright);
+    }
+    .management-tel {
+      color: var(--color-gold);
+      text-decoration: underline;
+      text-underline-offset: 0.22em;
+      text-decoration-color: rgba(200, 162, 78, 0.5);
+      transition: color 220ms, text-decoration-color 220ms;
+    }
+    .management-tel:hover {
+      color: var(--color-gold-bright);
+      text-decoration-color: var(--color-gold-bright);
     }
 
     .emergency-frame {
